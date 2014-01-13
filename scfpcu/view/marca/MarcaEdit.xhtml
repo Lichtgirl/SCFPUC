@@ -60,13 +60,13 @@
             <s:button id="cancelEdit"
                    value="Cancel"
              propagation="end"
-                    view="/Marca.xhtml"
+                    view="/marca/Marca.xhtml"
                 rendered="#{marcaHome.managed}"/>
 
             <s:button id="cancelAdd"
                    value="Cancel"
              propagation="end"
-                    view="/#{empty marcaFrom ? 'MarcaList' : marcaFrom}.xhtml"
+                    view="/marca/#{empty marcaFrom ? 'MarcaList' : marcaFrom}.xhtml"
                 rendered="#{!marcaHome.managed}"/>
 
         </div>

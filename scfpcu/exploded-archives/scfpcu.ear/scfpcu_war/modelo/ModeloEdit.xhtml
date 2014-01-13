@@ -50,7 +50,7 @@
             <h:commandButton id="update"
                           value="Save"
                          action="#{modeloHome.update}"
-                       rendered="#{modeloHome.managed}"/>
+                       rendered="#{modeloHome.managed}" style=" width : 56px;"/>
 
             <h:commandButton id="delete"
                           value="Delete"
@@ -61,13 +61,13 @@
             <s:button id="cancelEdit"
                    value="Cancel"
              propagation="end"
-                    view="/Modelo.xhtml"
+                    view="/modelo/Modelo.xhtml"
                 rendered="#{modeloHome.managed}"/>
 
             <s:button id="cancelAdd"
                    value="Cancel"
              propagation="end"
-                    view="/#{empty modeloFrom ? 'ModeloList' : modeloFrom}.xhtml"
+                    view="/modelo/#{empty modeloFrom ? 'ModeloList' : modeloFrom}.xhtml"
                 rendered="#{!modeloHome.managed}"/>
 
         </div>
@@ -98,8 +98,8 @@
 
         <div class="actionButtons">
             <s:button id="#{modeloHome.instance.marca != null ? 'changeParent' : 'selectParent'}" value="#{modeloHome.instance.marca != null ? 'Change' : 'Select'} marca"
-                       view="/MarcaList.xhtml">
-                <f:param name="from" value="ModeloEdit"/>
+                       view="/marca/MarcaList.xhtml">
+                <f:param name="from" value="/modelo/ModeloEdit"/>
             </s:button>
         </div>
 

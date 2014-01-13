@@ -15,10 +15,10 @@
 
         <rich:panel>
             <f:facet name="header">#{veiculoHome.managed ? 'Editar' : 'Adicionar'} Veiculo</f:facet>
-			<div  style="width: 100%;">
+			<div  class="editContainer">
 			<div class="editLayout">
 			<s:decorate id="entidadeField" template="../layout/edit.xhtml">
-                <ui:define name="label">Minist/Orgão/Entidade</ui:define>
+                <ui:define name="label">Ministério/Orgão/Entidade</ui:define>
                 <h:selectOneMenu value="#{veiculoHome.instance.entidade}" >
                 	<s:selectItems var="_entidade" value="#{entidadeList.resultList}" 
 								label="#{_entidade.tipoEntidade}" 
@@ -29,7 +29,7 @@
             </div>
 			<div class="editLayout">
 			<s:decorate id="especieField" template="../layout/edit.xhtml">
-                <ui:define name="label">Especie</ui:define>
+                <ui:define name="label">Espécie</ui:define>
                 <h:selectOneMenu value="#{veiculoHome.instance.especie}" >
                 	<s:selectItems var="_especie" value="#{especieList.resultList}" 
 								label="#{_especie.especie}" 
@@ -41,12 +41,10 @@
             <div class="editLayout">
             <s:decorate id="marcaField" template="../layout/edit.xhtml">
                 <ui:define name="label">Marca</ui:define>
-                <h:selectOneMenu value="#{veiculoHome.marca}" >
-                	<s:selectItems var="_marca" value="#{marcaList.resultList}" 
-								label="#{_marca.marca}"
-								noSelectionLabel="Selecione"/>
-						 <a:support event="onchange" reRender="modeloField" 
-					      	ignoreDupResponses="true" action="#{veiculoHome.setListModelos()}">
+                <h:selectOneMenu value="#{veiculoHome.marca.idMarca}" rendered="true">
+                	<f:selectItem itemValue="#{null}" itemLabel="Selecione" />
+                	<f:selectItems value="#{veiculoHome.marcas}"/>
+						 <a:support event="onchange" ajaxSingle="true" action="#{veiculoHome.actionCarregaModeloByMarca()}" reRender="modeloField">
 					      </a:support>
                 </h:selectOneMenu>
             </s:decorate>
@@ -54,11 +52,8 @@
             <div class="editLayout">
             <s:decorate id="modeloField" template="../layout/edit.xhtml">
                 <ui:define name="label">Modelo</ui:define>
-                <h:selectOneMenu value="#{veiculoHome.instance.modelo}" >
-                	<s:selectItems var="_modelo" value="#{veiculoHome.listModelos}" 
-								label="#{_modelo.modelo}" 
-								 noSelectionLabel="Selecione"/>
-							<s:convertEntity />
+                 <h:selectOneMenu value="#{veiculoHome.instance.modelo.idModelo}" id="modelo" style="width:130px;">
+                	<f:selectItems value="#{veiculoHome.listModelos}"/>
                 </h:selectOneMenu>
             </s:decorate>
             </div>
@@ -84,15 +79,12 @@
                 </h:selectOneMenu>
             </s:decorate>
             </div>
-            </div>
-            
-            <div style="width: 100%;">
-            	<div class="editLayout">
+            <div class="editLayout">
             		 <s:decorate id="anoFabricacaoField" template="../layout/edit.xhtml">
 		                <ui:define name="label">Ano Fabricação</ui:define>
 		                <h:inputText id="anoFabricacao"
 		                       required="true"
-		                          value="#{veiculoHome.instance.anoFabricacao}">
+		                          value="#{veiculoHome.instance.anoFabricacao}" maxlength="4" size="5">
 		                    <a:support event="onblur" reRender="anoFabricacaoField" bypassUpdates="true" ajaxSingle="true"/>
 		                </h:inputText>
 		            </s:decorate>
@@ -102,17 +94,20 @@
 		                <ui:define name="label">Ano modelo</ui:define>
 		                <h:inputText id="anoModelo"
 		                       required="true"
-		                          value="#{veiculoHome.instance.anoModelo}">
+		                          value="#{veiculoHome.instance.anoModelo}" maxlength="4" size="5">
 		                    <a:support event="onblur" reRender="anoModeloField" bypassUpdates="true" ajaxSingle="true"/>
 		                </h:inputText>
 		            </s:decorate>
 		          </div>
+            </div>
+            
+            <div class="editContainer">
 		          <div class="editLayout"> 
 		            <s:decorate id="placaAnteriorField" template="../layout/edit.xhtml">
 		                <ui:define name="label">Placa anterior</ui:define>
 		                <h:inputText id="placaAnterior"
 		                           size="10"
-		                      maxlength="10"
+		                      maxlength="7"
 		                          value="#{veiculoHome.instance.placaAnterior}">
 		                    <a:support event="onblur" reRender="placaAnteriorField" bypassUpdates="true" ajaxSingle="true"/>
 		                </h:inputText>
@@ -132,7 +127,7 @@
 					<div class="editLayout">
 					<s:decorate id="cidadeAnteriorField" template="../layout/edit.xhtml">
 		                <ui:define name="label">Cidade</ui:define>
-		                <h:selectOneMenu value="#{veiculoHome.instance.cidadesByIdCidadePanterior.idCidade}" id="cidade">
+		                <h:selectOneMenu value="#{veiculoHome.instance.cidadesByIdCidadePanterior.idCidade}" id="cidade" style="width:130px;">
 		                	<f:selectItems value="#{veiculoHome.listCidades}"/>
 		                </h:selectOneMenu>
 		            </s:decorate>
@@ -143,7 +138,7 @@
 		                <h:inputText id="placaAtual"
 		                       required="true"
 		                           size="10"
-		                      maxlength="10"
+		                      maxlength="7"
 		                          value="#{veiculoHome.instance.placaAtual}">
 		                    <a:support event="onblur" reRender="placaAtualField" bypassUpdates="true" ajaxSingle="true"/>
 		                </h:inputText>
@@ -163,118 +158,127 @@
 					<div class="editLayout">
 					<s:decorate id="cidadeAtualField" template="../layout/edit.xhtml">
 		                <ui:define name="label">Cidade</ui:define>
-		                <h:selectOneMenu value="#{veiculoHome.instance.cidadesByIdCidadePatual.idCidade}" id="cidade">
+		                <h:selectOneMenu value="#{veiculoHome.instance.cidadesByIdCidadePatual.idCidade}" id="cidade" style="width:130px;">
 		                	<f:selectItems value="#{veiculoHome.listCidades}"/>
 		                </h:selectOneMenu>
 		            </s:decorate>
 		            </div>
+		            <div class="editLayout">
+					<s:decorate id="potenciaField" template="../layout/edit.xhtml">
+		                <ui:define name="label">Potência</ui:define>
+		                <h:inputText id="potencia"
+		                          value="#{veiculoHome.instance.potencia}">
+		                    <a:support event="onblur" reRender="potenciaField" bypassUpdates="true" ajaxSingle="true"/>
+		                </h:inputText>
+		            </s:decorate> 
+					</div>
+					<div class="editLayout">
+		            <s:decorate id="chassiField" template="../layout/edit.xhtml">
+		                <ui:define name="label">Chassi</ui:define>
+		                <h:inputText id="chassi"
+		                       required="true"
+		                           size="10"
+		                      maxlength="10"
+		                          value="#{veiculoHome.instance.chassi}">
+		                    <a:support event="onblur" reRender="chassiField" bypassUpdates="true" ajaxSingle="true"/>
+		                </h:inputText>
+		            </s:decorate>
+					</div>
             </div>
-            
-            
-           
- 
-
-           
-
-            <s:decorate id="chassiField" template="../layout/edit.xhtml">
-                <ui:define name="label">Chassi</ui:define>
-                <h:inputText id="chassi"
-                       required="true"
-                           size="10"
-                      maxlength="10"
-                          value="#{veiculoHome.instance.chassi}">
-                    <a:support event="onblur" reRender="chassiField" bypassUpdates="true" ajaxSingle="true"/>
-                </h:inputText>
-            </s:decorate>
-
-			<s:decorate id="potenciaField" template="../layout/edit.xhtml">
-                <ui:define name="label">Potência</ui:define>
-                <h:inputText id="potencia"
-                          value="#{veiculoHome.instance.potencia}">
-                    <a:support event="onblur" reRender="potenciaField" bypassUpdates="true" ajaxSingle="true"/>
-                </h:inputText>
-            </s:decorate>
-            
-            <s:decorate id="codRenavamField" template="../layout/edit.xhtml">
-                <ui:define name="label">Cod renavam</ui:define>
-                <h:inputText id="codRenavam"
-                       required="true"
-                          value="#{veiculoHome.instance.codRenavam}">
-                    <a:support event="onblur" reRender="codRenavamField" bypassUpdates="true" ajaxSingle="true"/>
-                </h:inputText>
-            </s:decorate>
-
-			<s:decorate id="adquiridoDeField" template="../layout/edit.xhtml">
-                <ui:define name="label">Adquirido de</ui:define>
-                <h:inputText id="adquiridoDe"
-                           size="100"
-                      maxlength="100"
-                          value="#{veiculoHome.instance.adquiridoDe}">
-                    <a:support event="onblur" reRender="adquiridoDeField" bypassUpdates="true" ajaxSingle="true"/>
-                </h:inputText>
-            </s:decorate>
-            
-            <s:decorate id="modalidadeAquisicaoField" template="../layout/edit.xhtml">
-                <ui:define name="label">Modalidade Aquisição</ui:define>
-                <h:inputText id="modalidadeAquisicao"
-                           size="10"
-                      maxlength="10"
-                          value="#{veiculoHome.instance.modalidadeAquisicao}">
-                    <a:support event="onblur" reRender="modalidadeAquisicaoField" bypassUpdates="true" ajaxSingle="true"/>
-                </h:inputText>
-            </s:decorate>
-            
-            <s:decorate id="valorDaAquisicaoField" template="../layout/edit.xhtml">
-                <ui:define name="label">Valor da Aquisição</ui:define>
-                <h:inputText id="valorDaAquisicao"
-                          value="#{veiculoHome.instance.valorDaAquisicao}">
-                    <a:support event="onblur" reRender="valorDaAquisicaoField" bypassUpdates="true" ajaxSingle="true"/>
-                </h:inputText>
-            </s:decorate>
-            
-            
-            <s:decorate id="dataDeAquisicaoField" template="../layout/edit.xhtml">
-                <ui:define name="label">Data de Aquisição</ui:define>
-                <rich:calendar id="dataDeAquisicao"
-                          value="#{veiculoHome.instance.dataDeAquisicao}" datePattern="MM/dd/yyyy" />
-            </s:decorate>
-            
-             <s:decorate id="numPatrimonioField" template="../layout/edit.xhtml">
-                <ui:define name="label">Num Patrimônio</ui:define>
-                <h:inputText id="numPatrimonio"
-                           size="10"
-                      maxlength="10"
-                          value="#{veiculoHome.instance.numPatrimonio}">
-                    <a:support event="onblur" reRender="numPatrimonioField" bypassUpdates="true" ajaxSingle="true"/>
-                </h:inputText>
-            </s:decorate>
-            
-             <s:decorate id="observacaoField" template="../layout/edit.xhtml">
-                <ui:define name="label">Observacao</ui:define>
-                <h:inputTextarea id="observacao"
-                               cols="80"
-                               rows="10"
-                              value="#{veiculoHome.instance.observacao}"/>
-            </s:decorate>
-
-            <s:decorate id="dataCadastroField" template="../layout/edit.xhtml">
-                <ui:define name="label">Data cadastro</ui:define>
-                <rich:calendar id="dataCadastro"
-                          value="#{veiculoHome.instance.dataCadastro}" datePattern="MM/dd/yyyy" />
-            </s:decorate>
-
-
-            <s:decorate id="idServidorField" template="../layout/edit.xhtml">
-                <ui:define name="label">Id servidor</ui:define>
-                <h:inputText id="idServidor"
-                          value="#{veiculoHome.instance.idServidor}">
-                    <a:support event="onblur" reRender="idServidorField" bypassUpdates="true" ajaxSingle="true"/>
-                </h:inputText>
-            </s:decorate>
+            <div class="editContainer">
+		        <div class="editLayout"> 
+		            <s:decorate id="codRenavamField" template="../layout/edit.xhtml">
+		                <ui:define name="label">Renavam</ui:define>
+		                <h:inputText id="codRenavam"
+		                       required="true"
+		                          value="#{veiculoHome.instance.codRenavam}"
+		                          maxlength="9"
+		                          size="10">
+		                    <a:support event="onblur" reRender="codRenavamField" bypassUpdates="true" ajaxSingle="true"/>
+		                </h:inputText>
+		            </s:decorate>
+		         </div>
+		         <div class="editLayout">
+		         	 <s:decorate id="numPatrimonioField" template="../layout/edit.xhtml">
+		                <ui:define name="label">Num Patrimônio</ui:define>
+		                <h:inputText id="numPatrimonio"
+		                           size="10"
+		                      maxlength="10"
+		                          value="#{veiculoHome.instance.numPatrimonio}">
+		                    <a:support event="onblur" reRender="numPatrimonioField" bypassUpdates="true" ajaxSingle="true"/>
+		                </h:inputText>
+		            </s:decorate>
+		         </div>
+				
+		        <div class="editLayout">
+		            <s:decorate id="modalidadeAquisicaoField" template="../layout/edit.xhtml">
+		                <ui:define name="label">Modalidade Aquisição</ui:define>
+		                <h:inputText id="modalidadeAquisicao"
+		                           size="10"
+		                      maxlength="10"
+		                          value="#{veiculoHome.instance.modalidadeAquisicao}">
+		                    <a:support event="onblur" reRender="modalidadeAquisicaoField" bypassUpdates="true" ajaxSingle="true"/>
+		                </h:inputText>
+		            </s:decorate>
+		        </div>
+		        <div class="editLayout">    
+		            <s:decorate id="valorDaAquisicaoField" template="../layout/edit.xhtml">
+		                <ui:define name="label">Valor da Aquisição</ui:define>
+		                <h:inputText id="valorDaAquisicao"
+		                          value="#{veiculoHome.instance.valorDaAquisicao}" maxlength="15"  size="15">
+		                    <a:support event="onblur" reRender="valorDaAquisicaoField" bypassUpdates="true" ajaxSingle="true"/>
+		                </h:inputText>
+		            </s:decorate>
+		         </div>   
+		         <div class="editLayout">   
+		            <s:decorate id="dataDeAquisicaoField" template="../layout/edit.xhtml">
+		                <ui:define name="label">Data de Aquisição</ui:define>
+		                <rich:calendar id="dataDeAquisicao" inputSize="10"
+		                          value="#{veiculoHome.instance.dataDeAquisicao}" datePattern="dd/MM/yyyy" />
+		            </s:decorate>
+		         </div>
+		         <div class="editLayout">
+					<s:decorate id="adquiridoDeField" template="../layout/edit.xhtml" >
+		                <ui:define name="label">Adquirido de</ui:define>
+		                <h:inputText id="adquiridoDe"
+		                           size="70"
+		                      maxlength="100"
+		                          value="#{veiculoHome.instance.adquiridoDe}" >
+		                    <a:support event="onblur" reRender="adquiridoDeField" bypassUpdates="true" ajaxSingle="true"/>
+		                </h:inputText>
+		            </s:decorate>
+		        </div>
+		         <div class="editLayout"></div>
+		         <div class="editLayout"></div>
+		         </div> 
+		         <div class="editLayout">   
+		             <s:decorate id="observacaoField" template="../layout/edit.xhtml">
+		                <ui:define name="label">Observacao</ui:define>
+		                <h:inputTextarea id="observacao"
+		                               cols="80"
+		                               rows="10"
+		                              value="#{veiculoHome.instance.observacao}"/>
+		            </s:decorate>
+		         </div>
+		
+		            <s:decorate id="dataCadastroField" template="../layout/edit.xhtml">
+		                <ui:define name="label">Data cadastro</ui:define>
+		                <rich:calendar id="dataCadastro"
+		                          value="#{veiculoHome.instance.dataCadastro}" datePattern="MM/dd/yyyy" />
+		            </s:decorate>
+		
+		
+		            <s:decorate id="idServidorField" template="../layout/edit.xhtml">
+		                <ui:define name="label">Id servidor</ui:define>
+		                <h:inputText id="idServidor"
+		                          value="#{veiculoHome.instance.idServidor}">
+		                    <a:support event="onblur" reRender="idServidorField" bypassUpdates="true" ajaxSingle="true"/>
+		                </h:inputText>
+		            </s:decorate>
 
             <div style="clear:both">
                 <span class="required">*</span>
-                required fields
+                Itens obrigatórios
             </div>
 
         </rich:panel>
