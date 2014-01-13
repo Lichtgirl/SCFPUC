@@ -28,15 +28,23 @@ public class VeiculoHome extends EntityHome<Veiculo> {
 	@In(create = true)
 	TipoCombustivelHome tipoCombustivelHome;
 	
-	private Marca marca = null;
+	private Marca marca = new Marca();
 	private Estados estado = new Estados();
-	private List<Modelo> listModelos = new ArrayList<Modelo>();
-	 private List<SelectItem> listCidades = new ArrayList<SelectItem>(); 
+	private List<SelectItem> listModelos = new ArrayList<SelectItem>();
+	private List<SelectItem> listCidades = new ArrayList<SelectItem>(); 
 
 	public void setVeiculoIdVeiculo(Integer id) {
 		setId(id);
 	}
 	
+	public List<SelectItem> getListModelos() {
+		return listModelos;
+	}
+
+	public void setListModelos(List<SelectItem> listModelos) {
+		this.listModelos = listModelos;
+	}
+
 	public List<SelectItem> getListCidades() {
 		return listCidades;
 	}
@@ -44,25 +52,6 @@ public class VeiculoHome extends EntityHome<Veiculo> {
 	public void setListCidades(List<SelectItem> listCidades) {
 		this.listCidades = listCidades;
 	}
-
-	public List<Modelo> getListModelos() {
-		return listModelos;
-	}
-
-	public void setListModelos(List<Modelo> listModelos) {
-		this.listModelos = listModelos;
-	}
-	
-	public String setListModelos() {
-		
-		if(this.marca != null){
-			this.listModelos = super.getEntityManager().createQuery("from Modelo modelo where modelo.marca.idMarca = "+ this.marca.getIdMarca())
-					.getResultList();
-		}
-		
-		return "";
-	}
-
 
 	public Marca getMarca() {
 		return marca;
@@ -161,6 +150,35 @@ public class VeiculoHome extends EntityHome<Veiculo> {
 				getInstance().getGastoses());
 	}
 	
+	public List<SelectItem> getMarcas(){
+		System.out.println("get marca");
+		List<Marca> listMarcas = (List<Marca>)super.getEntityManager().createQuery("from Marca").getResultList();
+		
+		List<SelectItem> listaNovaMarca = new ArrayList<SelectItem>(listMarcas.size());
+		
+		for (Marca marca : listMarcas) {
+			listaNovaMarca.add(new SelectItem(marca.getIdMarca(),marca.getMarca()));
+		}
+		return listaNovaMarca;
+	}
+	
+	public String actionCarregaModeloByMarca(){
+		this.listModelos = getCarregaModeloByMarca(this.marca.getIdMarca());
+
+		return "getCarregaModeloByMarcaSucesso";
+	}
+
+	public List<SelectItem> getCarregaModeloByMarca(Integer idMarca){
+
+		List<Modelo> lModelos = (List<Modelo>)super.getEntityManager().createQuery("from Modelo modelo where modelo.marca.idMarca = "+ idMarca).getResultList();
+		List<SelectItem> lModelosNova = new ArrayList<SelectItem>(lModelos.size());
+
+		for(Modelo modelo: lModelos){
+			lModelosNova.add(new SelectItem(modelo.getModelo()));
+		}
+		return lModelosNova;
+	}
+	
 	public List<SelectItem> getEstados(){
 		System.out.println("get estados");
 		List<Estados> listEstados = (List<Estados>)super.getEntityManager().createQuery("from Estados").getResultList();
@@ -168,7 +186,7 @@ public class VeiculoHome extends EntityHome<Veiculo> {
 		List<SelectItem> listaNovaEstados = new ArrayList<SelectItem>(listEstados.size());
 		
 		for (Estados estados : listEstados) {
-			listaNovaEstados.add(new SelectItem(estados.getId(),estados.getNome()+ " - " + estados.getUf()));
+			listaNovaEstados.add(new SelectItem(estados.getId(),estados.getUf()));
 		}
 		
 		System.out.println("estados:::"+listaNovaEstados);
@@ -178,7 +196,7 @@ public class VeiculoHome extends EntityHome<Veiculo> {
 	 public String actionCarregaCidadesByEstado(){
 	        this.listCidades = getCarregaCidadesByEstado(this.estado.getId());
 	        
-	        return "getSubcategoriasByCategoriaSucesso";
+	        return "getCarregaCidadesByEstadoSucesso";
 	    }
 	 
     public List<SelectItem> getCarregaCidadesByEstado(Integer idEstado){
