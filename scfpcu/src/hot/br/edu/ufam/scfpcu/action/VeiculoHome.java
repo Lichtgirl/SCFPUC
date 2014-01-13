@@ -5,13 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.model.SelectItem;
+import javax.persistence.Query;
 
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.framework.EntityHome;
+import org.jboss.seam.security.Identity;
 
 @Name("veiculoHome")
 public class VeiculoHome extends EntityHome<Veiculo> {
+	
+	@In(create = true)
+	Identity identity;
 
 	@In(create = true)
 	CidadesHome cidadesHome;
@@ -27,6 +32,8 @@ public class VeiculoHome extends EntityHome<Veiculo> {
 	ModeloHome modeloHome;
 	@In(create = true)
 	TipoCombustivelHome tipoCombustivelHome;
+	@In(create = true)
+	UsuarioHome usuarioHome;
 	
 	private Marca marca = new Marca();
 	private Estados estado = new Estados();
@@ -121,6 +128,10 @@ public class VeiculoHome extends EntityHome<Veiculo> {
 		if (tipoCombustivel != null) {
 			getInstance().setTipoCombustivel(tipoCombustivel);
 		}
+		Usuario usuario = usuarioHome.getDefinedInstance();
+		if (usuario != null) {
+			getInstance().setUsuario(usuario);
+		}
 	}
 
 	public boolean isWired() {
@@ -214,4 +225,29 @@ public class VeiculoHome extends EntityHome<Veiculo> {
         
         return lCidadesNova;
     }
+    
+    public String persist(){
+    	 Usuario user = encontrarUsuarioByLogin( identity.getUsername() );
+  	   if (user != null){
+  		   this.getInstance().setUsuario(user);
+  	   }
+  	   
+  	 return (super.persist());
+    }
+    
+    public Usuario encontrarUsuarioByLogin(String login) {
+		Usuario usuario = null;
+		Query query = super.getEntityManager().createQuery(
+				"from Usuario usuario " +
+					"where usuario.login = '"
+						+ login + "'");
+
+		Object Usu = null;
+		try {
+			Usu = query.getSingleResult();
+			usuario = (Usuario) Usu;
+		} catch (Exception e) {
+		}
+		return usuario;
+	}
 }

@@ -1,5 +1,5 @@
 package br.edu.ufam.scfpcu.model;
-// Generated Jan 9, 2014 11:42:56 PM by Hibernate Tools 3.2.4.GA
+// Generated Jan 13, 2014 5:46:24 PM by Hibernate Tools 3.2.4.GA
 
 import java.util.Date;
 import java.util.HashSet;
@@ -29,6 +29,7 @@ public class Veiculo implements java.io.Serializable {
 
 	private Integer idVeiculo;
 	private Cor cor;
+	private Usuario usuario;
 	private Cidades cidadesByIdCidadePatual;
 	private TipoCombustivel tipoCombustivel;
 	private Modelo modelo;
@@ -50,7 +51,6 @@ public class Veiculo implements java.io.Serializable {
 	private String placaAnterior;
 	private String placaAtual;
 	private Date dataCadastro;
-	private Integer idServidor;
 	private Set<Gastos> gastoses = new HashSet<Gastos>(0);
 
 	public Veiculo() {
@@ -73,7 +73,7 @@ public class Veiculo implements java.io.Serializable {
 		this.codRenavam = codRenavam;
 		this.placaAtual = placaAtual;
 	}
-	public Veiculo(Cor cor, Cidades cidadesByIdCidadePatual,
+	public Veiculo(Cor cor, Usuario usuario, Cidades cidadesByIdCidadePatual,
 			TipoCombustivel tipoCombustivel, Modelo modelo, Especie especie,
 			Grupo grupo, Cidades cidadesByIdCidadePanterior, Entidade entidade,
 			int anoFabricacao, int anoModelo, Integer potencia,
@@ -81,8 +81,9 @@ public class Veiculo implements java.io.Serializable {
 			String adquiridoDe, Date dataDeAquisicao,
 			String modalidadeAquisicao, Double valorDaAquisicao,
 			String observacao, String placaAnterior, String placaAtual,
-			Date dataCadastro, Integer idServidor, Set<Gastos> gastoses) {
+			Date dataCadastro, Set<Gastos> gastoses) {
 		this.cor = cor;
+		this.usuario = usuario;
 		this.cidadesByIdCidadePatual = cidadesByIdCidadePatual;
 		this.tipoCombustivel = tipoCombustivel;
 		this.modelo = modelo;
@@ -104,7 +105,6 @@ public class Veiculo implements java.io.Serializable {
 		this.placaAnterior = placaAnterior;
 		this.placaAtual = placaAtual;
 		this.dataCadastro = dataCadastro;
-		this.idServidor = idServidor;
 		this.gastoses = gastoses;
 	}
 
@@ -128,6 +128,16 @@ public class Veiculo implements java.io.Serializable {
 
 	public void setCor(Cor cor) {
 		this.cor = cor;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_servidor")
+	public Usuario getUsuario() {
+		return this.usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -341,15 +351,6 @@ public class Veiculo implements java.io.Serializable {
 
 	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
-	}
-
-	@Column(name = "id_servidor")
-	public Integer getIdServidor() {
-		return this.idServidor;
-	}
-
-	public void setIdServidor(Integer idServidor) {
-		this.idServidor = idServidor;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "veiculo")
