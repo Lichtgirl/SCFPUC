@@ -1,6 +1,9 @@
 package br.edu.ufam.scfpcu.action;
 
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
@@ -27,8 +30,12 @@ public class AuthenticatorBean implements Authenticator {
 		if ("admin".equals(credentials.getUsername())) {
 			identity.addRole("admin");
 			return true;
+		}else{
+			FacesMessage msg = new FacesMessage("Usuário ou senha inválido!");
+			FacesContext.getCurrentInstance().addMessage("erro",msg);
+			return false;	
 		}
-		return false;
+		
 	}
 
 }
