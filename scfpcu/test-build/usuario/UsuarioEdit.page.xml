@@ -19,21 +19,21 @@
    <navigation from-action="#{usuarioHome.persist}">
       <rule if-outcome="persisted">
          <end-conversation/>
-         <redirect view-id="/Usuario.xhtml"/>
+         <redirect view-id="/usuario/Usuario.xhtml"/>
       </rule>
    </navigation>
 
    <navigation from-action="#{usuarioHome.update}">
       <rule if-outcome="updated">
          <end-conversation/>
-         <redirect view-id="/Usuario.xhtml"/>
+         <redirect view-id="/usuario/Usuario.xhtml"/>
       </rule>
    </navigation>
 
    <navigation from-action="#{usuarioHome.remove}">
       <rule if-outcome="removed">
          <end-conversation/>
-         <redirect view-id="/UsuarioList.xhtml"/>
+         <redirect view-id="/usuario/UsuarioList.xhtml"/>
       </rule>
    </navigation>
 

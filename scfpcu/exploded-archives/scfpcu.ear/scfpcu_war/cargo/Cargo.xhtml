@@ -27,11 +27,11 @@
 
         <s:button view="/CargoEdit.xhtml"
                     id="edit"
-                 value="Edit"/>
+                 value="Editar"/>
 
         <s:button view="/#{empty cargoFrom ? 'CargoList' : cargoFrom}.xhtml"
                     id="done"
-                 value="Done"/>
+                 value="Ok"/>
 
     </div>
 
@@ -43,7 +43,7 @@
         </f:facet>
     <h:form styleClass="association" id="usuariosChildren">
 
-        <h:outputText value="There are no usuarios associated with this cargo."
+        <h:outputText value="Não há usuários com o respectivo cargo."
                    rendered="#{empty cargoHome.usuarios}"/>
 
         <rich:dataTable value="#{cargoHome.usuarios}"
@@ -78,7 +78,7 @@
             <h:column>
                 <f:facet name="header">Action</f:facet>
                 <s:link id="selectusuario"
-                     value="Select"
+                     value="Selecionar"
                       view="/Usuario.xhtml">
                     <f:param name="usuarioIdServidor"
                             value="#{_usuario.idServidor}"/>
@@ -91,7 +91,7 @@
 
     <div class="actionButtons">
         <s:button
-               value="Add usuario"
+               value="Adicionar usuário"
                 view="/UsuarioEdit.xhtml">
             <f:param name="cargoIdCargo"
                     value="#{cargoHome.instance.idCargo}"/>
@@ -154,7 +154,7 @@
 
     <div class="actionButtons">
         <s:button
-               value="Add usuario"
+               value="Adicionar usuário"
                 view="/UsuarioEdit.xhtml">
             <f:param name="cargoIdCargo"
                     value="#{cargoHome.instance.idCargo}"/>

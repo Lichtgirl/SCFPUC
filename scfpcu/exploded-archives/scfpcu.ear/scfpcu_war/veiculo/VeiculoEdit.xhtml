@@ -52,8 +52,8 @@
             <div class="editLayout">
             <s:decorate id="modeloField" template="../layout/edit.xhtml">
                 <ui:define name="label">Modelo</ui:define>
-                 <h:selectOneMenu value="#{veiculoHome.instance.modelo.idModelo}" id="modelo" style="width:130px;">
-                	<f:selectItems value="#{veiculoHome.listModelos}"/>
+                 <h:selectOneMenu value="#{veiculoHome.idModelo}" id="modelo" style="width:130px;">
+                 	<f:selectItems value="#{veiculoHome.listModelos}"/>
                 </h:selectOneMenu>
             </s:decorate>
             </div>
@@ -127,8 +127,9 @@
 					<div class="editLayout">
 					<s:decorate id="cidadeAnteriorField" template="../layout/edit.xhtml">
 		                <ui:define name="label">Cidade</ui:define>
-		                <h:selectOneMenu value="#{veiculoHome.instance.cidadesByIdCidadePanterior.idCidade}" id="cidade" style="width:130px;">
-		                	<f:selectItems value="#{veiculoHome.listCidades}"/>
+		                 <h:selectOneMenu value="#{veiculoHome.idCidadePanterior}" id="cidadeAnterior" style="width:130px;">
+		                 	<f:selectItems value="#{veiculoHome.listCidadeAnterior}" id="cidadeAnteriorSelect"/>
+		                 	<a:support event="onblur" ajaxSingle="true" ignoreDupResponses="true" bypassUpdates="true"/>
 		                </h:selectOneMenu>
 		            </s:decorate>
 					</div>
@@ -147,10 +148,10 @@
 		            <div class="editLayout">
 		            <s:decorate id="uf2Field" template="../layout/edit.xhtml">
 		                <ui:define name="label">UF</ui:define>
-		                <h:selectOneMenu value="#{veiculoHome.estado.id}" rendered="true">
+		                <h:selectOneMenu value="#{veiculoHome.estado.id}" rendered="true" id="uf2">
 		                	<f:selectItem itemValue="#{null}" itemLabel="Selecione" />
 		                	<f:selectItems value="#{veiculoHome.estados}"/>
-								 <a:support event="onchange" ajaxSingle="true" action="#{veiculoHome.actionCarregaCidadesByEstado()}" reRender="cidadeAtualField">
+								 <a:support event="onchange" ajaxSingle="true" action="#{veiculoHome.actionCarregaCidadesAtualByEstado()}" reRender="cidadeAtualField">
 							      </a:support>
 		                </h:selectOneMenu>
 		            </s:decorate>
@@ -158,8 +159,9 @@
 					<div class="editLayout">
 					<s:decorate id="cidadeAtualField" template="../layout/edit.xhtml">
 		                <ui:define name="label">Cidade</ui:define>
-		                <h:selectOneMenu value="#{veiculoHome.instance.cidadesByIdCidadePatual.idCidade}" id="cidade" style="width:130px;">
-		                	<f:selectItems value="#{veiculoHome.listCidades}"/>
+		                <h:selectOneMenu value="#{veiculoHome.idCidadePatual}" id="cidadeAtual" style="width:130px;">
+		                	<f:selectItems value="#{veiculoHome.listCidadeAtual}" id="cidadeAtualSelect"/>
+		                	<a:support event="onblur" ajaxSingle="true" ignoreDupResponses="true" bypassUpdates="true"/>
 		                </h:selectOneMenu>
 		            </s:decorate>
 		            </div>
@@ -267,15 +269,7 @@
 		                          value="#{veiculoHome.instance.dataCadastro}" datePattern="MM/dd/yyyy" />
 		            </s:decorate>
 		
-		
-		            <s:decorate id="idServidorField" template="../layout/edit.xhtml">
-		                <ui:define name="label">Id servidor</ui:define>
-		                <h:inputText id="idServidor"
-		                          value="#{veiculoHome.instance.idServidor}">
-		                    <a:support event="onblur" reRender="idServidorField" bypassUpdates="true" ajaxSingle="true"/>
-		                </h:inputText>
-		            </s:decorate>
-
+		            
             <div style="clear:both">
                 <span class="required">*</span>
                 Itens obrigatórios
@@ -288,7 +282,6 @@
             <h:commandButton id="save"
                           value="Save"
                          action="#{veiculoHome.persist}"
-                       disabled="#{!veiculoHome.wired}"
                        rendered="#{!veiculoHome.managed}"/>
 
             <h:commandButton id="update"

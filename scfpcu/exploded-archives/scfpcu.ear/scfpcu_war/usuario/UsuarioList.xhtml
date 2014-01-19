@@ -71,11 +71,11 @@
             <f:facet name="header">
                 <ui:include src="../layout/sort.xhtml">
                     <ui:param name="entityList" value="#{usuarioList}"/>
-                    <ui:param name="propertyLabel" value="Cargo id cargo"/>
+                    <ui:param name="propertyLabel" value="Cargo"/>
                     <ui:param name="propertyPath" value="usuario.cargo.idCargo"/>
                 </ui:include>
             </f:facet>
-            <h:outputText value="#{_usuario.cargo.idCargo}"/>
+            <h:outputText value="#{_usuario.cargo.cargo}"/>
         </h:column>
         <h:column>
             <f:facet name="header">
@@ -111,16 +111,6 @@
             <f:facet name="header">
                 <ui:include src="../layout/sort.xhtml">
                     <ui:param name="entityList" value="#{usuarioList}"/>
-                    <ui:param name="propertyLabel" value="Senha"/>
-                    <ui:param name="propertyPath" value="usuario.senha"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_usuario.senha}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{usuarioList}"/>
                     <ui:param name="propertyLabel" value="Siape"/>
                     <ui:param name="propertyPath" value="usuario.siape"/>
                 </ui:include>
@@ -129,7 +119,7 @@
         </h:column>
         <rich:column styleClass="action">
             <f:facet name="header">Action</f:facet>
-            <s:link view="/#{empty from ? 'Usuario' : from}.xhtml"
+            <s:link view="/usuario/#{empty from ? 'Usuario' : from}.xhtml"
                    value="#{empty from ? 'View' : 'Select'}"
              propagation="#{empty from ? 'none' : 'default'}"
                       id="usuarioViewId">
@@ -137,7 +127,7 @@
                         value="#{_usuario.idServidor}"/>
             </s:link>
             #{' '}
-            <s:link view="/UsuarioEdit.xhtml"
+            <s:link view="/usuario/UsuarioEdit.xhtml"
                    value="Edit"
              propagation="none"
                       id="usuarioEdit"
@@ -187,10 +177,10 @@
     </div>
 
     <s:div styleClass="actionButtons" rendered="#{empty from}">
-        <s:button view="/UsuarioEdit.xhtml"
+        <s:button view="/usuario/UsuarioEdit.xhtml"
                     id="create"
            propagation="none"
-                 value="Create usuario">
+                 value="Criar usuario">
             <f:param name="usuarioIdServidor"/>
         </s:button>
     </s:div>

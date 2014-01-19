@@ -33,14 +33,14 @@
             <h:outputText value="#{usuarioHome.instance.nome}"/>
         </s:decorate>
 
-        <s:decorate id="senha" template="../layout/display.xhtml">
-            <ui:define name="label">Senha</ui:define>
-            <h:outputText value="#{usuarioHome.instance.senha}"/>
-        </s:decorate>
-
         <s:decorate id="siape" template="../layout/display.xhtml">
             <ui:define name="label">Siape</ui:define>
             <h:outputText value="#{usuarioHome.instance.siape}"/>
+        </s:decorate>
+        
+        <s:decorate id="cargo" template="../layout/display.xhtml">
+            <ui:define name="label">Cargo</ui:define>
+            <h:outputText value="#{usuarioHome.instance.cargo.cargo}"/>
         </s:decorate>
 
         <div style="clear:both"/>
@@ -49,54 +49,16 @@
 
     <div class="actionButtons">
 
-        <s:button view="/UsuarioEdit.xhtml"
+        <s:button view="/usuario/UsuarioEdit.xhtml"
                     id="edit"
-                 value="Edit"/>
+                 value="Editar"/>
 
-        <s:button view="/#{empty usuarioFrom ? 'UsuarioList' : usuarioFrom}.xhtml"
+        <s:button view="/usuario/#{empty usuarioFrom ? 'UsuarioList' : usuarioFrom}.xhtml"
                     id="done"
-                 value="Done"/>
+                 value="Ok"/>
 
     </div>
 
-    <rich:tabPanel switchType="ajax">
-
-    <rich:tab>
-        <f:facet name="label">
-            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Cargo</h:panelGroup>
-        </f:facet>
-    <div class="association" id="cargoParent">
-
-        <h:outputText value="There is no cargo associated with this usuario."
-                   rendered="#{usuarioHome.instance.cargo == null}"/>
-
-        <rich:dataTable var="_cargo"
-                   value="#{usuarioHome.instance.cargo}"
-                rendered="#{usuarioHome.instance.cargo != null}"
-              rowClasses="rvgRowOne,rvgRowTwo"
-                      id="cargoTable">
-            <h:column>
-                <f:facet name="header">Id cargo</f:facet>
-                <h:outputText value="#{_cargo.idCargo}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Cargo</f:facet>
-                <h:outputText value="#{_cargo.cargo}"/>
-            </h:column>
-            <h:column styleClass="action">
-                <f:facet name="header">Action</f:facet>
-                <s:link id="viewcargo"
-                     value="View"
-                      view="/Cargo.xhtml">
-                    <f:param name="cargoIdCargo"
-                           value="#{_cargo.idCargo}"/>
-                </s:link>
-            </h:column>
-        </rich:dataTable>
-
-    </div>
-    </rich:tab>
-</rich:tabPanel>
 </ui:define>
 
 </ui:composition>

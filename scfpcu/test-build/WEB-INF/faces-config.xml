@@ -16,5 +16,12 @@
       </locale-config>
       <view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
    </application>
+   
+   <converter>
+     <converter-id>converteModelo</converter-id>
+     <converter-class>
+       br.edu.ufam.scfpcu.converter.ConverteModelo
+     </converter-class>
+   </converter>
 
 </faces-config>

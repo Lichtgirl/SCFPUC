@@ -21,10 +21,10 @@
                 <h:panelGrid columns="2" rowClasses="prop" columnClasses="name,value">
                     <h:outputLabel for="username" style="FONT-SIZE: x-small;">Login</h:outputLabel>
                     <h:inputText id="username"
-                              value="#{credentials.username}" required="true"/>
+                              value="#{identity.username}" required="true"/>
                     <h:outputLabel for="password">Senha</h:outputLabel>
                     <h:inputSecret id="password"
-                                value="#{credentials.password}" required="true"/>
+                                value="#{identity.password}" required="true"/>
                     <h:outputLabel for="rememberMe">Manter conectado</h:outputLabel>
                     <h:selectBooleanCheckbox id="rememberMe"
                                           value="#{rememberMe.enabled}"/>
@@ -32,10 +32,6 @@
                     <h:messages id="msgErro" style="color: red"/>                     
                 </h:panelGrid>
             </div>
-
-            <p>
-              <i>Note - </i> You may login with the username 'admin' and a blank password.
-            </p>
 
         </rich:panel>
 

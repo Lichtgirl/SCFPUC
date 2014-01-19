@@ -36,36 +36,42 @@ public class VeiculoHome extends EntityHome<Veiculo> {
 	UsuarioHome usuarioHome;
 	
 	private Marca marca = new Marca();
+	private Integer idModelo;
 	private Estados estado = new Estados();
+	private Integer idCidadePanterior;
+	private Integer idCidadePatual;
 	private List<SelectItem> listModelos = new ArrayList<SelectItem>();
-	private List<SelectItem> listCidades = new ArrayList<SelectItem>(); 
+	private List<SelectItem> listCidadeAnterior = new ArrayList<SelectItem>(); 
+	private List<SelectItem> listCidadeAtual = new ArrayList<SelectItem>();
 
-	public void setVeiculoIdVeiculo(Integer id) {
-		setId(id);
-	}
-	
 	public List<SelectItem> getListModelos() {
 		return listModelos;
 	}
+
 
 	public void setListModelos(List<SelectItem> listModelos) {
 		this.listModelos = listModelos;
 	}
 
-	public List<SelectItem> getListCidades() {
-		return listCidades;
-	}
 
-	public void setListCidades(List<SelectItem> listCidades) {
-		this.listCidades = listCidades;
+	public void setVeiculoIdVeiculo(Integer id) {
+		setId(id);
 	}
-
+	
 	public Marca getMarca() {
 		return marca;
 	}
 
 	public void setMarca(Marca marca) {
 		this.marca = marca;
+	}
+
+	public Integer getIdModelo() {
+		return idModelo;
+	}
+
+	public void setIdModelo(Integer idModelo) {
+		this.idModelo = idModelo;
 	}
 
 	public Estados getEstado() {
@@ -75,6 +81,46 @@ public class VeiculoHome extends EntityHome<Veiculo> {
 	public void setEstado(Estados estado) {
 		this.estado = estado;
 	}
+
+	public Integer getIdCidadePanterior() {
+		return idCidadePanterior;
+	}
+
+
+	public void setIdCidadePanterior(Integer idCidadePanterior) {
+		this.idCidadePanterior = idCidadePanterior;
+	}
+
+
+	public Integer getIdCidadePatual() {
+		return idCidadePatual;
+	}
+
+
+	public void setIdCidadePatual(Integer idCidadePatual) {
+		this.idCidadePatual = idCidadePatual;
+	}
+
+
+	public List<SelectItem> getListCidadeAnterior() {
+		return listCidadeAnterior;
+	}
+
+
+	public void setListCidadeAnterior(List<SelectItem> listCidadeAnterior) {
+		this.listCidadeAnterior = listCidadeAnterior;
+	}
+
+
+	public List<SelectItem> getListCidadeAtual() {
+		return listCidadeAtual;
+	}
+
+
+	public void setListCidadeAtual(List<SelectItem> listCidadeAtual) {
+		this.listCidadeAtual = listCidadeAtual;
+	}
+
 
 	public Integer getVeiculoIdVeiculo() {
 		return (Integer) getId();
@@ -185,53 +231,74 @@ public class VeiculoHome extends EntityHome<Veiculo> {
 		List<SelectItem> lModelosNova = new ArrayList<SelectItem>(lModelos.size());
 
 		for(Modelo modelo: lModelos){
-			lModelosNova.add(new SelectItem(modelo.getModelo()));
+			lModelosNova.add(new SelectItem(modelo.getIdModelo(), modelo.getModelo()));
 		}
 		return lModelosNova;
 	}
 	
 	public List<SelectItem> getEstados(){
-		System.out.println("get estados");
+		System.out.println("get Estados");
 		List<Estados> listEstados = (List<Estados>)super.getEntityManager().createQuery("from Estados").getResultList();
 		
 		List<SelectItem> listaNovaEstados = new ArrayList<SelectItem>(listEstados.size());
-		
-		for (Estados estados : listEstados) {
-			listaNovaEstados.add(new SelectItem(estados.getId(),estados.getUf()));
+		for (Estados estado : listEstados) {
+			listaNovaEstados.add(new SelectItem(estado.getId(), estado.getNome()));
 		}
 		
-		System.out.println("estados:::"+listaNovaEstados);
 		return listaNovaEstados;
 	}
 	
-	 public String actionCarregaCidadesByEstado(){
-	        this.listCidades = getCarregaCidadesByEstado(this.estado.getId());
-	        
-	        return "getCarregaCidadesByEstadoSucesso";
-	    }
-	 
-    public List<SelectItem> getCarregaCidadesByEstado(Integer idEstado){
+	public String actionCarregaCidadesByEstado(){
+		this.listCidadeAnterior = getCarregaCidadesByEstado(this.estado.getId());
 
-        List<Cidades> lCidades = (List<Cidades>)super.getEntityManager().createQuery("from Cidades cidade where cidade.estados.id = "+ idEstado).getResultList();
-        List<SelectItem> lCidadesNova = new ArrayList<SelectItem>(lCidades.size());
-        
-        
-        for(Cidades cidade : lCidades){
-        	lCidadesNova.add(new SelectItem(cidade.getNome()));
-        }
-        
-        System.out.println("lCidadesNova >>> " + lCidadesNova);
+		return "getCarregaCidadesByEstado";
+	}
 
-        
-        return lCidadesNova;
-    }
-    
+	public List<SelectItem> getCarregaCidadesByEstado(Integer idEstado){
+
+		List<Cidades> lCidades = (List<Cidades>)super.getEntityManager().createQuery("from Cidades cidades where cidades.estados.id = "+ idEstado).getResultList();
+		List<SelectItem> lCidadesNova = new ArrayList<SelectItem>(lCidades.size());
+
+		for(Cidades cidades: lCidades){
+			lCidadesNova.add(new SelectItem(cidades.getIdCidade(), cidades.getNome()));
+		}
+		return lCidadesNova;
+	}
+	
+	public String actionCarregaCidadesAtualByEstado(){
+		this.listCidadeAtual = getCarregaCidadesAtualByEstado(this.estado.getId());
+
+		return "getCarregaCidadesByEstado";
+	}
+
+	public List<SelectItem> getCarregaCidadesAtualByEstado(Integer idEstado){
+
+		List<Cidades> lCidades = (List<Cidades>)super.getEntityManager().createQuery("from Cidades cidades where cidades.estados.id = "+ idEstado).getResultList();
+		List<SelectItem> lCidadesNova = new ArrayList<SelectItem>(lCidades.size());
+
+		for(Cidades cidades: lCidades){
+			lCidadesNova.add(new SelectItem(cidades.getIdCidade(), cidades.getNome()));
+		}
+		return lCidadesNova;
+	}
+	
+	
     public String persist(){
-    	 Usuario user = encontrarUsuarioByLogin( identity.getUsername() );
+    	
+    	 Modelo modelo = super.getEntityManager().find(Modelo.class, this.idModelo);
+    	   System.out.println("MOdelo selecionado:::"+modelo.getModelo());
+    	   Cidades cidadeAnterior = super.getEntityManager().find(Cidades.class, this.idCidadePanterior);
+    	   System.out.println("cidadeAnterior:::"+cidadeAnterior.getNome());
+    	 Cidades cidadeAtual = super.getEntityManager().find(Cidades.class, this.idCidadePatual);
+  	   System.out.println("cidadeAtual:::"+cidadeAtual.getNome());
+    	   
+    	
+    	Usuario user = encontrarUsuarioByLogin( identity.getUsername() );
+    	 System.out.println("Usuario Logado"+user.getNome());
   	   if (user != null){
   		   this.getInstance().setUsuario(user);
   	   }
-  	   
+  	  
   	 return (super.persist());
     }
     

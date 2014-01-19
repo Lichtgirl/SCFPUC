@@ -20,7 +20,7 @@
         </s:decorate>
 
         <s:decorate id="uf" template="../layout/display.xhtml">
-            <ui:define name="label">Uf</ui:define>
+            <ui:define name="label">UF</ui:define>
             <h:outputText value="#{cidadesHome.instance.uf}"/>
         </s:decorate>
 
@@ -32,11 +32,11 @@
 
         <s:button view="/CidadesEdit.xhtml"
                     id="edit"
-                 value="Edit"/>
+                 value="Editar"/>
 
         <s:button view="/#{empty cidadesFrom ? 'CidadesList' : cidadesFrom}.xhtml"
                     id="done"
-                 value="Done"/>
+                 value="OK"/>
 
     </div>
 
@@ -48,7 +48,7 @@
         </f:facet>
     <div class="association" id="estadosParent">
 
-        <h:outputText value="There is no estados associated with this cidades."
+        <h:outputText value="Não há estado para essa cidade."
                    rendered="#{cidadesHome.instance.estados == null}"/>
 
         <rich:dataTable var="_estados"
@@ -65,13 +65,13 @@
                 <h:outputText value="#{_estados.nome}"/>
             </h:column>
             <h:column>
-                <f:facet name="header">Uf</f:facet>
+                <f:facet name="header">UF</f:facet>
                 <h:outputText value="#{_estados.uf}"/>
             </h:column>
             <h:column styleClass="action">
                 <f:facet name="header">Action</f:facet>
                 <s:link id="viewestados"
-                     value="View"
+                     value="Visualizar"
                       view="/Estados.xhtml">
                     <f:param name="estadosId"
                            value="#{_estados.id}"/>
@@ -167,7 +167,7 @@
             <h:column>
                 <f:facet name="header">Action</f:facet>
                 <s:link id="selectveiculo"
-                     value="Select"
+                     value="Selecionar"
                       view="/Veiculo.xhtml">
                     <f:param name="veiculoIdVeiculo"
                             value="#{_veiculo.idVeiculo}"/>
@@ -274,7 +274,7 @@
             <h:column>
                 <f:facet name="header">Action</f:facet>
                 <s:link id="selectveiculo"
-                     value="Select"
+                     value="Selecionar"
                       view="/Veiculo.xhtml">
                     <f:param name="veiculoIdVeiculo"
                             value="#{_veiculo.idVeiculo}"/>
@@ -287,7 +287,7 @@
 
     <div class="actionButtons">
         <s:button
-               value="Add veiculo"
+               value="Adicionar Veiculo"
                 view="/VeiculoEdit.xhtml">
             <f:param name="cidadesIdCidade"
                     value="#{cidadesHome.instance.idCidade}"/>
@@ -381,7 +381,7 @@
             <h:column>
                 <f:facet name="header">Action</f:facet>
                 <s:link id="selectveiculo"
-                     value="Select"
+                     value="Selecionar"
                       view="/Veiculo.xhtml">
                     <f:param name="veiculoIdVeiculo"
                             value="#{_veiculo.idVeiculo}"/>
@@ -394,7 +394,7 @@
 
     <div class="actionButtons">
         <s:button
-               value="Add veiculo"
+               value="Adicionar Veiculo"
                 view="/VeiculoEdit.xhtml">
             <f:param name="cidadesIdCidade"
                     value="#{cidadesHome.instance.idCidade}"/>
@@ -488,7 +488,7 @@
             <h:column>
                 <f:facet name="header">Action</f:facet>
                 <s:link id="selectveiculo"
-                     value="Select"
+                     value="Selecionar"
                       view="/Veiculo.xhtml">
                     <f:param name="veiculoIdVeiculo"
                             value="#{_veiculo.idVeiculo}"/>
@@ -501,7 +501,7 @@
 
     <div class="actionButtons">
         <s:button
-               value="Add veiculo"
+               value="Adicionar Veiculo"
                 view="/VeiculoEdit.xhtml">
             <f:param name="cidadesIdCidade"
                     value="#{cidadesHome.instance.idCidade}"/>

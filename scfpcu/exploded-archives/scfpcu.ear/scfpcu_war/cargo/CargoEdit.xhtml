@@ -33,7 +33,7 @@
 
             <div style="clear:both">
                 <span class="required">*</span>
-                required fields
+                Campos Obrigatórios
             </div>
 
         </rich:panel>
@@ -41,30 +41,30 @@
         <div class="actionButtons">
 
             <h:commandButton id="save"
-                          value="Save"
+                          value="Salvar"
                          action="#{cargoHome.persist}"
                        disabled="#{!cargoHome.wired}"
                        rendered="#{!cargoHome.managed}"/>
 
             <h:commandButton id="update"
-                          value="Save"
+                          value="Atualizar"
                          action="#{cargoHome.update}"
                        rendered="#{cargoHome.managed}"/>
 
             <h:commandButton id="delete"
-                          value="Delete"
+                          value="Excluir"
                          action="#{cargoHome.remove}"
                       immediate="true"
                        rendered="#{cargoHome.managed}"/>
 
             <s:button id="cancelEdit"
-                   value="Cancel"
+                   value="Cancelar"
              propagation="end"
                     view="/Cargo.xhtml"
                 rendered="#{cargoHome.managed}"/>
 
             <s:button id="cancelAdd"
-                   value="Cancel"
+                   value="Cancelar"
              propagation="end"
                     view="/#{empty cargoFrom ? 'CargoList' : cargoFrom}.xhtml"
                 rendered="#{!cargoHome.managed}"/>
@@ -77,7 +77,7 @@
     <rich:tab label="Usuarios">
         <h:form styleClass="association" id="usuariosChildren">
 
-            <h:outputText value="There are no usuarios associated with this cargo."
+            <h:outputText value="Não há usuários com o respectivo cargo."
                        rendered="#{empty cargoHome.usuarios}"/>
 
             <rich:dataTable value="#{cargoHome.usuarios}"
@@ -116,7 +116,7 @@
         <f:subview rendered="#{cargoHome.managed}" id="usuarios">
         <div class="actionButtons">
             <s:button id="addusuario"
-                   value="Add usuario"
+                   value="Adicionar"
                     view="/UsuarioEdit.xhtml"
              propagation="none">
                  <f:param name="cargoIdCargo"
@@ -169,7 +169,7 @@
         <f:subview rendered="#{cargoHome.managed}" id="usuarios_1">
         <div class="actionButtons">
             <s:button id="addusuario"
-                   value="Add usuario"
+                   value="Adicionar"
                     view="/UsuarioEdit.xhtml"
              propagation="none">
                  <f:param name="cargoIdCargo"

@@ -1,12 +1,15 @@
 package br.edu.ufam.scfpcu.model;
-// Generated Jan 9, 2014 11:42:56 PM by Hibernate Tools 3.2.4.GA
+// Generated Jan 13, 2014 5:46:24 PM by Hibernate Tools 3.2.4.GA
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.validator.Length;
 import org.hibernate.validator.NotNull;
@@ -23,14 +26,15 @@ public class Usuario implements java.io.Serializable {
 	private String siape;
 	private String nome;
 	private String email;
-	private int login;
-	private int senha;
+	private String login;
+	private String senha;
+	private Set<Veiculo> veiculos = new HashSet<Veiculo>(0);
 
 	public Usuario() {
 	}
 
 	public Usuario(int idServidor, Cargo cargo, String siape, String nome,
-			String email, int login, int senha) {
+			String email, String login, String senha) {
 		this.idServidor = idServidor;
 		this.cargo = cargo;
 		this.siape = siape;
@@ -38,6 +42,17 @@ public class Usuario implements java.io.Serializable {
 		this.email = email;
 		this.login = login;
 		this.senha = senha;
+	}
+	public Usuario(int idServidor, Cargo cargo, String siape, String nome,
+			String email, String login, String senha, Set<Veiculo> veiculos) {
+		this.idServidor = idServidor;
+		this.cargo = cargo;
+		this.siape = siape;
+		this.nome = nome;
+		this.email = email;
+		this.login = login;
+		this.senha = senha;
+		this.veiculos = veiculos;
 	}
 
 	@Id
@@ -94,22 +109,35 @@ public class Usuario implements java.io.Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "Login", nullable = false)
-	public int getLogin() {
+	@Column(name = "Login", nullable = false, length = 11)
+	@NotNull
+	@Length(max = 11)
+	public String getLogin() {
 		return this.login;
 	}
 
-	public void setLogin(int login) {
+	public void setLogin(String login) {
 		this.login = login;
 	}
 
-	@Column(name = "Senha", nullable = false)
-	public int getSenha() {
+	@Column(name = "Senha", nullable = false, length = 15)
+	@NotNull
+	@Length(max = 15)
+	public String getSenha() {
 		return this.senha;
 	}
 
-	public void setSenha(int senha) {
+	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
+	public Set<Veiculo> getVeiculos() {
+		return this.veiculos;
+	}
+
+	public void setVeiculos(Set<Veiculo> veiculos) {
+		this.veiculos = veiculos;
 	}
 
 }

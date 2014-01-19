@@ -48,7 +48,7 @@
 
             <div style="clear:both">
                 <span class="required">*</span>
-                required fields
+                Campos Obrigatórios
             </div>
 
         </rich:panel>
@@ -56,30 +56,30 @@
         <div class="actionButtons">
 
             <h:commandButton id="save"
-                          value="Save"
+                          value="Salvar"
                          action="#{cidadesHome.persist}"
                        disabled="#{!cidadesHome.wired}"
                        rendered="#{!cidadesHome.managed}"/>
 
             <h:commandButton id="update"
-                          value="Save"
+                          value="Atualizar"
                          action="#{cidadesHome.update}"
                        rendered="#{cidadesHome.managed}"/>
 
             <h:commandButton id="delete"
-                          value="Delete"
+                          value="Excluir"
                          action="#{cidadesHome.remove}"
                       immediate="true"
                        rendered="#{cidadesHome.managed}"/>
 
             <s:button id="cancelEdit"
-                   value="Cancel"
+                   value="Cancelar"
              propagation="end"
                     view="/Cidades.xhtml"
                 rendered="#{cidadesHome.managed}"/>
 
             <s:button id="cancelAdd"
-                   value="Cancel"
+                   value="Cancelar"
              propagation="end"
                     view="/#{empty cidadesFrom ? 'CidadesList' : cidadesFrom}.xhtml"
                 rendered="#{!cidadesHome.managed}"/>
