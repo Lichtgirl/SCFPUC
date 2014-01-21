@@ -121,7 +121,8 @@ public class UsuarioHome extends EntityHome<Usuario> {
 	
 	@Override
 	public String update(){
-		
+		System.out.println("Updateeee");
+		System.out.println("this.getInstance().getNome():::"+this.getInstance().getNome());
 		String result = "";
 		this.getInstance().setSenha(StringToMd5.md5(this.getInstance().getSenha()));
 		try {

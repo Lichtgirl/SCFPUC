@@ -70,7 +70,6 @@ public class AuthenticatorBean implements Authenticator {
 		catch (RuntimeException ex)
 		{
 			facesMessages.addToControl("username", LOGIN_INVALIDO);
-			System.out.println("Nao entrar");
 			return false;
 		}
 		

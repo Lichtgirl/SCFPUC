@@ -15,21 +15,13 @@
         <rich:panel>
             <f:facet name="header">Sistema de Controle de Frotas da FUA</f:facet>
 
-            <p style="FONT-SIZE: small;">Insira os dados de Login</p>
+            <p style="FONT-SIZE: small;">Digite seu e-mail</p>
 
             <div class="dialog">
                 <h:panelGrid columns="2" rowClasses="prop" columnClasses="name,value">
-                    <h:outputLabel for="username" style="FONT-SIZE: x-small;">Login</h:outputLabel>
+                    <h:outputLabel for="username" style="FONT-SIZE: x-small;">E-mail</h:outputLabel>
                     <h:inputText id="username"
-                              value="#{identity.username}" required="true"/>
-                    <h:outputLabel for="password">Senha</h:outputLabel>
-                    <h:inputSecret id="password"
-                                value="#{identity.password}" required="true"/>
-                    <h:outputLabel for="rememberMe">Manter conectado</h:outputLabel>
-                    <h:selectBooleanCheckbox id="rememberMe"
-                                          value="#{rememberMe.enabled}"/>
-                    <s:link view="/recuperaSenha.xhtml" value="Esqueci a senha">
-			        </s:link>
+                              value="#{recuperarSenha.mail}" required="true"/>
                     <h:messages id="msgErro" style="color: red"/>                     
                 </h:panelGrid>
             </div>
@@ -37,7 +29,7 @@
         </rich:panel>
 
         <div class="actionButtons">
-            <h:commandButton id="submit" value="Acessar" action="#{identity.login}"/>            
+            <h:commandButton id="submit" value="Buscar" action="#{recuperarSenha.enviarEmail()}"/>            
         </div>
 
     </h:form>

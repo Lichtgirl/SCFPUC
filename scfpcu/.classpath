@@ -42,5 +42,6 @@
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.13.jar"/>
 	<classpathentry kind="lib" path="lib/lucene-core.jar"/>
 	<classpathentry kind="lib" path="lib/richfaces-components-api-4.3.4.Final.jar"/>
+	<classpathentry kind="lib" path="lib/commons-email-1.3.2.jar"/>
 	<classpathentry kind="output" path="test-build"/>
 </classpath>
