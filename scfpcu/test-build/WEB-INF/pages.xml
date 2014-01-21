@@ -16,32 +16,32 @@
 
     <exception class="org.jboss.seam.framework.EntityNotFoundException">
         <redirect view-id="/error.xhtml">
-            <message severity="warn">Record not found</message>
+            <message severity="warn">Registro não encontrado</message>
         </redirect>
     </exception>
     
     <exception class="javax.persistence.EntityNotFoundException">
         <redirect view-id="/error.xhtml">
-            <message severity="warn">Record not found</message>
+            <message severity="warn">Registro não encontrado</message>
         </redirect>
     </exception>
     
     <exception class="javax.persistence.EntityExistsException">
         <redirect view-id="/error.xhtml">
-            <message severity="warn">Duplicate record</message>
+            <message severity="warn">Registro Duplicado</message>
         </redirect>
     </exception>
     
     <exception class="javax.persistence.OptimisticLockException">
         <end-conversation/>
         <redirect view-id="/error.xhtml">
-            <message severity="warn">Another user changed the same data, please try again</message>
+            <message severity="warn">Por favor tente novamente</message>
         </redirect>
     </exception>
     
     <exception class="org.jboss.seam.security.AuthorizationException">
         <redirect view-id="/error.xhtml">
-            <message severity="error">You don't have permission to access this resource</message>
+            <message severity="error">Você não tem permissão para acessar esta página</message>
         </redirect>
     </exception>
     
@@ -53,7 +53,7 @@
     
     <exception class="javax.faces.application.ViewExpiredException">
         <redirect view-id="/error.xhtml">
-            <message severity="warn">Your session has timed out, please try again</message>
+            <message severity="warn">Sua sessão expirou, por favor tente novamente</message>
         </redirect>
     </exception>
     
@@ -63,7 +63,7 @@
      
     <exception>
         <redirect view-id="/error.xhtml">
-            <message severity="error">Unexpected error, please try again</message>
+            <message severity="error">Erro inesperado, por favor tente novamente</message>
         </redirect>
     </exception>
     

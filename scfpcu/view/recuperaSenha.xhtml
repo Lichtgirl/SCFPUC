@@ -5,6 +5,7 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
     xmlns:rich="http://richfaces.org/rich"
     template="layout/template.xhtml">
 
@@ -22,14 +23,17 @@
                     <h:outputLabel for="username" style="FONT-SIZE: x-small;">E-mail</h:outputLabel>
                     <h:inputText id="username"
                               value="#{recuperarSenha.mail}" required="true"/>
-                    <h:messages id="msgErro" style="color: red"/>                     
                 </h:panelGrid>
+                <h:messages id="msgErro" style="color: red; width:500px;"/>
             </div>
 
         </rich:panel>
 
         <div class="actionButtons">
-            <h:commandButton id="submit" value="Buscar" action="#{recuperarSenha.enviarEmail()}"/>            
+            <h:commandButton id="submit" value="Buscar" action="#{recuperarSenha.enviarEmail()}" >
+            	<a:support event="oncomplete" ajaxSingle="true" reRender="botaoVoltar"/>
+            </h:commandButton>            
+            <s:button id="botaoVoltar" value="Voltar" view="/login.xhtml" rendered="#{recuperarSenha.sucesso}"/>
         </div>
 
     </h:form>

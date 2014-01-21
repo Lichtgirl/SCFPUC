@@ -23,7 +23,6 @@ public class StringToMd5 {
 	public static String string(){
 		
 		String senha = UUID.randomUUID().toString();
-		System.out.println("Senha Random::"+senha.substring(0,6));
 		return senha.substring(0,6);
 	}
 }

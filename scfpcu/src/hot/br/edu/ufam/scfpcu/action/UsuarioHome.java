@@ -129,6 +129,7 @@ public class UsuarioHome extends EntityHome<Usuario> {
 			result = super.update();
 		} catch (Exception e) {
 			super.getFacesMessages().add("Não foi possível atualizar registro.");
+			System.out.println("Erro::"+e);
 		}
 		return result;
 	}
