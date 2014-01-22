@@ -11,7 +11,7 @@
 <ui:define name="body">
 
     <rich:panel>
-        <f:facet name="header">Veiculo Details</f:facet>
+        <f:facet name="header">Detalhes do Veículo</f:facet>
 
 
         <s:decorate id="adquiridoDe" template="../layout/display.xhtml">
@@ -42,20 +42,20 @@
         <s:decorate id="dataCadastro" template="../layout/display.xhtml">
             <ui:define name="label">Data cadastro</ui:define>
             <h:outputText value="#{veiculoHome.instance.dataCadastro}">
-                <s:convertDateTime type="date" dateStyle="short"/>
+                <s:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
             </h:outputText>
         </s:decorate>
 
         <s:decorate id="dataDeAquisicao" template="../layout/display.xhtml">
             <ui:define name="label">Data de aquisicao</ui:define>
             <h:outputText value="#{veiculoHome.instance.dataDeAquisicao}">
-                <s:convertDateTime type="date" dateStyle="short"/>
+                <s:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
             </h:outputText>
         </s:decorate>
 
         <s:decorate id="idServidor" template="../layout/display.xhtml">
             <ui:define name="label">Id servidor</ui:define>
-            <h:outputText value="#{veiculoHome.instance.idServidor}"/>
+            <h:outputText value="#{veiculoHome.instance.usuario.idServidor}"/>
         </s:decorate>
 
         <s:decorate id="modalidadeAquisicao" template="../layout/display.xhtml">
@@ -68,29 +68,71 @@
             <h:outputText value="#{veiculoHome.instance.numPatrimonio}"/>
         </s:decorate>
 
-        <s:decorate id="observacao" template="../layout/display.xhtml">
-            <ui:define name="label">Observacao</ui:define>
-            <h:outputText value="#{veiculoHome.instance.observacao}"/>
-        </s:decorate>
-
         <s:decorate id="placaAnterior" template="../layout/display.xhtml">
             <ui:define name="label">Placa anterior</ui:define>
             <h:outputText value="#{veiculoHome.instance.placaAnterior}"/>
+        </s:decorate>
+        
+        <s:decorate id="localizacaoUFAnterior" template="../layout/display.xhtml">
+            <ui:define name="label">Localização/UF Anterior</ui:define>
+            <h:outputText value="#{veiculoHome.instance.cidadesByIdCidadePanterior.nome} - #{veiculoHome.instance.cidadesByIdCidadePanterior.uf}"/>
         </s:decorate>
 
         <s:decorate id="placaAtual" template="../layout/display.xhtml">
             <ui:define name="label">Placa atual</ui:define>
             <h:outputText value="#{veiculoHome.instance.placaAtual}"/>
         </s:decorate>
-
+		
+		<s:decorate id="localizacaoUFAtual" template="../layout/display.xhtml">
+            <ui:define name="label">Localização/UF Atual</ui:define>
+            <h:outputText value="#{veiculoHome.instance.cidadesByIdCidadePatual.nome} - #{veiculoHome.instance.cidadesByIdCidadePatual.uf}"/>
+        </s:decorate>
+        
         <s:decorate id="potencia" template="../layout/display.xhtml">
             <ui:define name="label">Potencia</ui:define>
             <h:outputText value="#{veiculoHome.instance.potencia}"/>
         </s:decorate>
 
         <s:decorate id="valorDaAquisicao" template="../layout/display.xhtml">
-            <ui:define name="label">Valor da aquisicao</ui:define>
-            <h:outputText value="#{veiculoHome.instance.valorDaAquisicao}"/>
+            <ui:define name="label">Valor da aquisição</ui:define>
+            <h:outputText value="#{veiculoHome.instance.valorDaAquisicao}">
+            	<f:convertNumber pattern="#,##0.00"/>
+            </h:outputText>
+        </s:decorate>
+        
+        <s:decorate id="cor" template="../layout/display.xhtml">
+            <ui:define name="label">Cor</ui:define>
+            <h:outputText value="#{veiculoHome.instance.cor.nome}"/>
+        </s:decorate>
+        
+         <s:decorate id="entidade" template="../layout/display.xhtml">
+            <ui:define name="label">Entidade</ui:define>
+            <h:outputText value="#{veiculoHome.instance.entidade.tipoEntidade}"/>
+        </s:decorate>
+        
+        <s:decorate id="especie" template="../layout/display.xhtml">
+            <ui:define name="label">Espécie</ui:define>
+            <h:outputText value="#{veiculoHome.instance.especie.especie}"/>
+        </s:decorate>
+        
+        <s:decorate id="grupo" template="../layout/display.xhtml">
+            <ui:define name="label">Grupo</ui:define>
+            <h:outputText value="#{veiculoHome.instance.grupo.tipoGrupo}"/>
+        </s:decorate>
+        
+        <s:decorate id="modelo" template="../layout/display.xhtml">
+            <ui:define name="label">Modelo</ui:define>
+            <h:outputText value="#{veiculoHome.instance.modelo.modelo}"/>
+        </s:decorate>
+        
+        <s:decorate id="tipoCombustivel" template="../layout/display.xhtml">
+            <ui:define name="label">Tipo Combustivel</ui:define>
+            <h:outputText value="#{veiculoHome.instance.tipoCombustivel.tipoCombustivel}"/>
+        </s:decorate>
+        
+        <s:decorate id="observacao" template="../layout/display.xhtml">
+            <ui:define name="label">Observação</ui:define>
+            <h:outputText value="#{veiculoHome.instance.observacao}"/>
         </s:decorate>
 
         <div style="clear:both"/>
@@ -99,395 +141,16 @@
 
     <div class="actionButtons">
 
-        <s:button view="/VeiculoEdit.xhtml"
+        <s:button view="/veiculo/VeiculoEdit.xhtml"
                     id="edit"
-                 value="Edit"/>
+                 value="Editar"/>
 
-        <s:button view="/#{empty veiculoFrom ? 'VeiculoList' : veiculoFrom}.xhtml"
+        <s:button view="/veiculo/#{empty veiculoFrom ? 'VeiculoList' : veiculoFrom}.xhtml"
                     id="done"
-                 value="Done"/>
+                 value="Voltar"/>
 
     </div>
 
-    <rich:tabPanel switchType="ajax">
-
-    <rich:tab>
-        <f:facet name="label">
-            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Cidades by id cidade panterior</h:panelGroup>
-        </f:facet>
-    <div class="association" id="cidadesByIdCidadePanteriorParent">
-
-        <h:outputText value="There is no cidadesByIdCidadePanterior associated with this veiculo."
-                   rendered="#{veiculoHome.instance.cidadesByIdCidadePanterior == null}"/>
-
-        <rich:dataTable var="_cidades"
-                   value="#{veiculoHome.instance.cidadesByIdCidadePanterior}"
-                rendered="#{veiculoHome.instance.cidadesByIdCidadePanterior != null}"
-              rowClasses="rvgRowOne,rvgRowTwo"
-                      id="cidadesByIdCidadePanteriorTable">
-            <h:column>
-                <f:facet name="header">Id cidade</f:facet>
-                <h:outputText value="#{_cidades.idCidade}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Estados id</f:facet>
-                <h:outputText value="#{_cidades.estados.id}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Nome</f:facet>
-                <h:outputText value="#{_cidades.nome}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Uf</f:facet>
-                <h:outputText value="#{_cidades.uf}"/>
-            </h:column>
-            <h:column styleClass="action">
-                <f:facet name="header">Action</f:facet>
-                <s:link id="viewcidades"
-                     value="View"
-                      view="/Cidades.xhtml">
-                    <f:param name="cidadesIdCidade"
-                           value="#{_cidades.idCidade}"/>
-                </s:link>
-            </h:column>
-        </rich:dataTable>
-
-    </div>
-    </rich:tab>
-
-    <rich:tab>
-        <f:facet name="label">
-            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Cidades by id cidade patual</h:panelGroup>
-        </f:facet>
-    <div class="association" id="cidadesByIdCidadePatualParent">
-
-        <h:outputText value="There is no cidadesByIdCidadePatual associated with this veiculo."
-                   rendered="#{veiculoHome.instance.cidadesByIdCidadePatual == null}"/>
-
-        <rich:dataTable var="_cidades"
-                   value="#{veiculoHome.instance.cidadesByIdCidadePatual}"
-                rendered="#{veiculoHome.instance.cidadesByIdCidadePatual != null}"
-              rowClasses="rvgRowOne,rvgRowTwo"
-                      id="cidadesByIdCidadePatualTable">
-            <h:column>
-                <f:facet name="header">Id cidade</f:facet>
-                <h:outputText value="#{_cidades.idCidade}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Estados id</f:facet>
-                <h:outputText value="#{_cidades.estados.id}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Nome</f:facet>
-                <h:outputText value="#{_cidades.nome}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Uf</f:facet>
-                <h:outputText value="#{_cidades.uf}"/>
-            </h:column>
-            <h:column styleClass="action">
-                <f:facet name="header">Action</f:facet>
-                <s:link id="viewcidades"
-                     value="View"
-                      view="/Cidades.xhtml">
-                    <f:param name="cidadesIdCidade"
-                           value="#{_cidades.idCidade}"/>
-                </s:link>
-            </h:column>
-        </rich:dataTable>
-
-    </div>
-    </rich:tab>
-
-    <rich:tab>
-        <f:facet name="label">
-            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Cor</h:panelGroup>
-        </f:facet>
-    <div class="association" id="corParent">
-
-        <h:outputText value="There is no cor associated with this veiculo."
-                   rendered="#{veiculoHome.instance.cor == null}"/>
-
-        <rich:dataTable var="_cor"
-                   value="#{veiculoHome.instance.cor}"
-                rendered="#{veiculoHome.instance.cor != null}"
-              rowClasses="rvgRowOne,rvgRowTwo"
-                      id="corTable">
-            <h:column>
-                <f:facet name="header">Id cor</f:facet>
-                <h:outputText value="#{_cor.idCor}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Nome</f:facet>
-                <h:outputText value="#{_cor.nome}"/>
-            </h:column>
-            <h:column styleClass="action">
-                <f:facet name="header">Action</f:facet>
-                <s:link id="viewcor"
-                     value="View"
-                      view="/Cor.xhtml">
-                    <f:param name="corIdCor"
-                           value="#{_cor.idCor}"/>
-                </s:link>
-            </h:column>
-        </rich:dataTable>
-
-    </div>
-    </rich:tab>
-
-    <rich:tab>
-        <f:facet name="label">
-            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Entidade</h:panelGroup>
-        </f:facet>
-    <div class="association" id="entidadeParent">
-
-        <h:outputText value="There is no entidade associated with this veiculo."
-                   rendered="#{veiculoHome.instance.entidade == null}"/>
-
-        <rich:dataTable var="_entidade"
-                   value="#{veiculoHome.instance.entidade}"
-                rendered="#{veiculoHome.instance.entidade != null}"
-              rowClasses="rvgRowOne,rvgRowTwo"
-                      id="entidadeTable">
-            <h:column>
-                <f:facet name="header">Id entidade</f:facet>
-                <h:outputText value="#{_entidade.idEntidade}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Tipo entidade</f:facet>
-                <h:outputText value="#{_entidade.tipoEntidade}"/>
-            </h:column>
-            <h:column styleClass="action">
-                <f:facet name="header">Action</f:facet>
-                <s:link id="viewentidade"
-                     value="View"
-                      view="/Entidade.xhtml">
-                    <f:param name="entidadeIdEntidade"
-                           value="#{_entidade.idEntidade}"/>
-                </s:link>
-            </h:column>
-        </rich:dataTable>
-
-    </div>
-    </rich:tab>
-
-    <rich:tab>
-        <f:facet name="label">
-            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Especie</h:panelGroup>
-        </f:facet>
-    <div class="association" id="especieParent">
-
-        <h:outputText value="There is no especie associated with this veiculo."
-                   rendered="#{veiculoHome.instance.especie == null}"/>
-
-        <rich:dataTable var="_especie"
-                   value="#{veiculoHome.instance.especie}"
-                rendered="#{veiculoHome.instance.especie != null}"
-              rowClasses="rvgRowOne,rvgRowTwo"
-                      id="especieTable">
-            <h:column>
-                <f:facet name="header">Id especie</f:facet>
-                <h:outputText value="#{_especie.idEspecie}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Especie</f:facet>
-                <h:outputText value="#{_especie.especie}"/>
-            </h:column>
-            <h:column styleClass="action">
-                <f:facet name="header">Action</f:facet>
-                <s:link id="viewespecie"
-                     value="View"
-                      view="/Especie.xhtml">
-                    <f:param name="especieIdEspecie"
-                           value="#{_especie.idEspecie}"/>
-                </s:link>
-            </h:column>
-        </rich:dataTable>
-
-    </div>
-    </rich:tab>
-
-    <rich:tab>
-        <f:facet name="label">
-            <h:panelGroup><h:graphicImage value="/img/onetomany.gif" style="vertical-align: middle; padding-right: 4px;"/>Gastoses</h:panelGroup>
-        </f:facet>
-    <h:form styleClass="association" id="gastosesChildren">
-
-        <h:outputText value="There are no gastoses associated with this veiculo."
-                   rendered="#{empty veiculoHome.gastoses}"/>
-
-        <rich:dataTable value="#{veiculoHome.gastoses}"
-                       var="_gastos"
-                  rendered="#{not empty veiculoHome.gastoses}"
-                rowClasses="rvgRowOne,rvgRowTwo"
-                        id="gastosesTable">
-            <rich:column sortBy="#{_gastos.idGasto}">
-                <f:facet name="header">Id gasto</f:facet>
-                <h:outputText value="#{_gastos.idGasto}"/>
-            </rich:column>
-            <rich:column sortBy="#{_gastos.data}">
-                <f:facet name="header">Data</f:facet>
-                <h:outputText value="#{_gastos.data}">
-                    <s:convertDateTime type="date" dateStyle="short"/>
-                </h:outputText>
-            </rich:column>
-            <rich:column sortBy="#{_gastos.lotado}">
-                <f:facet name="header">Lotado</f:facet>
-                <h:outputText value="#{_gastos.lotado}"/>
-            </rich:column>
-            <rich:column sortBy="#{_gastos.odometro}">
-                <f:facet name="header">Odometro</f:facet>
-                <h:outputText value="#{_gastos.odometro}"/>
-            </rich:column>
-            <rich:column sortBy="#{_gastos.qtd}">
-                <f:facet name="header">Qtd</f:facet>
-                <h:outputText value="#{_gastos.qtd}"/>
-            </rich:column>
-            <rich:column sortBy="#{_gastos.tipoGasto}">
-                <f:facet name="header">Tipo gasto</f:facet>
-                <h:outputText value="#{_gastos.tipoGasto}"/>
-            </rich:column>
-            <rich:column sortBy="#{_gastos.valor}">
-                <f:facet name="header">Valor</f:facet>
-                <h:outputText value="#{_gastos.valor}"/>
-            </rich:column>
-            <h:column>
-                <f:facet name="header">Action</f:facet>
-                <s:link id="selectgastos"
-                     value="Select"
-                      view="/Gastos.xhtml">
-                    <f:param name="gastosIdGasto"
-                            value="#{_gastos.idGasto}"/>
-                    <f:param name="gastosFrom" value="Veiculo"/>
-                </s:link>
-            </h:column>
-        </rich:dataTable>
-
-    </h:form>
-
-    <div class="actionButtons">
-        <s:button
-               value="Add gastos"
-                view="/GastosEdit.xhtml">
-            <f:param name="veiculoIdVeiculo"
-                    value="#{veiculoHome.instance.idVeiculo}"/>
-            <f:param name="gastosFrom" value="Veiculo"/>
-        </s:button>
-    </div>
-    </rich:tab>
-
-    <rich:tab>
-        <f:facet name="label">
-            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Grupo</h:panelGroup>
-        </f:facet>
-    <div class="association" id="grupoParent">
-
-        <h:outputText value="There is no grupo associated with this veiculo."
-                   rendered="#{veiculoHome.instance.grupo == null}"/>
-
-        <rich:dataTable var="_grupo"
-                   value="#{veiculoHome.instance.grupo}"
-                rendered="#{veiculoHome.instance.grupo != null}"
-              rowClasses="rvgRowOne,rvgRowTwo"
-                      id="grupoTable">
-            <h:column>
-                <f:facet name="header">Id grupo</f:facet>
-                <h:outputText value="#{_grupo.idGrupo}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Tipo grupo</f:facet>
-                <h:outputText value="#{_grupo.tipoGrupo}"/>
-            </h:column>
-            <h:column styleClass="action">
-                <f:facet name="header">Action</f:facet>
-                <s:link id="viewgrupo"
-                     value="View"
-                      view="/Grupo.xhtml">
-                    <f:param name="grupoIdGrupo"
-                           value="#{_grupo.idGrupo}"/>
-                </s:link>
-            </h:column>
-        </rich:dataTable>
-
-    </div>
-    </rich:tab>
-
-    <rich:tab>
-        <f:facet name="label">
-            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Modelo</h:panelGroup>
-        </f:facet>
-    <div class="association" id="modeloParent">
-
-        <h:outputText value="There is no modelo associated with this veiculo."
-                   rendered="#{veiculoHome.instance.modelo == null}"/>
-
-        <rich:dataTable var="_modelo"
-                   value="#{veiculoHome.instance.modelo}"
-                rendered="#{veiculoHome.instance.modelo != null}"
-              rowClasses="rvgRowOne,rvgRowTwo"
-                      id="modeloTable">
-            <h:column>
-                <f:facet name="header">Id modelo</f:facet>
-                <h:outputText value="#{_modelo.idModelo}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Marca id marca</f:facet>
-                <h:outputText value="#{_modelo.marca.idMarca}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Modelo</f:facet>
-                <h:outputText value="#{_modelo.modelo}"/>
-            </h:column>
-            <h:column styleClass="action">
-                <f:facet name="header">Action</f:facet>
-                <s:link id="viewmodelo"
-                     value="View"
-                      view="/Modelo.xhtml">
-                    <f:param name="modeloIdModelo"
-                           value="#{_modelo.idModelo}"/>
-                </s:link>
-            </h:column>
-        </rich:dataTable>
-
-    </div>
-    </rich:tab>
-
-    <rich:tab>
-        <f:facet name="label">
-            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Tipo combustivel</h:panelGroup>
-        </f:facet>
-    <div class="association" id="tipoCombustivelParent">
-
-        <h:outputText value="There is no tipoCombustivel associated with this veiculo."
-                   rendered="#{veiculoHome.instance.tipoCombustivel == null}"/>
-
-        <rich:dataTable var="_tipoCombustivel"
-                   value="#{veiculoHome.instance.tipoCombustivel}"
-                rendered="#{veiculoHome.instance.tipoCombustivel != null}"
-              rowClasses="rvgRowOne,rvgRowTwo"
-                      id="tipoCombustivelTable">
-            <h:column>
-                <f:facet name="header">Id combustivel</f:facet>
-                <h:outputText value="#{_tipoCombustivel.idCombustivel}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Tipo combustivel</f:facet>
-                <h:outputText value="#{_tipoCombustivel.tipoCombustivel}"/>
-            </h:column>
-            <h:column styleClass="action">
-                <f:facet name="header">Action</f:facet>
-                <s:link id="viewtipoCombustivel"
-                     value="View"
-                      view="/TipoCombustivel.xhtml">
-                    <f:param name="tipoCombustivelIdCombustivel"
-                           value="#{_tipoCombustivel.idCombustivel}"/>
-                </s:link>
-            </h:column>
-        </rich:dataTable>
-
-    </div>
-    </rich:tab>
-</rich:tabPanel>
 </ui:define>
 
 </ui:composition>

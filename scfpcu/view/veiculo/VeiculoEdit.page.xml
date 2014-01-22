@@ -42,21 +42,21 @@
    <navigation from-action="#{veiculoHome.persist}">
       <rule if-outcome="persisted">
          <end-conversation/>
-         <redirect view-id="/Veiculo.xhtml"/>
+         <redirect view-id="/veiculo/Veiculo.xhtml"/>
       </rule>
    </navigation>
 
    <navigation from-action="#{veiculoHome.update}">
       <rule if-outcome="updated">
          <end-conversation/>
-         <redirect view-id="/Veiculo.xhtml"/>
+         <redirect view-id="/veiculo/Veiculo.xhtml"/>
       </rule>
    </navigation>
 
    <navigation from-action="#{veiculoHome.remove}">
       <rule if-outcome="removed">
          <end-conversation/>
-         <redirect view-id="/VeiculoList.xhtml"/>
+         <redirect view-id="/veiculo/VeiculoList.xhtml"/>
       </rule>
    </navigation>
 

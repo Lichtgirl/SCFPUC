@@ -102,6 +102,17 @@
             </div>
             
             <div class="editContainer">
+            		<div class="editLayout">
+					<s:decorate id="grupoField" template="../layout/edit.xhtml">
+		                <ui:define name="label">Grupo</ui:define>
+		                <h:selectOneMenu value="#{veiculoHome.instance.grupo}" >
+		                	<s:selectItems var="_grupo" value="#{grupoList.resultList}" 
+										label="#{_grupo.tipoGrupo}" 
+										noSelectionLabel="Selecione"/>
+									<s:convertEntity />
+		                </h:selectOneMenu>
+		            </s:decorate>
+		            </div>
 		          <div class="editLayout"> 
 		            <s:decorate id="placaAnteriorField" template="../layout/edit.xhtml">
 		                <ui:define name="label">Placa anterior</ui:define>
@@ -174,7 +185,9 @@
 		                </h:inputText>
 		            </s:decorate> 
 					</div>
-					<div class="editLayout">
+            </div>
+            <div class="editContainer">
+           		<div class="editLayout">
 		            <s:decorate id="chassiField" template="../layout/edit.xhtml">
 		                <ui:define name="label">Chassi</ui:define>
 		                <h:inputText id="chassi"
@@ -185,9 +198,7 @@
 		                    <a:support event="onblur" reRender="chassiField" bypassUpdates="true" ajaxSingle="true"/>
 		                </h:inputText>
 		            </s:decorate>
-					</div>
-            </div>
-            <div class="editContainer">
+				</div>
 		        <div class="editLayout"> 
 		            <s:decorate id="codRenavamField" template="../layout/edit.xhtml">
 		                <ui:define name="label">Renavam</ui:define>
@@ -227,7 +238,7 @@
 		            <s:decorate id="valorDaAquisicaoField" template="../layout/edit.xhtml">
 		                <ui:define name="label">Valor da Aquisição</ui:define>
 		                <h:inputText id="valorDaAquisicao"
-		                          value="#{veiculoHome.instance.valorDaAquisicao}" maxlength="15"  size="15">
+		                          value="#{veiculoHome.instance.valorDaAquisicao}" maxlength="15"  size="15" >
 		                    <a:support event="onblur" reRender="valorDaAquisicaoField" bypassUpdates="true" ajaxSingle="true"/>
 		                </h:inputText>
 		            </s:decorate>
@@ -263,13 +274,6 @@
 		            </s:decorate>
 		         </div>
 		
-		            <s:decorate id="dataCadastroField" template="../layout/edit.xhtml">
-		                <ui:define name="label">Data cadastro</ui:define>
-		                <rich:calendar id="dataCadastro"
-		                          value="#{veiculoHome.instance.dataCadastro}" datePattern="MM/dd/yyyy" />
-		            </s:decorate>
-		
-		            
             <div style="clear:both">
                 <span class="required">*</span>
                 Itens obrigatórios
@@ -280,29 +284,29 @@
         <div class="actionButtons">
 
             <h:commandButton id="save"
-                          value="Save"
+                          value="Salvar"
                          action="#{veiculoHome.persist}"
                        rendered="#{!veiculoHome.managed}"/>
 
             <h:commandButton id="update"
-                          value="Save"
+                          value="Salvar"
                          action="#{veiculoHome.update}"
                        rendered="#{veiculoHome.managed}"/>
 
             <h:commandButton id="delete"
-                          value="Delete"
+                          value="Excluir"
                          action="#{veiculoHome.remove}"
                       immediate="true"
                        rendered="#{veiculoHome.managed}"/>
 
             <s:button id="cancelEdit"
-                   value="Cancel"
+                   value="Cancelar"
              propagation="end"
                     view="/veiculo/Veiculo.xhtml"
                 rendered="#{veiculoHome.managed}"/>
 
             <s:button id="cancelAdd"
-                   value="Cancel"
+                   value="Cancelar"
              propagation="end"
                     view="/#{empty veiculoFrom ? 'VeiculoList' : veiculoFrom}.xhtml"
                 rendered="#{!veiculoHome.managed}"/>

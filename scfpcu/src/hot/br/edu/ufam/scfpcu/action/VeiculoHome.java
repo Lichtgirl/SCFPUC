@@ -2,6 +2,7 @@ package br.edu.ufam.scfpcu.action;
 
 import br.edu.ufam.scfpcu.model.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.model.SelectItem;
@@ -283,24 +284,41 @@ public class VeiculoHome extends EntityHome<Veiculo> {
 	}
 	
 	
-    public String persist(){
-    	
-    	 Modelo modelo = super.getEntityManager().find(Modelo.class, this.idModelo);
-    	   System.out.println("MOdelo selecionado:::"+modelo.getModelo());
-    	   Cidades cidadeAnterior = super.getEntityManager().find(Cidades.class, this.idCidadePanterior);
-    	   System.out.println("cidadeAnterior:::"+cidadeAnterior.getNome());
-    	 Cidades cidadeAtual = super.getEntityManager().find(Cidades.class, this.idCidadePatual);
-  	   System.out.println("cidadeAtual:::"+cidadeAtual.getNome());
-    	   
-    	
-    	Usuario user = encontrarUsuarioByLogin( identity.getUsername() );
-    	 System.out.println("Usuario Logado"+user.getNome());
-  	   if (user != null){
-  		   this.getInstance().setUsuario(user);
-  	   }
-  	  
-  	 return (super.persist());
-    }
+	public String persist(){
+		VeiculoList veiculoList = new VeiculoList();
+		List<Veiculo> lVeiculos = veiculoList.getResultList();
+		
+		for (Veiculo veiculo : lVeiculos) {
+			if(veiculo.getPlacaAtual().equals(this.getInstance().getPlacaAtual())){
+				super.getFacesMessages().add("Placa atual já cadastrada");
+				return "";
+			}else if (veiculo.getChassi().equals(this.getInstance().getChassi())) {
+				super.getFacesMessages().add("Chassi já cadastrado");
+				return "";
+			}else if ((veiculo.getCodRenavam() == this.getInstance().getCodRenavam())) {
+				super.getFacesMessages().add("Código Renavam já cadastrado");
+				return "";
+			}else if (veiculo.getNumPatrimonio().equals(this.getInstance().getNumPatrimonio())) {
+				super.getFacesMessages().add("Número de Patrimônio já cadastrado");
+				return "";
+			}
+		}
+
+		Modelo modelo = super.getEntityManager().find(Modelo.class, this.idModelo);
+		Cidades cidadeAnterior = super.getEntityManager().find(Cidades.class, this.idCidadePanterior);
+		Cidades cidadeAtual = super.getEntityManager().find(Cidades.class, this.idCidadePatual);
+		this.getInstance().setModelo(modelo);
+		this.getInstance().setCidadesByIdCidadePanterior(cidadeAnterior);
+		this.getInstance().setCidadesByIdCidadePatual(cidadeAtual);
+		this.getInstance().setDataCadastro(new Date());
+
+		Usuario user = encontrarUsuarioByLogin( identity.getUsername() );
+		if (user != null){
+			this.getInstance().setUsuario(user);
+		}
+
+		return (super.persist());
+	}
     
     public Usuario encontrarUsuarioByLogin(String login) {
 		Usuario usuario = null;

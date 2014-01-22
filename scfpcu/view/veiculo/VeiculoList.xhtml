@@ -12,7 +12,7 @@
 
     <h:form id="veiculoSearch" styleClass="edit">
 
-        <rich:simpleTogglePanel label="Veiculo Search Filter" switchType="ajax">
+        <rich:simpleTogglePanel label="Parâmetros de Pesquisa" switchType="ajax">
 
             <s:decorate template="../layout/display.xhtml">
                 <ui:define name="label">Adquirido de</ui:define>
@@ -25,18 +25,8 @@
             </s:decorate>
 
             <s:decorate template="../layout/display.xhtml">
-                <ui:define name="label">Modalidade aquisicao</ui:define>
-                <h:inputText id="modalidadeAquisicao" value="#{veiculoList.veiculo.modalidadeAquisicao}"/>
-            </s:decorate>
-
-            <s:decorate template="../layout/display.xhtml">
                 <ui:define name="label">Num patrimonio</ui:define>
                 <h:inputText id="numPatrimonio" value="#{veiculoList.veiculo.numPatrimonio}"/>
-            </s:decorate>
-
-            <s:decorate template="../layout/display.xhtml">
-                <ui:define name="label">Observacao</ui:define>
-                <h:inputText id="observacao" value="#{veiculoList.veiculo.observacao}"/>
             </s:decorate>
 
             <s:decorate template="../layout/display.xhtml">
@@ -50,53 +40,90 @@
             </s:decorate>
 
             <s:decorate template="../layout/display.xhtml">
-                <ui:define name="label">Match</ui:define>
+                <ui:define name="label">Combinar</ui:define>
                 <h:selectOneRadio id="logic" value="#{veiculoList.restrictionLogicOperator}" styleClass="radio">
-                    <f:selectItem itemLabel="All" itemValue="and"/>
-                    <f:selectItem itemLabel="Any" itemValue="or"/>
+                    <f:selectItem itemLabel="Todos" itemValue="and"/>
+                    <f:selectItem itemLabel="Qualquer" itemValue="or"/>
                 </h:selectOneRadio>
             </s:decorate>
 
         </rich:simpleTogglePanel>
 
         <div class="actionButtons">
-            <h:commandButton id="search" value="Search" action="/VeiculoList.xhtml"/>
-            <s:button id="reset" value="Reset" includePageParams="false"/>
+            <h:commandButton id="search" value="Buscar" action="/VeiculoList.xhtml"/>
+            <s:button id="reset" value="Limpar" includePageParams="false"/>
         </div>
 
     </h:form>
 
     <rich:panel>
-        <f:facet name="header">Veiculo Search Results (#{empty veiculoList.resultList ? 0 : (veiculoList.paginated ? veiculoList.resultCount : veiculoList.resultList.size)})</f:facet>
+        <f:facet name="header">Resultado da Busca (#{empty veiculoList.resultList ? 0 : (veiculoList.paginated ? veiculoList.resultCount : veiculoList.resultList.size)})</f:facet>
     <div class="results" id="veiculoList">
 
-    <h:outputText value="The veiculo search returned no results."
+    <h:outputText value="Nenhum veículo encontrado"
                rendered="#{empty veiculoList.resultList}"/>
 
     <rich:dataTable id="veiculoList"
                 var="_veiculo"
               value="#{veiculoList.resultList}"
            rendered="#{not empty veiculoList.resultList}">
+		<h:column>
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{veiculoList}"/>
+                    <ui:param name="propertyLabel" value="Placa atual"/>
+                    <ui:param name="propertyPath" value="veiculo.placaAtual"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_veiculo.placaAtual}"/>
+        </h:column>
+        
         <h:column>
             <f:facet name="header">
                 <ui:include src="../layout/sort.xhtml">
                     <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Id veiculo"/>
-                    <ui:param name="propertyPath" value="veiculo.idVeiculo"/>
+                    <ui:param name="propertyLabel" value="Chassi"/>
+                    <ui:param name="propertyPath" value="veiculo.chassi"/>
                 </ui:include>
             </f:facet>
-            <h:outputText value="#{_veiculo.idVeiculo}"/>
+            <h:outputText value="#{_veiculo.chassi}"/>
         </h:column>
         <h:column>
             <f:facet name="header">
                 <ui:include src="../layout/sort.xhtml">
                     <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Adquirido de"/>
-                    <ui:param name="propertyPath" value="veiculo.adquiridoDe"/>
+                    <ui:param name="propertyLabel" value="Cod renavam"/>
+                    <ui:param name="propertyPath" value="veiculo.codRenavam"/>
                 </ui:include>
             </f:facet>
-            <h:outputText value="#{_veiculo.adquiridoDe}"/>
+            <h:outputText value="#{_veiculo.codRenavam}"/>
         </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{veiculoList}"/>
+                    <ui:param name="propertyLabel" value="Data de aquisicao"/>
+                    <ui:param name="propertyPath" value="veiculo.dataDeAquisicao"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_veiculo.dataDeAquisicao}">
+                <s:convertDateTime type="date" dateStyle="short"/>
+            </h:outputText>
+        </h:column>
+        
+        
+        
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{veiculoList}"/>
+                    <ui:param name="propertyLabel" value="Num patrimonio"/>
+                    <ui:param name="propertyPath" value="veiculo.numPatrimonio"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_veiculo.numPatrimonio}"/>
+        </h:column>
+        
         <h:column>
             <f:facet name="header">
                 <ui:include src="../layout/sort.xhtml">
@@ -121,218 +148,24 @@
             <f:facet name="header">
                 <ui:include src="../layout/sort.xhtml">
                     <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Chassi"/>
-                    <ui:param name="propertyPath" value="veiculo.chassi"/>
+                    <ui:param name="propertyLabel" value="Adquirido de"/>
+                    <ui:param name="propertyPath" value="veiculo.adquiridoDe"/>
                 </ui:include>
             </f:facet>
-            <h:outputText value="#{_veiculo.chassi}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Cidades by id cidade panterior id cidade"/>
-                    <ui:param name="propertyPath" value="veiculo.cidadesByIdCidadePanterior.idCidade"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_veiculo.cidadesByIdCidadePanterior.idCidade}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Cidades by id cidade patual id cidade"/>
-                    <ui:param name="propertyPath" value="veiculo.cidadesByIdCidadePatual.idCidade"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_veiculo.cidadesByIdCidadePatual.idCidade}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Cod renavam"/>
-                    <ui:param name="propertyPath" value="veiculo.codRenavam"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_veiculo.codRenavam}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Cor id cor"/>
-                    <ui:param name="propertyPath" value="veiculo.cor.idCor"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_veiculo.cor.idCor}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Data cadastro"/>
-                    <ui:param name="propertyPath" value="veiculo.dataCadastro"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_veiculo.dataCadastro}">
-                <s:convertDateTime type="date" dateStyle="short"/>
-            </h:outputText>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Data de aquisicao"/>
-                    <ui:param name="propertyPath" value="veiculo.dataDeAquisicao"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_veiculo.dataDeAquisicao}">
-                <s:convertDateTime type="date" dateStyle="short"/>
-            </h:outputText>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Entidade id entidade"/>
-                    <ui:param name="propertyPath" value="veiculo.entidade.idEntidade"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_veiculo.entidade.idEntidade}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Especie id especie"/>
-                    <ui:param name="propertyPath" value="veiculo.especie.idEspecie"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_veiculo.especie.idEspecie}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Grupo id grupo"/>
-                    <ui:param name="propertyPath" value="veiculo.grupo.idGrupo"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_veiculo.grupo.idGrupo}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Id servidor"/>
-                    <ui:param name="propertyPath" value="veiculo.idServidor"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_veiculo.idServidor}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Modalidade aquisicao"/>
-                    <ui:param name="propertyPath" value="veiculo.modalidadeAquisicao"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_veiculo.modalidadeAquisicao}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Modelo id modelo"/>
-                    <ui:param name="propertyPath" value="veiculo.modelo.idModelo"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_veiculo.modelo.idModelo}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Num patrimonio"/>
-                    <ui:param name="propertyPath" value="veiculo.numPatrimonio"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_veiculo.numPatrimonio}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Observacao"/>
-                    <ui:param name="propertyPath" value="veiculo.observacao"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_veiculo.observacao}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Placa anterior"/>
-                    <ui:param name="propertyPath" value="veiculo.placaAnterior"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_veiculo.placaAnterior}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Placa atual"/>
-                    <ui:param name="propertyPath" value="veiculo.placaAtual"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_veiculo.placaAtual}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Potencia"/>
-                    <ui:param name="propertyPath" value="veiculo.potencia"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_veiculo.potencia}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Tipo combustivel id combustivel"/>
-                    <ui:param name="propertyPath" value="veiculo.tipoCombustivel.idCombustivel"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_veiculo.tipoCombustivel.idCombustivel}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Valor da aquisicao"/>
-                    <ui:param name="propertyPath" value="veiculo.valorDaAquisicao"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_veiculo.valorDaAquisicao}"/>
+            <h:outputText value="#{_veiculo.adquiridoDe}"/>
         </h:column>
         <rich:column styleClass="action">
             <f:facet name="header">Action</f:facet>
-            <s:link view="/#{empty from ? 'Veiculo' : from}.xhtml"
-                   value="#{empty from ? 'View' : 'Select'}"
+            <s:link view="/veiculo/#{empty from ? 'Veiculo' : from}.xhtml"
+                   value="#{empty from ? 'Ver' : 'Select'}"
              propagation="#{empty from ? 'none' : 'default'}"
                       id="veiculoViewId">
                 <f:param name="veiculoIdVeiculo"
                         value="#{_veiculo.idVeiculo}"/>
             </s:link>
             #{' '}
-            <s:link view="/VeiculoEdit.xhtml"
-                   value="Edit"
+            <s:link view="/veiculo/VeiculoEdit.xhtml"
+                   value="Editar"
              propagation="none"
                       id="veiculoEdit"
                 rendered="#{empty from}">
@@ -347,32 +180,32 @@
 
     <div class="tableControl">
 
-        <s:link view="/VeiculoList.xhtml"
+        <s:link view="/veiculo/VeiculoList.xhtml"
             rendered="#{veiculoList.previousExists}"
-               value="#{messages.left}#{messages.left} First Page"
+               value="#{messages.left}#{messages.left} Primeira Página"
                   id="firstPage">
           <f:param name="firstResult" value="0"/>
         </s:link>
 
-        <s:link view="/VeiculoList.xhtml"
+        <s:link view="/veiculo/VeiculoList.xhtml"
             rendered="#{veiculoList.previousExists}"
-               value="#{messages.left} Previous Page"
+               value="#{messages.left} Página Anterior"
                   id="previousPage">
             <f:param name="firstResult"
                     value="#{veiculoList.previousFirstResult}"/>
         </s:link>
 
-        <s:link view="/VeiculoList.xhtml"
+        <s:link view="/veiculo/VeiculoList.xhtml"
             rendered="#{veiculoList.nextExists}"
-               value="Next Page #{messages.right}"
+               value="Próxima Página #{messages.right}"
                   id="nextPage">
             <f:param name="firstResult"
                     value="#{veiculoList.nextFirstResult}"/>
         </s:link>
 
-        <s:link view="/VeiculoList.xhtml"
+        <s:link view="/veiculo/VeiculoList.xhtml"
             rendered="#{veiculoList.nextExists}"
-               value="Last Page #{messages.right}#{messages.right}"
+               value="Última Página #{messages.right}#{messages.right}"
                   id="lastPage">
             <f:param name="firstResult"
                     value="#{veiculoList.lastFirstResult}"/>
@@ -384,7 +217,7 @@
         <s:button view="/veiculo/VeiculoEdit.xhtml"
                     id="create"
            propagation="none"
-                 value="Create veiculo">
+                 value="Criar Veiculo">
             <f:param name="veiculoIdVeiculo"/>
         </s:button>
     </s:div>
