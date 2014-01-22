@@ -1,0 +1,56 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:scrp="http://www.digiboard.com.br/srp/facelets"       
+                template="../layout/template.xhtml">
+                
+                       
+<ui:define name="body">
+    <h:panelGrid columns="1">
+    <h:outputText value="Relatorio de Gastos" styleClass="titulo" />
+    
+    <rich:spacer height="70" />
+    </h:panelGrid>
+  <h:panelGrid columns="1" id="principal">	
+    <h:form id="report" styleClass="edit">
+     <rich:panel style=" width : 438px;">
+      	<f:facet name="header">Gastos</f:facet>
+      			
+		<h:panelGrid columns="1">
+			<h:messages styleClass="message" id="globalMessages"/>
+		</h:panelGrid>
+		
+		<s:decorate id="idgastosde" template="../layout/edit.xhtml">
+		                <ui:define name="label">Data Inicio</ui:define>
+		                <rich:calendar id="gastosde" inputSize="10"
+		                          value="#{relatorioGastos.idGastosDe}" datePattern="dd/MM/yyyy" />
+		            </s:decorate>
+            <s:decorate id="idgastosate" template="../layout/edit.xhtml">
+		                <ui:define name="label">Data Fim</ui:define>
+		                <rich:calendar id="gastosate" inputSize="10"
+		                          value="#{relatorioGastos.idGastosAte}" datePattern="dd/MM/yyyy" />
+		            </s:decorate>
+            
+            <scrp:baseSelect/>               
+
+
+        <div style="clear:both">
+          <h:panelGrid columns="3">
+        	<h:commandButton action="#{relatorioGastos.imprimir()}" onclick="target='_blank'" styleClass="bt-vizualisar" value="Buscar"></h:commandButton>        	
+	     </h:panelGrid>
+        </div>
+    
+      </rich:panel>        
+                
+    </h:form>
+  </h:panelGrid>
+    
+</ui:define>
+
+</ui:composition>

@@ -1,6 +1,7 @@
 package br.edu.ufam.scfpcu.action;
 
 import br.edu.ufam.scfpcu.model.*;
+
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.framework.EntityHome;
@@ -14,6 +15,25 @@ public class GastosHome extends EntityHome<Gastos> {
 	TipoServicoHome tipoServicoHome;
 	@In(create = true)
 	VeiculoHome veiculoHome;
+	
+	private Veiculo veiculo;
+	private double valorTotal;
+
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
+
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
+	}
+
+	public double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
 
 	public void setGastosIdGasto(Integer id) {
 		setId(id);
@@ -60,6 +80,11 @@ public class GastosHome extends EntityHome<Gastos> {
 
 	public Gastos getDefinedInstance() {
 		return isIdDefined() ? getInstance() : null;
+	}
+	
+	public String setVeiculoSelecionado(){
+		this.getInstance().setVeiculo(this.veiculo);
+		return "";
 	}
 
 }

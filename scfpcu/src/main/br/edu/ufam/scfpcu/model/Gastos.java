@@ -157,5 +157,6 @@ public class Gastos implements java.io.Serializable {
 	public void setTipoGasto(int tipoGasto) {
 		this.tipoGasto = tipoGasto;
 	}
+	
 
 }

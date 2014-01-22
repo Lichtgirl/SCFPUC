@@ -17,7 +17,7 @@ h1 {
 }
 
 input[type=submit], input[type=button] {
-	font-size: 11px;
+	font-size: 12px;
 	margin: 5px 5px 5px 0;
 	cursor: pointer;
 }
@@ -36,7 +36,7 @@ select {
 }
 
 .tableControl a {
-	padding-left: 10px;
+	padding-left: 12px;
 }
 
 .tableControl {
@@ -89,6 +89,7 @@ select {
 .editLayout{
 	float: left;
 	flex:1;
+	font-size: 12px;
 }
 
 .editContainer{
