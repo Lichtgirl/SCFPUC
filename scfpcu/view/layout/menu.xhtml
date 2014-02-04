@@ -9,7 +9,7 @@
         <s:link id="menuHomeId" view="/home.xhtml" value="Home" propagation="none"/>
     </rich:toolBarGroup>
     <rich:dropDownMenu showDelay="250" hideDelay="0" submitMode="none">
-        <f:facet name="label">Browse data</f:facet>
+        <f:facet name="label">Menu</f:facet>
 	<rich:menuItem>
     	<s:link view="/modelo/ModeloList.xhtml"
            	value="Modelo"
@@ -21,6 +21,13 @@
     	<s:link view="/entidade/EntidadeList.xhtml"
            	value="Entidade"
            	id="EntidadeId"
+			includePageParams="false"
+     		propagation="none"/>
+     </rich:menuItem>
+     <rich:menuItem>
+    	<s:link view="/relatorios/report.xhtml"
+           	value="Relatorios"
+           	id="reportId"
 			includePageParams="false"
      		propagation="none"/>
      </rich:menuItem>

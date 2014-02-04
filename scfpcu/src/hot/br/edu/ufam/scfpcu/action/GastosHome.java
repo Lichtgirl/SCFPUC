@@ -16,16 +16,9 @@ public class GastosHome extends EntityHome<Gastos> {
 	@In(create = true)
 	VeiculoHome veiculoHome;
 	
-	private Veiculo veiculo;
 	private double valorTotal;
+	private Short tipoGasto = null;
 
-	public Veiculo getVeiculo() {
-		return veiculo;
-	}
-
-	public void setVeiculo(Veiculo veiculo) {
-		this.veiculo = veiculo;
-	}
 
 	public double getValorTotal() {
 		return valorTotal;
@@ -33,6 +26,14 @@ public class GastosHome extends EntityHome<Gastos> {
 
 	public void setValorTotal(double valorTotal) {
 		this.valorTotal = valorTotal;
+	}
+
+	public Short getTipoGasto() {
+		return tipoGasto;
+	}
+
+	public void setTipoGasto(Short tipoGasto) {
+		this.tipoGasto = tipoGasto;
 	}
 
 	public void setGastosIdGasto(Integer id) {
@@ -82,9 +83,8 @@ public class GastosHome extends EntityHome<Gastos> {
 		return isIdDefined() ? getInstance() : null;
 	}
 	
-	public String setVeiculoSelecionado(){
-		this.getInstance().setVeiculo(this.veiculo);
+	public String setValorTotal(){
+		this.valorTotal = this.getInstance().getQtd() * this.getInstance().getValor();
 		return "";
 	}
-
 }

@@ -17,52 +17,50 @@
             <f:facet name="header">#{gastosHome.managed ? 'Editar' : 'Adicionar'} Gastos</f:facet>
 
 			<div  class="editContainer">
-				<h:form>
-					<div class="editLayout">
-						<s:decorate id="placaField" template="../layout/edit.xhtml">
-			                <ui:define name="label">Placa</ui:define>
-			                <h:selectOneMenu value="#{gastosHome.veiculo}" >
-			                	<s:selectItems var="_veiculo" value="#{veiculoList.resultList}" 
-											label="#{_veiculo.placaAtual}" 
-											noSelectionLabel="Selecione">
-								</s:selectItems>
-								 <s:convertEntity />
-			                </h:selectOneMenu>
-			                <h:commandButton action="#{gastosHome.setVeiculoSelecionado()}" value="Buscar" >
-			                	<a:support event="onclick" reRender="veiculoForm" ajaxSingle="true" />
-			                </h:commandButton>
-			            </s:decorate>
-		            </div>
-	            </h:form>
-            </div>
-            <rich:spacer height="20"/>
-            
-			<div  class="editContainer">
-				<h:form id="veiculoForm">
+				<a:form id="placaForm">
+						<div class="editLayout">
+							<s:decorate id="placaField" template="../layout/edit.xhtml">
+				                <ui:define name="label">Placa</ui:define>
+				                <h:selectOneMenu value="#{gastosHome.instance.veiculo}" >
+				                	<s:selectItems var="_veiculo" value="#{veiculoList.resultList}" 
+												label="#{_veiculo.placaAtual}" 
+												noSelectionLabel="Selecione">
+									</s:selectItems>
+									<a:support event="onchange" reRender="veiculoForm" ajaxSingle="true"  ignoreDupResponses="true" />
+									 <s:convertEntity />
+				                </h:selectOneMenu>
+				            </s:decorate>
+			            </div>
+		            </a:form>
+				<a:form id="veiculoForm" >
 				<div class="editLayout">
-					<s:decorate id="especieField" template="../layout/edit.xhtml">
+					<s:decorate id="especieField" template="../layout/display.xhtml">
 		                <ui:define name="label">Espécie</ui:define>
 		                <h:outputText id="idEspecie" value="#{gastosHome.instance.veiculo.especie.especie}" />
+		                <a:support event="onblur" reRender="especieField" bypassUpdates="true" ajaxSingle="true"/>
 		            </s:decorate>
+		            
 	            </div>
 	            <div class="editLayout">
-					<s:decorate id="marcaField" template="../layout/edit.xhtml">
+					<s:decorate id="marcaField" template="../layout/display.xhtml">
 		                <ui:define name="label">Marca</ui:define>
 		                <h:outputText id="idMarca" value="#{gastosHome.instance.veiculo.modelo.marca.marca}" />
+		                <a:support event="onblur" reRender="marcaField" bypassUpdates="true" ajaxSingle="true"/>
 		            </s:decorate>
 	            </div>
 	            <div class="editLayout">
-					<s:decorate id="modeloField" template="../layout/edit.xhtml">
+					<s:decorate id="modeloField" template="../layout/display.xhtml">
 		                <ui:define name="label">Modelo</ui:define>
 		                <h:outputText id="idModelo" value="#{gastosHome.instance.veiculo.modelo.modelo}" />
+		                <a:support event="onblur" reRender="modeloField" bypassUpdates="true" ajaxSingle="true"/>
 		            </s:decorate>
 	            </div>
-	            </h:form>
+	            </a:form>
 	            <div class="editLayout">
 	            	<s:decorate id="lotadoField" template="../layout/edit.xhtml">
 		                <ui:define name="label">Lotado</ui:define>
 		                <h:inputText id="lotado"
-		                           size="40"
+		                           size="35"
 		                      maxlength="50"
 		                          value="#{gastosHome.instance.lotado}">
 		                    <a:support event="onblur" reRender="lotadoField" bypassUpdates="true" ajaxSingle="true"/>
@@ -88,18 +86,21 @@
 		            </s:decorate>
             	</div>
             	<div class="editLayout">
+            		<a:form id="tipoGastoForm">
             		<s:decorate id="tipoGastoField" template="../layout/edit.xhtml">
             			<ui:define name="label">Tipo Gasto</ui:define>
-            			<h:selectOneMenu value="#{gastosHome.instance.tipoGasto}">
+            			<h:selectOneMenu value="#{gastosHome.tipoGasto}">
             				<f:selectItem itemValue="#{null}" itemLabel="Selecione" />
             				<f:selectItem id="servico" itemLabel="Serviços" itemValue="1"/>
             				<f:selectItem id="abastecimento" itemLabel="Abastecimento" itemValue="2"/>
-            				<a:support event="onchange" reRender="combustivelField,servicoField"></a:support>
+            				<a:support event="onchange" reRender="servicoForm, combustivelForm" ajaxSingle="true"  ignoreDupResponses="true" />
             			</h:selectOneMenu>
             		</s:decorate>
+            		</a:form>
 	            </div>
             	<div class="editLayout">
-					<s:decorate id="servicoField" template="../layout/edit.xhtml" >
+            		<a:form id="servicoForm">
+					<s:decorate id="servicoField" template="../layout/edit.xhtml" rendered="#{gastosHome.tipoGasto == 1}">
 		                <ui:define name="label">Tipo Serviço</ui:define>
 		                <h:selectOneMenu value="#{gastosHome.instance.tipoServico}" >
 		                	<s:selectItems var="_tipoServico" value="#{tipoServicoList.resultList}" 
@@ -109,9 +110,11 @@
 									<s:convertEntity />
 		                </h:selectOneMenu>
 		            </s:decorate>
+		            </a:form> 
 	            </div>
             	<div class="editLayout">
-					<s:decorate id="combustivelField" template="../layout/edit.xhtml" >
+            		<a:form id="combustivelForm">
+					<s:decorate id="combustivelField" template="../layout/edit.xhtml" rendered="#{gastosHome.tipoGasto == 2}">
 		                <ui:define name="label">Combustível</ui:define>
 		                <h:selectOneMenu value="#{gastosHome.instance.tipoCombustivel}" >
 		                	<s:selectItems var="_combustivel" value="#{tipoCombustivelList.resultList}" 
@@ -120,6 +123,7 @@
 									<s:convertEntity />
 		                </h:selectOneMenu>
 		            </s:decorate>
+		            </a:form>
 	            </div>
 	            <div class="editLayout">
 	            	<s:decorate id="qtdField" template="../layout/edit.xhtml">
@@ -132,24 +136,27 @@
 		            </s:decorate>
 	            </div>
 	            <div class="editLayout">
+	            	<a:form id="valorForm" >
 	            	<s:decorate id="valorField" template="../layout/edit.xhtml">
 		                <ui:define name="label">Valor</ui:define>
 		                <h:inputText id="valor"
 		                       required="true"
 		                          value="#{gastosHome.instance.valor}">
-		                    <a:support event="onblur" reRender="valorField" bypassUpdates="true" ajaxSingle="true"/>
+		                    <a:support event="onblur" reRender="valorTotalForm" bypassUpdates="true" ajaxSingle="true" action="#{gastosHome.setValorTotal()}"/>
 		                </h:inputText>
 		           </s:decorate>
+		           </a:form>
 	            </div>
 	            <div class="editLayout">
+	            	<a:form id="valorTotalForm" >
 	            	<s:decorate id="valorTotalField" template="../layout/edit.xhtml">
 		                <ui:define name="label">Valor Total</ui:define>
-		                <h:inputText id="valorTotal"
-		                       required="true"
-		                          value="#{gastosHome.valorTotal}">
-		                    <a:support event="onblur" reRender="valorField" bypassUpdates="true" ajaxSingle="true" disabled="true"/>
-		                </h:inputText>
+		                <h:inputText id="valor"
+		                          value="#{gastosHome.valorTotal}"
+		                          disabled="true">
+ 		                </h:inputText>
 		           </s:decorate>
+		           </a:form>
 	            </div>
             </div>
 			

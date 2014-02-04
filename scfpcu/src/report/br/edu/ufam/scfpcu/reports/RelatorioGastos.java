@@ -11,6 +11,8 @@ import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
 
 @Name("relatorioGastos")
+//@ManagedBean("relatorioGastos")
+
 
 public class RelatorioGastos extends ReportAction{
 	private String idGastosde;
@@ -20,6 +22,13 @@ public class RelatorioGastos extends ReportAction{
 	
 	public String getIdGastosde() {
 		return idGastosde;
+	}
+
+	public RelatorioGastos(String idGastosde, String idGastosAte, Date emissao) {
+		super();
+		this.idGastosde = idGastosde;
+		this.idGastosAte = idGastosAte;
+		this.emissao = emissao;
 	}
 
 	public void setIdGastosde(String idGastosde) {

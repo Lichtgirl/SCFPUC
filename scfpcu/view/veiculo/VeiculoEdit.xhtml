@@ -233,12 +233,11 @@
 		                    <a:support event="onblur" reRender="modalidadeAquisicaoField" bypassUpdates="true" ajaxSingle="true"/>
 		                </h:inputText>
 		            </s:decorate>
-		        </div>
-		        <div class="editLayout">    
 		            <s:decorate id="valorDaAquisicaoField" template="../layout/edit.xhtml">
 		                <ui:define name="label">Valor da Aquisição</ui:define>
 		                <h:inputText id="valorDaAquisicao"
 		                          value="#{veiculoHome.instance.valorDaAquisicao}" maxlength="15"  size="15" >
+							<rich:jQuery selector="#horaFim" timing="onload" query="mask('99,99')" />
 		                    <a:support event="onblur" reRender="valorDaAquisicaoField" bypassUpdates="true" ajaxSingle="true"/>
 		                </h:inputText>
 		            </s:decorate>
