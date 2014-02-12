@@ -99,13 +99,27 @@ public class UsuarioHome extends EntityHome<Usuario> {
 	public String persist(){
 		System.out.println("persistindo/.....");
 		System.out.println("this.getInstance().getLogin()::::"+this.getInstance().getLogin());
-		List<Usuario>  usuario = (List<Usuario>) super.getEntityManager().createQuery("from Usuario where login = '"+this.getInstance().getLogin()+"'" ).getResultList();
-		System.out.println("usuario.size()..."+usuario.size());
-		if(!usuario.isEmpty()){
+		List<Usuario>  usuarioEmail = (List<Usuario>) super.getEntityManager().createQuery("from Usuario where email = '"+this.getInstance().getEmail()+"'" ).getResultList();
+		if(!usuarioEmail.isEmpty()){
+			super.getFacesMessages().addToControl("txLoginUsuario",
+					FacesMessage.SEVERITY_ERROR, "Já existe um usuário com o mesmo e-mail, por favor escolha outro e-mail");
+			return "";
+		}
+		
+		List<Usuario>  usuarioLogin = (List<Usuario>) super.getEntityManager().createQuery("from Usuario where login = '"+this.getInstance().getLogin()+"'" ).getResultList();
+		if(!usuarioLogin.isEmpty()){
 			super.getFacesMessages().addToControl("txLoginUsuario",
 					FacesMessage.SEVERITY_ERROR, "Já existe um usuário com o mesmo login, por favor escolha outro login");
 			return "";
 		}
+		
+		List<Usuario>  usuarioSiape = (List<Usuario>) super.getEntityManager().createQuery("from Usuario where siape = '"+this.getInstance().getSiape()+"'" ).getResultList();
+		if(!usuarioSiape.isEmpty()){
+			super.getFacesMessages().addToControl("txLoginUsuario",
+					FacesMessage.SEVERITY_ERROR, "Já existe um usuário com o mesmo SIAPE");
+			return "";
+		}
+		
 		
 		String result = "";
 		this.getInstance().setSenha(StringToMd5.md5(this.getInstance().getSenha()));

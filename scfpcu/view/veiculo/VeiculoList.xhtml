@@ -156,7 +156,7 @@
         </h:column>
         <rich:column styleClass="action">
             <f:facet name="header">Action</f:facet>
-            <s:link view="/veiculo/#{empty from ? 'Veiculo' : from}.xhtml"
+            <s:link view="/#{empty from ? '/veiculo/Veiculo' : from}.xhtml"
                    value="#{empty from ? 'Ver' : 'Select'}"
              propagation="#{empty from ? 'none' : 'default'}"
                       id="veiculoViewId">

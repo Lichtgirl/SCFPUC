@@ -17,18 +17,6 @@
             <f:facet name="header">#{usuarioHome.managed ? 'Editar' : 'Adicionar'} Usuario</f:facet>
 
 
-            <s:decorate id="idServidorField" template="../layout/edit.xhtml">
-                <ui:define name="label">Id servidor</ui:define>
-                <h:inputText id="idServidor"
-                       required="true"
-                       disabled="#{usuarioHome.managed}"
-                          value="#{usuarioHome.instance.idServidor}">
-                    <a:support event="onblur" reRender="idServidorField" bypassUpdates="true" ajaxSingle="true"/>
-                </h:inputText>
-            </s:decorate>
-
-
-
             <s:decorate id="emailField" template="../layout/edit.xhtml">
                 <ui:define name="label">Email</ui:define>
                 <h:inputText id="email"

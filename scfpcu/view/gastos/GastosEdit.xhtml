@@ -12,8 +12,8 @@
 <ui:define name="body">
 
     <h:form id="gastos" styleClass="edit">
-
-        <rich:panel>
+		
+        <rich:panel id="panelGastos">
             <f:facet name="header">#{gastosHome.managed ? 'Editar' : 'Adicionar'} Gastos</f:facet>
 
 			<div  class="editContainer">
@@ -26,7 +26,7 @@
 												label="#{_veiculo.placaAtual}" 
 												noSelectionLabel="Selecione">
 									</s:selectItems>
-									<a:support event="onchange" reRender="veiculoForm" ajaxSingle="true"  ignoreDupResponses="true" />
+									<a:support event="onchange" reRender="panelGastos, veiculoForm" ajaxSingle="true"  ignoreDupResponses="true" />
 									 <s:convertEntity />
 				                </h:selectOneMenu>
 				            </s:decorate>
@@ -93,7 +93,7 @@
             				<f:selectItem itemValue="#{null}" itemLabel="Selecione" />
             				<f:selectItem id="servico" itemLabel="Serviços" itemValue="1"/>
             				<f:selectItem id="abastecimento" itemLabel="Abastecimento" itemValue="2"/>
-            				<a:support event="onchange" reRender="servicoForm, combustivelForm" ajaxSingle="true"  ignoreDupResponses="true" />
+            				<a:support event="onchange" reRender="panelGastos, servicoForm, combustivelForm" ajaxSingle="true"  ignoreDupResponses="true" />
             			</h:selectOneMenu>
             		</s:decorate>
             		</a:form>
@@ -125,28 +125,26 @@
 		            </s:decorate>
 		            </a:form>
 	            </div>
+	            <a:form id="valorForm" >
 	            <div class="editLayout">
 	            	<s:decorate id="qtdField" template="../layout/edit.xhtml">
 		                <ui:define name="label">Qtd</ui:define>
 		                <h:inputText id="qtd"
-		                       required="true"
 		                          value="#{gastosHome.instance.qtd}">
-		                    <a:support event="onblur" reRender="qtdField" bypassUpdates="true" ajaxSingle="true"/>
+		                 <a:support event="onblur" reRender="qtdField" bypassUpdates="true" ajaxSingle="true"/>
 		                </h:inputText>
 		            </s:decorate>
 	            </div>
 	            <div class="editLayout">
-	            	<a:form id="valorForm" >
 	            	<s:decorate id="valorField" template="../layout/edit.xhtml">
 		                <ui:define name="label">Valor</ui:define>
 		                <h:inputText id="valor"
-		                       required="true"
 		                          value="#{gastosHome.instance.valor}">
-		                    <a:support event="onblur" reRender="valorTotalForm" bypassUpdates="true" ajaxSingle="true" action="#{gastosHome.setValorTotal()}"/>
+		                   <a:support event="onblur" reRender="valorField" bypassUpdates="true" ajaxSingle="true"/>
 		                </h:inputText>
 		           </s:decorate>
-		           </a:form>
 	            </div>
+	            </a:form>
 	            <div class="editLayout">
 	            	<a:form id="valorTotalForm" >
 	            	<s:decorate id="valorTotalField" template="../layout/edit.xhtml">
@@ -158,7 +156,8 @@
 		           </s:decorate>
 		           </a:form>
 	            </div>
-            </div>
+	            
+	        </div>
 			
 
             <div style="clear:both">
@@ -169,6 +168,13 @@
         </rich:panel>
 
         <div class="actionButtons">
+        	<h:commandButton id="calc"
+                          value="Calcular"
+                         action="#{gastosHome.setarValorTotal()}"
+                      immediate="true">
+                      <a:support event="oncomplete" reRender="valorTotalForm"/>
+                </h:commandButton>
+        	
 
             <h:commandButton id="save"
                           value="Salvar"

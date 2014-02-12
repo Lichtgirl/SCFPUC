@@ -10,6 +10,18 @@
     template="../layout/template.xhtml">
 
 <ui:define name="body">
+<script language="JavaScript" type="text/javascript" src="/js/jquery.maskMoney.js"></script>  
+    <script type="text/javascript">  
+    jQuery(function($){  
+        $(document).keypress(formatarValores);  
+        function formatarValores(evento){  
+            $("#debito").maskMoney({decimal:",",thousands:".", allowZero:true, allowNegative:false, defaultZero:true});  
+            $("#credito").maskMoney({decimal:",",thousands:".", allowZero:true, allowNegative:false, defaultZero:true});  
+            $("#saldo").maskMoney({decimal:",",thousands:".", allowZero:true, allowNegative:true, defaultZero:true});         
+            $("#real").maskMoney({showSymbol:true,symbol:"R$", decimal:",", thousands:".", allowZero:true});     
+    }})  
+  
+    </script>
 
     <h:form id="veiculo" styleClass="edit">
 
@@ -235,9 +247,8 @@
 		            </s:decorate>
 		            <s:decorate id="valorDaAquisicaoField" template="../layout/edit.xhtml">
 		                <ui:define name="label">Valor da Aquisição</ui:define>
-		                <h:inputText id="valorDaAquisicao"
+		                <h:inputText id="real"
 		                          value="#{veiculoHome.instance.valorDaAquisicao}" maxlength="15"  size="15" >
-							<rich:jQuery selector="#horaFim" timing="onload" query="mask('99,99')" />
 		                    <a:support event="onblur" reRender="valorDaAquisicaoField" bypassUpdates="true" ajaxSingle="true"/>
 		                </h:inputText>
 		            </s:decorate>

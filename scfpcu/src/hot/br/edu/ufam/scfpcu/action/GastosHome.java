@@ -2,8 +2,10 @@ package br.edu.ufam.scfpcu.action;
 
 import br.edu.ufam.scfpcu.model.*;
 
+import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
+import org.jboss.seam.annotations.Scope;
 import org.jboss.seam.framework.EntityHome;
 
 @Name("gastosHome")
@@ -18,6 +20,8 @@ public class GastosHome extends EntityHome<Gastos> {
 	
 	private double valorTotal;
 	private Short tipoGasto = null;
+	private double valor;
+	private int qtd;
 
 
 	public double getValorTotal() {
@@ -34,6 +38,23 @@ public class GastosHome extends EntityHome<Gastos> {
 
 	public void setTipoGasto(Short tipoGasto) {
 		this.tipoGasto = tipoGasto;
+	}
+	
+	
+	public double getValor() {
+		return valor;
+	}
+
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
+
+	public int getQtd() {
+		return qtd;
+	}
+
+	public void setQtd(int qtd) {
+		this.qtd = qtd;
 	}
 
 	public void setGastosIdGasto(Integer id) {
@@ -83,8 +104,23 @@ public class GastosHome extends EntityHome<Gastos> {
 		return isIdDefined() ? getInstance() : null;
 	}
 	
-	public String setValorTotal(){
+	public String setarValorTotal(){
+		System.out.println("setarValorTotal");
+		System.out.println("this.getInstance().getQtd()::"+this.getInstance().getQtd());
+		System.out.println("this.getInstance().getValor()::"+this.getInstance().getValor());
 		this.valorTotal = this.getInstance().getQtd() * this.getInstance().getValor();
+		System.out.println("setarValorTotal::::::::"+this.valorTotal);
 		return "";
+	}
+	
+	public String persist(){
+		System.out.println("persist");
+		String result="falhou";
+		try {
+			result = super.persist();
+		} catch (Exception e) {
+			System.out.println("falhou...Exception e:::"+ e);
+		}
+		return result;
 	}
 }
