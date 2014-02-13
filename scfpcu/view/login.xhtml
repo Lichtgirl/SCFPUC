@@ -6,41 +6,106 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:rich="http://richfaces.org/rich"
-    template="layout/template.xhtml">
-
-<ui:define name="body">
-
-    <h:form id="loginForm">
-
-        <rich:panel>
-            <f:facet name="header">Sistema de Controle de Frotas da FUA</f:facet>
-
-            <p style="FONT-SIZE: small;">Insira os dados de Login</p>
-
-            <div class="dialog">
-                <h:panelGrid columns="2" rowClasses="prop" columnClasses="name,value">
-                    <h:outputLabel for="username" style="FONT-SIZE: x-small;">Login</h:outputLabel>
-                    <h:inputText id="username"
-                              value="#{identity.username}" required="true"/>
-                    <h:outputLabel for="password">Senha</h:outputLabel>
-                    <h:inputSecret id="password"
-                                value="#{identity.password}" required="true"/>
-                    <h:outputLabel for="rememberMe">Manter conectado</h:outputLabel>
-                    <h:selectBooleanCheckbox id="rememberMe"
-                                          value="#{rememberMe.enabled}"/>
-                    <s:link view="/recuperaSenha.xhtml" value="Esqueci a senha">
-			        </s:link>
-                    <h:messages id="msgErro" style="color: red"/>                     
-                </h:panelGrid>
-            </div>
-
-        </rich:panel>
-
-        <div class="actionButtons">
-            <h:commandButton id="submit" value="Acessar" action="#{identity.login}"/>            
+    xmlns:a="http://richfaces.org/a4j"
+    contentType="text/html">
+    
+ <html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <title>Controle de Frotas da Prefeitura do Campus Universitário</title>
+      <link rel="shortcut icon" href="#{request.contextPath}/favicon.ico"/>
+      <a:loadStyle src="resource:///stylesheet/theme.xcss"/>
+      <a:loadStyle src="/stylesheet/theme.css"/>
+      <a:loadStyle src="/stylesheet/style.css"/>
+      <ui:insert name="head"/>
+   </head>
+   <body>
+        <div id="art-page-background-glare-wrapper">
+            <div id="art-page-background-glare"></div>
         </div>
+        <div id="art-main">
+            <div class="cleared reset-box"></div>
+            <div class="art-header">
+                <div class="art-header-position">
+                    <div class="art-header-wrapper">
+                        <div class="cleared reset-box"></div>
+                        <h:graphicImage value="/img/banner.png" alt="SCFPCU" width="100%"/>
+                    </div>
+                </div>
+            </div>
+            <div class="art-box art-sheet">
+                <div class="art-box-body art-sheet-body">
+                    <div class="art-layout-wrapper">
+                        <div class="art-content-layout">
+                            <div class="art-content-layout-row">
+                                <div class="art-layout-cell art-sidebar1">
+                                    <div class="art-box art-block">
+                                        <div class="art-box-body art-block-body">
+                                            <div class="art-bar art-blockheader">
+                                                <div class="art-box art-blockcontent">
+                                                    <div class="art-box-body">
+                                                        <!--<div class="art-box-body art-blockcontent-body">-->
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    <div id="section-box">
+                                                                        <div class="m">
+                                                                            <h:form id="loginForm">
 
-    </h:form>
-
- </ui:define>
+																		        <rich:panel style="margin-top: 15px; height: 160px;">
+																		            <div style="margin-top: 15px;" >
+																		                <h:panelGrid columns="2" rowClasses="prop" columnClasses="name,value">
+																		                    <h:outputLabel for="username" styleClass="form">Login</h:outputLabel>
+																		                    <h:inputText id="username"
+																		                              value="#{identity.username}" required="true"/>
+																		                    <h:outputLabel for="password" styleClass="form">Senha</h:outputLabel>
+																		                    <h:inputSecret id="password"
+																		                                value="#{identity.password}" required="true"/>
+																		                </h:panelGrid>
+																		                <div style="margin-bottom: 10px;">
+																				            <h:commandButton id="submit" value="Acessar" action="#{identity.login}" style="margin-left: 70px;"/>
+																				        </div>
+																				        
+																		                <s:link view="/recuperaSenha.xhtml" value="Esqueci a senha" style="font-size: 1em; margin-left: 60px;"/>
+																		                <h:messages id="msgErro" style="color: red"/>
+																		            </div>
+																		
+																		        </rich:panel>
+																		    </h:form>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="cleared"></div>
+                                        </div>
+                                        <div class="cleared"></div>
+                                    </div>
+                                    <div class="cleared"></div>
+                                </div>
+                                <div class="cleared"></div>
+                            </div>
+                            <div class="cleared"></div>
+                        </div>
+                        <div class="cleared"></div>
+                    </div>
+                    <div class="cleared"></div>
+                    <div class="art-footer">
+                        <div class="art-footer-body">
+                            <div class="art-footer-text">
+                                <p>© ICOMP - Instituto de Computação</p>
+                                <p>Desenvolvido no contexto da disciplina IEC112 - 2013/02</p>
+                            </div>
+                            <div class="cleared"></div>
+                        </div>
+                    </div>
+                    <div class="cleared"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+ </html>
 </ui:composition>

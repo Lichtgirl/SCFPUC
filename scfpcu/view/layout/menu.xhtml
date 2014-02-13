@@ -1,139 +1,62 @@
-<rich:toolBar
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:s="http://jboss.com/products/seam/taglib"
-    xmlns:rich="http://richfaces.org/rich">
-    <rich:toolBarGroup>
-        <s:link id="menuHomeId" view="/home.xhtml" value="Home" propagation="none"/>
-    </rich:toolBarGroup>
-    <rich:dropDownMenu showDelay="250" hideDelay="0" submitMode="none">
-        <f:facet name="label">Menu</f:facet>
-	<rich:menuItem>
-    	<s:link view="/modelo/ModeloList.xhtml"
-           	value="Modelo"
-           	id="ModeloId"
-			includePageParams="false"
-     		propagation="none"/>
-     </rich:menuItem>
-	<rich:menuItem>
-    	<s:link view="/entidade/EntidadeList.xhtml"
-           	value="Entidade"
-           	id="EntidadeId"
-			includePageParams="false"
-     		propagation="none"/>
-     </rich:menuItem>
-     <rich:menuItem>
-    	<s:link view="/relatorios/report.xhtml"
-           	value="Relatorios"
-           	id="reportId"
-			includePageParams="false"
-     		propagation="none"/>
-     </rich:menuItem>
-	<rich:menuItem>
-    	<s:link view="/motVeic/MotVeicList.xhtml"
-           	value="MotVeic"
-           	id="MotVeicId"
-			includePageParams="false"
-     		propagation="none"/>
-     </rich:menuItem>
-	<rich:menuItem>
-    	<s:link view="/tipoCombustivel/TipoCombustivelList.xhtml"
-           	value="TipoCombustivel"
-           	id="TipoCombustivelId"
-			includePageParams="false"
-     		propagation="none"/>
-     </rich:menuItem>
-	<rich:menuItem>
-    	<s:link view="/estados/EstadosList.xhtml"
-           	value="Estados"
-           	id="EstadosId"
-			includePageParams="false"
-     		propagation="none"/>
-     </rich:menuItem>
-	<rich:menuItem>
-    	<s:link view="/grupo/GrupoList.xhtml"
-           	value="Grupo"
-           	id="GrupoId"
-			includePageParams="false"
-     		propagation="none"/>
-     </rich:menuItem>
-	<rich:menuItem>
-    	<s:link view="/tipoServico/TipoServicoList.xhtml"
-           	value="TipoServico"
-           	id="TipoServicoId"
-			includePageParams="false"
-     		propagation="none"/>
-     </rich:menuItem>
-	<rich:menuItem>
-    	<s:link view="/usuario/UsuarioList.xhtml"
-           	value="Usuario"
-           	id="UsuarioId"
-			includePageParams="false"
-     		propagation="none"/>
-     </rich:menuItem>
-	<rich:menuItem>
-    	<s:link view="/cargo/CargoList.xhtml"
-           	value="Cargo"
-           	id="CargoId"
-			includePageParams="false"
-     		propagation="none"/>
-     </rich:menuItem>
-	<rich:menuItem>
-    	<s:link view="/marca/MarcaList.xhtml"
-           	value="Marca"
-           	id="MarcaId"
-			includePageParams="false"
-     		propagation="none"/>
-     </rich:menuItem>
-	<rich:menuItem>
-    	<s:link view="/motorista/MotoristaList.xhtml"
-           	value="Motorista"
-           	id="MotoristaId"
-			includePageParams="false"
-     		propagation="none"/>
-     </rich:menuItem>
-	<rich:menuItem>
-    	<s:link view="/cor/CorList.xhtml"
-           	value="Cor"
-           	id="CorId"
-			includePageParams="false"
-     		propagation="none"/>
-     </rich:menuItem>
-	<rich:menuItem>
-    	<s:link view="/especie/EspecieList.xhtml"
-           	value="Especie"
-           	id="EspecieId"
-			includePageParams="false"
-     		propagation="none"/>
-     </rich:menuItem>
-	<rich:menuItem>
-    	<s:link view="/gastos/GastosList.xhtml"
-           	value="Gastos"
-           	id="GastosId"
-			includePageParams="false"
-     		propagation="none"/>
-     </rich:menuItem>
-	<rich:menuItem>
-    	<s:link view="/veiculo/VeiculoList.xhtml"
-           	value="Veiculo"
-           	id="VeiculoId"
-			includePageParams="false"
-     		propagation="none"/>
-     </rich:menuItem>
-	<rich:menuItem>
-    	<s:link view="/cidades/CidadesList.xhtml"
-           	value="Cidades"
-           	id="CidadesId"
-			includePageParams="false"
-     		propagation="none"/>
-     </rich:menuItem>
-    </rich:dropDownMenu>
-    <!-- @newMenuItem@ -->
-    <rich:toolBarGroup location="right">
-        <h:outputText id="menuWelcomeId" value="Você está logado como: #{credentials.username}" rendered="#{identity.loggedIn}"/>
-        <s:link id="menuLoginId" view="/login.xhtml" value="Login" rendered="#{not identity.loggedIn}" propagation="none"/>
-        <s:link id="menuLogoutId" view="/home.xhtml" action="#{identity.logout}" value="Logout" rendered="#{identity.loggedIn}" propagation="none"/>
-    </rich:toolBarGroup>
-</rich:toolBar>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:s="http://jboss.com/products/seam/taglib"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+        
+    
+    <style>
+        .cols{
+            vertical-align:top;
+        }
+    </style> 
+    <h:form id="form" style="width:200;" >
+    
+    <h:panelGrid columns="1" columnClasses="cols" width="220">
+    <rich:panelMenu style="width:200px"  mode="ajax" 
+        iconExpandedGroup="disc" iconCollapsedGroup="disc" 
+        iconExpandedTopGroup="chevronUp" iconGroupTopPosition="right" 
+        iconCollapsedTopGroup="chevronDown" >
+        <rich:panelMenuGroup label="Principal" expanded="true">
+        	<rich:panelMenuItem label="Cadastro de Gastos" event="onclick" submitMode="none" 
+            action="/gastos/GastosList.xhtml"/>
+            <rich:panelMenuItem label="Cadastro de Veiculo" event="onclick" submitMode="none" 
+	            action="/veiculo/VeiculoList.xhtml"/>
+	             <rich:panelMenuItem label="Cadastro de Motorista" event="onclick" submitMode="none" 
+	            action="/motorista/MotoristaList.xhtml"/>
+            <rich:panelMenuItem label="Relatorios" event="onclick" submitMode="none" 
+	            action="/relatorios/report.xhtml"/>
+	        </rich:panelMenuGroup>
+	        
+	         <rich:panelMenuGroup label="Cadastros" expanded="true">
+        	<rich:panelMenuItem label="Cadastro de Modelo" event="onclick" submitMode="none" 
+            action="/modelo/ModeloList.xhtml"/>
+            <rich:panelMenuItem label="Cadastro de Entidade" event="onclick" submitMode="none" 
+	            action="/entidade/EntidadeList.xhtml"/>
+            <rich:panelMenuItem label="Motorista-Veiculo" event="onclick" submitMode="none" 
+	            action="/motVeic/MotVeicList.xhtml"/>
+	        <rich:panelMenuItem label="Tipo de Combustivel" event="onclick" submitMode="none" 
+            action="/tipoCombustivel/TipoCombustivelList.xhtml"/>
+            <rich:panelMenuItem label="Grupo" event="onclick" submitMode="none" 
+	            action="/grupo/GrupoList.xhtml"/>
+            <rich:panelMenuItem label="Tipo de Serviço" event="onclick" submitMode="none" 
+	            action="/tipoServico/TipoServicoList.xhtml"/>
+	            <rich:panelMenuItem label="Tipo de Combustivel" event="onclick" submitMode="none" 
+            action="/usuario/UsuarioList.xhtml"/>
+            <rich:panelMenuItem label="Usuário" event="onclick" submitMode="none" 
+	            action="/grupo/GrupoList.xhtml"/>
+            <rich:panelMenuItem label="Cargo" event="onclick" submitMode="none" 
+	            action="/cargo/CargoList.xhtml"/>
+	            <rich:panelMenuItem label="Marca" event="onclick" submitMode="none" 
+	            action="/marca/MarcaList.xhtml"/>
+            <rich:panelMenuItem label="Cor" event="onclick" submitMode="none" 
+	            action="/cor/CorList.xhtml"/>
+	             <rich:panelMenuItem label="Especie" event="onclick" submitMode="none" 
+	            action="/especie/EspecieList.xhtml"/>
+	        </rich:panelMenuGroup>
+	    </rich:panelMenu>
+    </h:panelGrid>
+    </h:form>
+</ui:composition>
