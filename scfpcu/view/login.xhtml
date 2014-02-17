@@ -51,9 +51,8 @@
                                                                     <div id="section-box">
                                                                         <div class="m">
                                                                             <h:form id="loginForm">
-
-																		        <rich:panel style="margin-top: 15px; height: 160px;">
-																		            <div style="margin-top: 15px;" >
+                                                                            	<fieldset style="margin-top: 13px;">
+																		            <div style="margin-top: 15px; height: 160px;" >
 																		                <h:panelGrid columns="2" rowClasses="prop" columnClasses="name,value">
 																		                    <h:outputLabel for="username" styleClass="form">Login</h:outputLabel>
 																		                    <h:inputText id="username"
@@ -66,11 +65,10 @@
 																				            <h:commandButton id="submit" value="Acessar" action="#{identity.login}" style="margin-left: 70px;"/>
 																				        </div>
 																				        
-																		                <s:link view="/recuperaSenha.xhtml" value="Esqueci a senha" style="font-size: 1em; margin-left: 60px;"/>
-																		                <h:messages id="msgErro" style="color: red"/>
+																		                <s:link view="/recuperaSenha.xhtml" value="Esqueci a senha" style="font-size: 0.7em; font-weight: normal; margin-left: 50px;"/>
+																		                <h:messages id="msgErro" style="color: red; font-size: 0.7em; font-weight: normal; margin-top: 10px;"/>
 																		            </div>
-																		
-																		        </rich:panel>
+																		          </fieldset>
 																		    </h:form>
                                                                         </div>
                                                                     </div>

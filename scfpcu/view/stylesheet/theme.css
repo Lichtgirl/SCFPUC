@@ -20,6 +20,9 @@ input[type=submit], input[type=button] {
 	font-size: 12px;
 	margin: 5px 5px 5px 0;
 	cursor: pointer;
+	background-image: url(../img/botao.png);
+	border-color: #B5BD00;
+	color: #000;
 }
 
 input[type=text], input[type=password], textarea {
@@ -264,6 +267,8 @@ width: 200px;
 }
 
 fieldset {
+font-size: 1.3em;
+font-weight: bold;
 margin-bottom: 10px;
 border: 1px #ccc solid;
 padding: 5px;
@@ -285,6 +290,9 @@ margin-right: 10px;
 background-color: #fff;
 }
 
+.dr-pmenu-hovered-element {
+background-color: #FFFCED;
+}
 div.m {
 border: 1px solid #ccc;
 padding: 0 8px;
@@ -294,3 +302,16 @@ background-color: #f4f4f4;
 border-radius: 10px;
 }
 
+.rich-pmenu-top-group {
+background-image: url(../img/topMenu.png);
+}
+
+
+.rich-pmenu-top-group.rich-pmenu-hovered-element {
+background-image: url(../img/topMenu.png);
+}
+
+.dr-pmenu-top-group {
+color: #000;
+background-color: ##FFED29;
+}
