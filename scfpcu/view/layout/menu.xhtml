@@ -30,10 +30,10 @@
 	            action="/relatorios/report.xhtml"/>
 	        </rich:panelMenuGroup>
 	        
-	         <rich:panelMenuGroup label="Cadastros" expanded="true">
-        	<rich:panelMenuItem label="Cadastro de Modelo" event="onclick" submitMode="none" 
+	         <rich:panelMenuGroup label="Cadastros" expanded="true" rendered="#{s:hasRole('Gerente')}">
+        	<rich:panelMenuItem label="Modelo" event="onclick" submitMode="none" 
             action="/modelo/ModeloList.xhtml"/>
-            <rich:panelMenuItem label="Cadastro de Entidade" event="onclick" submitMode="none" 
+            <rich:panelMenuItem label="Entidade" event="onclick" submitMode="none" 
 	            action="/entidade/EntidadeList.xhtml"/>
             <rich:panelMenuItem label="Motorista-Veiculo" event="onclick" submitMode="none" 
 	            action="/motVeic/MotVeicList.xhtml"/>

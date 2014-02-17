@@ -4,7 +4,7 @@
       xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.2.xsd"
       no-conversation-view-id="/UsuarioList.xhtml"
       login-required="true">
-
+<restrict>#{identity.loggedIn and s:hasRole('Gerente')}</restrict>
    <begin-conversation join="true" flush-mode="MANUAL"/>
 
 
