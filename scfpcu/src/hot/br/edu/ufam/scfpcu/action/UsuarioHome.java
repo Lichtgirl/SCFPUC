@@ -24,7 +24,8 @@ public class UsuarioHome extends EntityHome<Usuario> {
 	Identity identity;
 	
 	private boolean editaSenha;
-
+	Usuario usuarioLogado = null;
+	
 //	public boolean isEditaSenha() {
 //		System.out.println("isEditaSenha???");
 //	Usuario usuario = getUsuarioByLogin();
@@ -38,6 +39,15 @@ public class UsuarioHome extends EntityHome<Usuario> {
 //	
 //	return editaSenha;
 //}
+
+	public Usuario getUsuarioLogado() {
+		this.usuarioLogado = getUsuarioByLogin();
+		return usuarioLogado;
+	}
+
+	public void setUsuarioLogado(Usuario usuarioLogado) {
+		this.usuarioLogado = usuarioLogado;
+	}
 
 	public void setEditaSenha(boolean editaSenha) {
 		this.editaSenha = editaSenha;
@@ -81,18 +91,13 @@ public class UsuarioHome extends EntityHome<Usuario> {
 		return isIdDefined() ? getInstance() : null;
 	}
 	
-//	private Usuario getUsuarioByLogin(){
-//		System.out.println("getUsuarioByLogin");
-//		System.out.println("identity.getUsername()::"+ identity.getUsername());
-//		
-//		Usuario usuario = null;
-//		if(identity.getUsername() != null){
-//			usuario = (Usuario) super.getEntityManager().createQuery("from Usuario usuario where usuario.login = '"+identity.getUsername()+"'" ).getSingleResult();
-//			System.out.println("usuario::::"+usuario.getIdServidor());
-//		}
-//		
-//		return usuario;
-//	}
+	private Usuario getUsuarioByLogin(){
+		Usuario usuario = null;
+		if(identity.getUsername() != null){
+			usuario = (Usuario) super.getEntityManager().createQuery("from Usuario usuario where usuario.login = '"+identity.getUsername()+"'" ).getSingleResult();
+		}
+		return usuario;
+	}
 	
 	
 	@Override
