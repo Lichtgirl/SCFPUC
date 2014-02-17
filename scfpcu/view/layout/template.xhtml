@@ -50,9 +50,10 @@
 	                                                                    <div id="section-box">
 	                                                                            <h:form style="padding-top: 10px;float:left; position: relative;">
 	                                                                            	<div style="margin: 5px;">
-																				    	<h:outputText id="menuWelcomeId" value="Olá #{usuarioHome.usuarioLogado.nome}, você tem acesso de #{usuarioHome.usuarioLogado.cargo.cargo}" rendered="#{identity.loggedIn}"/>
+																				    	<h:outputText id="menuWelcomeId" value="Olá #{usuarioHome.usuarioLogado.nome}! Seu perfil atual é #{usuarioHome.usuarioLogado.cargo.cargo}" rendered="#{identity.loggedIn}"/>
 																				        <br />
-																				        <s:link id="menuLogoutId" view="/login.xhtml" action="#{identity.logout}" value="Logout" rendered="#{identity.loggedIn}" propagation="none"/>
+																				        <h:outputText value="Para sair do sistema faça " />
+																				        <s:link id="menuLogoutId" view="/logout.xhtml" action="#{identity.logout}" value="Logout" rendered="#{identity.loggedIn}" propagation="none"/>
 																				     </div>
 																					<ui:include src="menu.xhtml"/>
 																			    </h:form>
