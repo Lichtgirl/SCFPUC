@@ -198,7 +198,7 @@
                     value="#{gastosList.nextFirstResult}"/>
         </s:link>
 
-        <s:link view="/GastosList.xhtml"
+        <s:link view="/gastos/GastosList.xhtml"
             rendered="#{gastosList.nextExists}"
                value="Last Page #{messages.right}#{messages.right}"
                   id="lastPage">
@@ -209,10 +209,10 @@
     </div>
 
     <s:div styleClass="actionButtons" rendered="#{empty from}">
-        <s:button view="/GastosEdit.xhtml"
+        <s:button view="/gastos/GastosEdit.xhtml"
                     id="create"
            propagation="none"
-                 value="Create gastos">
+                 value="Criar gastos">
             <f:param name="gastosIdGasto"/>
         </s:button>
     </s:div>

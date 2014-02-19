@@ -14,20 +14,94 @@
       <link rel="shortcut icon" href="#{request.contextPath}/favicon.ico"/>
       <a:loadStyle src="resource:///stylesheet/theme.xcss"/>
       <a:loadStyle src="/stylesheet/theme.css"/>
+      <a:loadStyle src="/stylesheet/style.css"/>
+      <a:loadStyle src="/stylesheet/template_1.css"/>
+      <a:loadStyle src="/stylesheet/template_css.css"/>
+      <a:loadStyle src="/stylesheet/aplication.css"/>
       <ui:insert name="head"/>
    </head>
    <body>
-      <ui:include src="menu.xhtml">
-         <ui:param name="projectName" value="scfpcu"/>
-      </ui:include>
-      <div class="body">
-         <h:messages id="messages" globalOnly="true" styleClass="message"
-            errorClass="errormsg" infoClass="infomsg" warnClass="warnmsg"
-            rendered="#{showGlobalMessages != 'false'}"/>
-         <ui:insert name="body"/>
-      </div>
-      <div class="footer">
-      </div>
+   		<div id="art-page-background-glare-wrapper">
+            <div id="art-page-background-glare"></div>
+        </div>
+        <div id="art-main">
+            <div class="cleared reset-box"></div>
+            <div class="art-header">
+                <div class="art-header-position">
+                    <div class="art-header-wrapper">
+                        <div class="cleared reset-box"></div>
+                        <h:graphicImage value="/img/banner.png" alt="SCFPCU" width="100%"/>
+                    </div>
+                </div>
+            </div>
+            <div class="art-box art-sheet">
+                <div class="art-box-body art-sheet-body">
+                    <div class="art-layout-wrapper">
+                        <div class="art-content-layout">
+                            <div class="art-content-layout-row">
+                                <div class="art-layout-cell art-sidebar1">
+                                    <div class="art-box art-block">
+                                        <div class="art-box-body art-block-body">
+                                            <div class="art-bar art-blockheader">
+                                                <div class="art-box art-blockcontent">
+                                                    <div class="art-box-body">
+                                                        <!--<div class="art-box-body art-blockcontent-body">-->
+                                                        <table >
+                                                        	<tbody valign="top">
+	                                                            <tr>
+	                                                                <td>
+	                                                                    <div id="section-box">
+	                                                                            <h:form style="padding-top: 10px;float:left; position: relative;">
+	                                                                            	<div style="margin: 5px;">
+																				    	<h:outputText id="menuWelcomeId" value="Olá #{usuarioHome.usuarioLogado.nome}! Seu perfil atual é #{usuarioHome.usuarioLogado.cargo.cargo}" rendered="#{identity.loggedIn}"/>
+																				        <br />
+																				        <h:outputText value="Para sair do sistema faça " />
+																				        <s:link id="menuLogoutId" view="/logout.xhtml" action="#{identity.logout}" value="Logout" rendered="#{identity.loggedIn}" propagation="none"/>
+																				     </div>
+																					<ui:include src="menu.xhtml"/>
+																			    </h:form>
+	                                                                    </div>
+	                                                                </td>
+	                                                                <td>
+	                                                                	<div class="body">
+																         <h:messages id="messages" globalOnly="true" styleClass="message"
+																            errorClass="errormsg" infoClass="infomsg" warnClass="warnmsg"
+																            rendered="#{showGlobalMessages != 'false'}"/>
+																         <ui:insert name="body"/>
+																      </div>
+	                                                                </td>
+	                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="cleared"></div>
+                                        </div>
+                                        <div class="cleared"></div>
+                                    </div>
+                                    <div class="cleared"></div>
+                                </div>
+                                <div class="cleared"></div>
+                            </div>
+                            <div class="cleared"></div>
+                        </div>
+                        <div class="cleared"></div>
+                    </div>
+                    <div class="cleared"></div>
+                    <div class="art-footer">
+                        <div class="art-footer-body">
+                            <div class="art-footer-text">
+                                <p>© ICOMP - Instituto de Computação</p>
+                                <p>Desenvolvido no contexto da disciplina IEC112 - 2013/02</p>
+                            </div>
+                            <div class="cleared"></div>
+                        </div>
+                    </div>
+                    <div class="cleared"></div>
+                </div>
+            </div>
+        </div>
    </body>
 </html>
 </f:view>

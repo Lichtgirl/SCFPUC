@@ -12,300 +12,201 @@
 <ui:define name="body">
 
     <h:form id="gastos" styleClass="edit">
+		
+        <rich:panel id="panelGastos">
+            <f:facet name="header">#{gastosHome.managed ? 'Editar' : 'Adicionar'} Gastos</f:facet>
 
-        <rich:panel>
-            <f:facet name="header">#{gastosHome.managed ? 'Edit' : 'Add'} Gastos</f:facet>
-
-
-
-            <s:decorate id="dataField" template="../layout/edit.xhtml">
-                <ui:define name="label">Data</ui:define>
-                <rich:calendar id="data"
-                       required="true"
-                          value="#{gastosHome.instance.data}" datePattern="MM/dd/yyyy" />
-            </s:decorate>
-
-
-            <s:decorate id="lotadoField" template="../layout/edit.xhtml">
-                <ui:define name="label">Lotado</ui:define>
-                <h:inputText id="lotado"
-                           size="50"
-                      maxlength="50"
-                          value="#{gastosHome.instance.lotado}">
-                    <a:support event="onblur" reRender="lotadoField" bypassUpdates="true" ajaxSingle="true"/>
-                </h:inputText>
-            </s:decorate>
-
-
-            <s:decorate id="odometroField" template="../layout/edit.xhtml">
-                <ui:define name="label">Odometro</ui:define>
-                <h:inputText id="odometro"
-                          value="#{gastosHome.instance.odometro}">
-                    <a:support event="onblur" reRender="odometroField" bypassUpdates="true" ajaxSingle="true"/>
-                </h:inputText>
-            </s:decorate>
-
-
-            <s:decorate id="qtdField" template="../layout/edit.xhtml">
-                <ui:define name="label">Qtd</ui:define>
-                <h:inputText id="qtd"
-                       required="true"
-                          value="#{gastosHome.instance.qtd}">
-                    <a:support event="onblur" reRender="qtdField" bypassUpdates="true" ajaxSingle="true"/>
-                </h:inputText>
-            </s:decorate>
-
-
-
-            <s:decorate id="tipoGastoField" template="../layout/edit.xhtml">
-                <ui:define name="label">Tipo gasto</ui:define>
-                <h:inputText id="tipoGasto"
-                       required="true"
-                          value="#{gastosHome.instance.tipoGasto}">
-                    <a:support event="onblur" reRender="tipoGastoField" bypassUpdates="true" ajaxSingle="true"/>
-                </h:inputText>
-            </s:decorate>
-
-
-
-            <s:decorate id="valorField" template="../layout/edit.xhtml">
-                <ui:define name="label">Valor</ui:define>
-                <h:inputText id="valor"
-                       required="true"
-                          value="#{gastosHome.instance.valor}">
-                    <a:support event="onblur" reRender="valorField" bypassUpdates="true" ajaxSingle="true"/>
-                </h:inputText>
-            </s:decorate>
-
+			<div  class="editContainer">
+				<a:form id="placaForm">
+						<div class="editLayout">
+							<s:decorate id="placaField" template="../layout/edit.xhtml">
+				                <ui:define name="label">Placa</ui:define>
+				                <h:selectOneMenu value="#{gastosHome.instance.veiculo}" >
+				                	<s:selectItems var="_veiculo" value="#{veiculoList.resultList}" 
+												label="#{_veiculo.placaAtual}" 
+												noSelectionLabel="Selecione">
+									</s:selectItems>
+									<a:support event="onchange" reRender="panelGastos, veiculoForm" ajaxSingle="true"  ignoreDupResponses="true" />
+									 <s:convertEntity />
+				                </h:selectOneMenu>
+				            </s:decorate>
+			            </div>
+		            </a:form>
+				<a:form id="veiculoForm" >
+				<div class="editLayout">
+					<s:decorate id="especieField" template="../layout/display.xhtml">
+		                <ui:define name="label">Espécie</ui:define>
+		                <h:outputText id="idEspecie" value="#{gastosHome.instance.veiculo.especie.especie}" />
+		                <a:support event="onblur" reRender="especieField" bypassUpdates="true" ajaxSingle="true"/>
+		            </s:decorate>
+		            
+	            </div>
+	            <div class="editLayout">
+					<s:decorate id="marcaField" template="../layout/display.xhtml">
+		                <ui:define name="label">Marca</ui:define>
+		                <h:outputText id="idMarca" value="#{gastosHome.instance.veiculo.modelo.marca.marca}" />
+		                <a:support event="onblur" reRender="marcaField" bypassUpdates="true" ajaxSingle="true"/>
+		            </s:decorate>
+	            </div>
+	            <div class="editLayout">
+					<s:decorate id="modeloField" template="../layout/display.xhtml">
+		                <ui:define name="label">Modelo</ui:define>
+		                <h:outputText id="idModelo" value="#{gastosHome.instance.veiculo.modelo.modelo}" />
+		                <a:support event="onblur" reRender="modeloField" bypassUpdates="true" ajaxSingle="true"/>
+		            </s:decorate>
+	            </div>
+	            </a:form>
+	            <div class="editLayout">
+	            	<s:decorate id="lotadoField" template="../layout/edit.xhtml">
+		                <ui:define name="label">Lotado</ui:define>
+		                <h:inputText id="lotado"
+		                           size="35"
+		                      maxlength="50"
+		                          value="#{gastosHome.instance.lotado}">
+		                    <a:support event="onblur" reRender="lotadoField" bypassUpdates="true" ajaxSingle="true"/>
+		                </h:inputText>
+		            </s:decorate>
+	            </div>
+	            <div class="editLayout">
+					<s:decorate id="dataGasto" template="../layout/edit.xhtml">
+		                <ui:define name="label">Data</ui:define>
+		                <rich:calendar id="idDataGasto" inputSize="10"
+		                          value="#{gastosHome.instance.data}" datePattern="dd/MM/yyyy" />
+		            </s:decorate>
+	            </div>
+            </div>
+            <div class="editContainer">
+            	<div class="editLayout">
+            		<s:decorate id="odometroField" template="../layout/edit.xhtml">
+		                <ui:define name="label">Odometro</ui:define>
+		                <h:inputText id="odometro"
+		                          value="#{gastosHome.instance.odometro}">
+		                    <a:support event="onblur" reRender="odometroField" bypassUpdates="true" ajaxSingle="true"/>
+		                </h:inputText>
+		            </s:decorate>
+            	</div>
+            	<div class="editLayout">
+            		<a:form id="tipoGastoForm">
+            		<s:decorate id="tipoGastoField" template="../layout/edit.xhtml">
+            			<ui:define name="label">Tipo Gasto</ui:define>
+            			<h:selectOneMenu value="#{gastosHome.tipoGasto}">
+            				<f:selectItem itemValue="#{null}" itemLabel="Selecione" />
+            				<f:selectItem id="servico" itemLabel="Serviços" itemValue="1"/>
+            				<f:selectItem id="abastecimento" itemLabel="Abastecimento" itemValue="2"/>
+            				<a:support event="onchange" reRender="panelGastos, servicoForm, combustivelForm" ajaxSingle="true"  ignoreDupResponses="true" />
+            			</h:selectOneMenu>
+            		</s:decorate>
+            		</a:form>
+	            </div>
+            	<div class="editLayout">
+            		<a:form id="servicoForm">
+					<s:decorate id="servicoField" template="../layout/edit.xhtml" rendered="#{gastosHome.tipoGasto == 1}">
+		                <ui:define name="label">Tipo Serviço</ui:define>
+		                <h:selectOneMenu value="#{gastosHome.instance.tipoServico}" >
+		                	<s:selectItems var="_tipoServico" value="#{tipoServicoList.resultList}" 
+										label="#{_tipoServico.servico}"
+										noSelectionLabel="Selecione"  
+										disabled=""/>
+									<s:convertEntity />
+		                </h:selectOneMenu>
+		            </s:decorate>
+		            </a:form> 
+	            </div>
+            	<div class="editLayout">
+            		<a:form id="combustivelForm">
+					<s:decorate id="combustivelField" template="../layout/edit.xhtml" rendered="#{gastosHome.tipoGasto == 2}">
+		                <ui:define name="label">Combustível</ui:define>
+		                <h:selectOneMenu value="#{gastosHome.instance.tipoCombustivel}" >
+		                	<s:selectItems var="_combustivel" value="#{tipoCombustivelList.resultList}" 
+										label="#{_combustivel.tipoCombustivel}"
+										noSelectionLabel="Selecione" />
+									<s:convertEntity />
+		                </h:selectOneMenu>
+		            </s:decorate>
+		            </a:form>
+	            </div>
+	            <a:form id="valorForm" >
+	            <div class="editLayout">
+	            	<s:decorate id="qtdField" template="../layout/edit.xhtml">
+		                <ui:define name="label">Qtd</ui:define>
+		                <h:inputText id="qtd"
+		                          value="#{gastosHome.instance.qtd}">
+		                 <a:support event="onblur" reRender="qtdField" bypassUpdates="true" ajaxSingle="true"/>
+		                </h:inputText>
+		            </s:decorate>
+	            </div>
+	            <div class="editLayout">
+	            	<s:decorate id="valorField" template="../layout/edit.xhtml">
+		                <ui:define name="label">Valor</ui:define>
+		                <h:inputText id="valor"
+		                          value="#{gastosHome.instance.valor}">
+		                   <a:support event="onblur" reRender="valorField" bypassUpdates="true" ajaxSingle="true"/>
+		                </h:inputText>
+		           </s:decorate>
+	            </div>
+	            </a:form>
+	            <div class="editLayout">
+	            	<a:form id="valorTotalForm" >
+	            	<s:decorate id="valorTotalField" template="../layout/edit.xhtml">
+		                <ui:define name="label">Valor Total</ui:define>
+		                <h:inputText id="valor"
+		                          value="#{gastosHome.valorTotal}"
+		                          disabled="true">
+ 		                </h:inputText>
+		           </s:decorate>
+		           </a:form>
+	            </div>
+	            
+	        </div>
+			
 
             <div style="clear:both">
                 <span class="required">*</span>
-                required fields
+                Itens obrigatórios
             </div>
 
         </rich:panel>
 
         <div class="actionButtons">
+        	<h:commandButton id="calc"
+                          value="Calcular"
+                         action="#{gastosHome.setarValorTotal()}"
+                      immediate="true">
+                      <a:support event="oncomplete" reRender="valorTotalForm"/>
+                </h:commandButton>
+        	
 
             <h:commandButton id="save"
-                          value="Save"
+                          value="Salvar"
                          action="#{gastosHome.persist}"
-                       disabled="#{!gastosHome.wired}"
                        rendered="#{!gastosHome.managed}"/>
 
             <h:commandButton id="update"
-                          value="Save"
+                          value="Salvar"
                          action="#{gastosHome.update}"
                        rendered="#{gastosHome.managed}"/>
 
             <h:commandButton id="delete"
-                          value="Delete"
+                          value="Excluir"
                          action="#{gastosHome.remove}"
                       immediate="true"
                        rendered="#{gastosHome.managed}"/>
 
             <s:button id="cancelEdit"
-                   value="Cancel"
+                   value="Cancelar"
              propagation="end"
-                    view="/Gastos.xhtml"
+                    view="/gastos/Gastos.xhtml"
                 rendered="#{gastosHome.managed}"/>
 
             <s:button id="cancelAdd"
-                   value="Cancel"
+                   value="Cancelar"
              propagation="end"
-                    view="/#{empty gastosFrom ? 'GastosList' : gastosFrom}.xhtml"
+                    view="/gastos/#{empty gastosFrom ? 'GastosList' : gastosFrom}.xhtml"
                 rendered="#{!gastosHome.managed}"/>
 
         </div>
     </h:form>
 
-<rich:tabPanel switchType="ajax">
-
-    <rich:tab label="Tipo combustivel">
-    <div class="association" id="tipoCombustivelParent">
-
-        <h:outputText value="There is no tipoCombustivel associated with this gastos."
-                   rendered="#{gastosHome.instance.tipoCombustivel == null}"/>
-
-        <rich:dataTable var="_tipoCombustivel"
-                   value="#{gastosHome.instance.tipoCombustivel}"
-                rendered="#{gastosHome.instance.tipoCombustivel != null}"
-              rowClasses="rvgRowOne,rvgRowTwo"
-                      id="tipoCombustivelTable">
-            <h:column>
-                <f:facet name="header">Id combustivel</f:facet>
-                <h:outputText value="#{_tipoCombustivel.idCombustivel}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Tipo combustivel</f:facet>
-                <h:outputText value="#{_tipoCombustivel.tipoCombustivel}"/>
-            </h:column>
-        </rich:dataTable>
-
-        <div class="actionButtons">
-            <s:button id="#{gastosHome.instance.tipoCombustivel != null ? 'changeParent' : 'selectParent'}" value="#{gastosHome.instance.tipoCombustivel != null ? 'Change' : 'Select'} tipoCombustivel"
-                       view="/TipoCombustivelList.xhtml">
-                <f:param name="from" value="GastosEdit"/>
-            </s:button>
-        </div>
-
-    </div>
-    </rich:tab>
-
-    <rich:tab label="Tipo servico">
-    <div class="association" id="tipoServicoParent">
-
-        <h:outputText value="There is no tipoServico associated with this gastos."
-                   rendered="#{gastosHome.instance.tipoServico == null}"/>
-
-        <rich:dataTable var="_tipoServico"
-                   value="#{gastosHome.instance.tipoServico}"
-                rendered="#{gastosHome.instance.tipoServico != null}"
-              rowClasses="rvgRowOne,rvgRowTwo"
-                      id="tipoServicoTable">
-            <h:column>
-                <f:facet name="header">Id servico</f:facet>
-                <h:outputText value="#{_tipoServico.idServico}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Servico</f:facet>
-                <h:outputText value="#{_tipoServico.servico}"/>
-            </h:column>
-        </rich:dataTable>
-
-        <div class="actionButtons">
-            <s:button id="#{gastosHome.instance.tipoServico != null ? 'changeParent' : 'selectParent'}" value="#{gastosHome.instance.tipoServico != null ? 'Change' : 'Select'} tipoServico"
-                       view="/TipoServicoList.xhtml">
-                <f:param name="from" value="GastosEdit"/>
-            </s:button>
-        </div>
-
-    </div>
-    </rich:tab>
-
-    <rich:tab label="Veiculo *" labelClass="required">
-    <div class="association" id="veiculoParent">
-
-        <h:outputText value="There is no veiculo associated with this gastos."
-                   rendered="#{gastosHome.instance.veiculo == null}"/>
-
-        <rich:dataTable var="_veiculo"
-                   value="#{gastosHome.instance.veiculo}"
-                rendered="#{gastosHome.instance.veiculo != null}"
-              rowClasses="rvgRowOne,rvgRowTwo"
-                      id="veiculoTable">
-            <h:column>
-                <f:facet name="header">Id veiculo</f:facet>
-                <h:outputText value="#{_veiculo.idVeiculo}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Adquirido de</f:facet>
-                <h:outputText value="#{_veiculo.adquiridoDe}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Ano fabricacao</f:facet>
-                <h:outputText value="#{_veiculo.anoFabricacao}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Ano modelo</f:facet>
-                <h:outputText value="#{_veiculo.anoModelo}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Chassi</f:facet>
-                <h:outputText value="#{_veiculo.chassi}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Cidades by id cidade panterior id cidade</f:facet>
-                <h:outputText value="#{_veiculo.cidadesByIdCidadePanterior.idCidade}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Cidades by id cidade patual id cidade</f:facet>
-                <h:outputText value="#{_veiculo.cidadesByIdCidadePatual.idCidade}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Cod renavam</f:facet>
-                <h:outputText value="#{_veiculo.codRenavam}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Cor id cor</f:facet>
-                <h:outputText value="#{_veiculo.cor.idCor}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Data cadastro</f:facet>
-                <h:outputText value="#{_veiculo.dataCadastro}">
-                    <s:convertDateTime type="date" dateStyle="short"/>
-                </h:outputText>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Data de aquisicao</f:facet>
-                <h:outputText value="#{_veiculo.dataDeAquisicao}">
-                    <s:convertDateTime type="date" dateStyle="short"/>
-                </h:outputText>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Entidade id entidade</f:facet>
-                <h:outputText value="#{_veiculo.entidade.idEntidade}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Especie id especie</f:facet>
-                <h:outputText value="#{_veiculo.especie.idEspecie}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Grupo id grupo</f:facet>
-                <h:outputText value="#{_veiculo.grupo.idGrupo}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Id servidor</f:facet>
-                <h:outputText value="#{_veiculo.idServidor}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Modalidade aquisicao</f:facet>
-                <h:outputText value="#{_veiculo.modalidadeAquisicao}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Modelo id modelo</f:facet>
-                <h:outputText value="#{_veiculo.modelo.idModelo}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Num patrimonio</f:facet>
-                <h:outputText value="#{_veiculo.numPatrimonio}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Observacao</f:facet>
-                <h:outputText value="#{_veiculo.observacao}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Placa anterior</f:facet>
-                <h:outputText value="#{_veiculo.placaAnterior}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Placa atual</f:facet>
-                <h:outputText value="#{_veiculo.placaAtual}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Potencia</f:facet>
-                <h:outputText value="#{_veiculo.potencia}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Tipo combustivel id combustivel</f:facet>
-                <h:outputText value="#{_veiculo.tipoCombustivel.idCombustivel}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Valor da aquisicao</f:facet>
-                <h:outputText value="#{_veiculo.valorDaAquisicao}"/>
-            </h:column>
-        </rich:dataTable>
-
-        <div class="actionButtons">
-            <s:button id="#{gastosHome.instance.veiculo != null ? 'changeParent' : 'selectParent'}" value="#{gastosHome.instance.veiculo != null ? 'Change' : 'Select'} veiculo"
-                       view="/VeiculoList.xhtml">
-                <f:param name="from" value="GastosEdit"/>
-            </s:button>
-        </div>
-
-    </div>
-    </rich:tab>
-</rich:tabPanel>
 </ui:define>
 
 </ui:composition>

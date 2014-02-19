@@ -16,6 +16,21 @@ h1 {
 	margin-top: 0;
 }
 
+.cpanel{
+width: 100%;
+min-width: 860px;
+}
+
+.icon-wrapper{
+	float: left; 
+	position: relative;
+}
+
+.icon-wrappersmall{
+	float: left; 
+	position: relative;
+}
+
 input[type=submit], input[type=button] {
 	font-size: 12px;
 	margin: 5px 5px 5px 0;

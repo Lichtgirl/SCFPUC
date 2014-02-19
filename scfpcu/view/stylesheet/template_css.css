@@ -44,6 +44,8 @@ table.adminform td.editor {
 
 #cpanel div.icon   { 
 	margin: 2px; 
+	width: 100%;
+	min-width: 660px;
 }
 #cpanel div.icon a { 
 	display: block; 

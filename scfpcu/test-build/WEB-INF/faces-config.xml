@@ -18,5 +18,7 @@
        br.edu.ufam.scfpcu.converter.ConverteModelo
      </converter-class>
    </converter>
+   
+   
 
 </faces-config>

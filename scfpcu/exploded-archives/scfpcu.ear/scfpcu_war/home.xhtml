@@ -9,29 +9,138 @@
     template="layout/template.xhtml">
 
     <ui:define name="body">
+    	<div class="cpanel" >
+    		<div class="pagetitle icon-48-frontpage"><h2>Página Inicial</h2></div>
+    		<br />
+    		<div class="icon-wrapper">
+                 <div class="icon">
+                 	 <s:link view="/gastos/GastosList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Gastos" />
+			       	</s:link>
+                 </div>
+             </div>
+			<div class="icon-wrapper">
+              <div class="icon">
+              	  <s:link view="/veiculo/VeiculoList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Veículos" />
+			       	</s:link>
+              </div>
+            </div>
+            <div  class="icon-wrapper">
+              <div class="icon">
+              	  <s:link view="/motorista/MotoristaList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Motoristas" />
+			       	</s:link>
+              </div>
+            </div>
+            
+		</div>
+    	<div  class="cleared"></div>
+    	<br />
+		<hr />
+		<br />
+		<div  class="cleared"></div>
 
-        <h1>Welcome to Seam!</h1>
-        <rich:panel>
-            <h:panelGrid columns="2">
-                <h:graphicImage value="/img/seamlogo.png" alt="Seam logo"/>
-                <s:div styleClass="info">
-                    <p><strong>Your seam-gen project is deployed!</strong> Here are some of the features this project provides:</p>
-                    <ul class="bullets">
-                        <li>Ant build script</li>
-                        <li>Deployment to JBoss AS (EAR or WAR)</li>
-                        <li>Development and production profiles</li>
-                        <li>Integration testing using TestNG and Embedded JBoss</li>
-                        <li>JavaBean or EJB 3.0 Seam components</li>
-                        <li>JPA entity classes</li>
-                        <li>A configurable DataSource and JPA EntityManager</li>
-                        <li>Templated Facelets views</li>
-                        <li>RichFaces panels and tables</li>
-                        <li>Default CSS stylesheet</li>
-                        <li>Internationalization support</li>
-                    </ul>
-                </s:div>
-            </h:panelGrid>
-        </rich:panel>
+		<div class="cpanel" >
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/cargo/CargoList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Cargo" />
+			       	</s:link>
+              </div>
+            </div>
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/cor/CorList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Cor" />
+			       	</s:link>
+              </div>
+            </div>
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/entidade/EntidadeList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Entidade" />
+			       	</s:link>
+              </div>
+            </div>
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/especie/EspecieList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Espécie" />
+			       	</s:link>
+              </div>
+            </div>
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/grupo/GrupoList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Grupo" />
+			       	</s:link>
+              </div>
+            </div>
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/marca/MarcaList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Marca" />
+			       	</s:link>
+              </div>
+            </div>
+		</div>
+		
+		<div  class="cleared"></div>
+		<br />
+		
+		<div class="cpanel" >
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/modelo/ModeloList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Modelo" />
+			       	</s:link>
+              </div>
+            </div>
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/motVeic/MotVeicList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Motorista-Veiculo" />
+			       	</s:link>
+              </div>
+            </div>
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/tipoCombustivel/TipoCombustivelList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Tipo de Combustivel" />
+			       	</s:link>
+              </div>
+            </div>
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/tipoServico/TipoServicoList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Tipo de Serviço" />
+			       	</s:link>
+              </div>
+            </div>
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/usuario/UsuarioList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Usuário" />
+			       	</s:link>
+              </div>
+            </div>
+		</div>        
+		        
 
     </ui:define>
 </ui:composition>

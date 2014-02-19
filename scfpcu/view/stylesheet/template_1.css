@@ -413,7 +413,7 @@ div.pagetitle h2 {
 	line-height: 48px;
 	font-size: 2em;
 	font-weight: bold;
-	color: #146295;
+	color: #000000;
 	margin: 0;
 	padding: 0;
 }
@@ -582,6 +582,7 @@ input#jformparams_link_category1 {
 
 div#position-icon.pane-sliders div.pane-down div.icon-wrapper {
 	margin: 5px 0 5px 0;
+	
 }
 
 div#position-icon.pane-sliders div.pane-down .icon-wrapper .icon {
@@ -733,10 +734,9 @@ li.acl-resetbtn:hover {
 
 
 /* -- CONTROL PANEL STYLES ----------------------------- */
-.cpanel div.icon, #cpanel div.icon {
+.cpanel div.icon, #cpanel div.icon, .cpanel div.iconsmall, #cpanel div.iconsmall {
 	text-align: center;
 	margin-right: 15px;
-	float: left;
 	margin-bottom: 15px;
 
 }
@@ -767,12 +767,44 @@ li.acl-resetbtn:hover {
 	-moz-transition-duration: 0.8s;
 }
 
+.cpanel div.iconsmall a, #cpanel div.iconsmall a {
+	background-position: -30px;
+	display: block;
+	float: left;
+	height: 58px;
+	width: 76px;
+	color: #565656;
+	vertical-align: middle;
+	text-decoration: none;
+	border: 1px solid #CCC;
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-transition-property:
+		background-position,
+		-webkit-border-bottom-left-radius,
+		-webkit-box-shadow;
+	-moz-transition-property:
+		background-position,
+		-moz-border-radius-bottomleft,
+		-moz-box-shadow;
+	-webkit-transition-duration: 0.8s;
+	-moz-transition-duration: 0.8s;
+}
+
 #cpanel div.icon a:hover,
 #cpanel div.icon a:focus,
 #cpanel div.icon a:active,
 .cpanel div.icon a:hover,
 .cpanel div.icon a:focus,
-.cpanel div.icon a:active {
+.cpanel div.icon a:active,
+#cpanel div.iconsmall a:hover,
+#cpanel div.iconsmall a:focus,
+#cpanel div.iconsmall a:active,
+.cpanel div.iconsmall a:hover,
+.cpanel div.iconsmall a:focus,
+.cpanel div.iconsmall a:active {
 	background-position: 0;
 	-webkit-border-bottom-left-radius: 50% 20px;
 	-moz-border-radius-bottomleft: 50% 20px;
@@ -2262,7 +2294,7 @@ a.jgrid:hover {	text-decoration: none;}
 .icon-messaging {background-image: url(../images/header/icon-messaging.png);}
 .icon-48-info {background-image: url(../images/header/icon-48-info.png);}
 .icon-48-deny {background-image: url(../images/header/icon-48-deny.png);}
-.icon-48-frontpage {background-image: url(../images/header/icon-48-frontpage.png);}
+.icon-48-frontpage {background-image: url(../img/icon-48-frontpage.png);}
 .icon-48-stats {background-image: url(../images/header/icon-48-stats.png);}
 .icon-48-calendar {background-image: url(../images/header/icon-48-calendar.png);}
 /* -- BASIC MENU STYLES ----------------------------- */

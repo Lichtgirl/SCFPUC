@@ -20,6 +20,8 @@
         iconExpandedTopGroup="chevronUp" iconGroupTopPosition="right" 
         iconCollapsedTopGroup="chevronDown" >
         <rich:panelMenuGroup label="Principal" expanded="true">
+        	<rich:panelMenuItem label="Página Inicial" event="onclick" submitMode="none" 
+            action="/home.xhtml"/>
         	<rich:panelMenuItem label="Cadastro de Gastos" event="onclick" submitMode="none" 
             action="/gastos/GastosList.xhtml"/>
             <rich:panelMenuItem label="Cadastro de Veiculo" event="onclick" submitMode="none" 
@@ -28,34 +30,32 @@
 	            action="/motorista/MotoristaList.xhtml"/>
             <rich:panelMenuItem label="Relatorios" event="onclick" submitMode="none" 
 	            action="/relatorios/report.xhtml"/>
-	        </rich:panelMenuGroup>
+	    </rich:panelMenuGroup>
 	        
-	         <rich:panelMenuGroup label="Cadastros" expanded="true" rendered="#{s:hasRole('Gerente')}">
-        	<rich:panelMenuItem label="Modelo" event="onclick" submitMode="none" 
-            action="/modelo/ModeloList.xhtml"/>
-            <rich:panelMenuItem label="Entidade" event="onclick" submitMode="none" 
+         <rich:panelMenuGroup label="Cadastros" expanded="true" rendered="#{s:hasRole('Gerente')}">
+	         <rich:panelMenuItem label="Cargo" event="onclick" submitMode="none" 
+	            action="/cargo/CargoList.xhtml"/>
+	         <rich:panelMenuItem label="Cor" event="onclick" submitMode="none" 
+	            action="/cor/CorList.xhtml"/>
+	         <rich:panelMenuItem label="Entidade" event="onclick" submitMode="none" 
 	            action="/entidade/EntidadeList.xhtml"/>
+	         <rich:panelMenuItem label="Espécie" event="onclick" submitMode="none" 
+	            action="/especie/EspecieList.xhtml"/>
+	         <rich:panelMenuItem label="Grupo" event="onclick" submitMode="none" 
+	            action="/grupo/GrupoList.xhtml"/>  
+	         <rich:panelMenuItem label="Marca" event="onclick" submitMode="none" 
+	            action="/marca/MarcaList.xhtml"/>
+        	 <rich:panelMenuItem label="Modelo" event="onclick" submitMode="none" 
+            	action="/modelo/ModeloList.xhtml"/>
             <rich:panelMenuItem label="Motorista-Veiculo" event="onclick" submitMode="none" 
 	            action="/motVeic/MotVeicList.xhtml"/>
-	        <rich:panelMenuItem label="Tipo de Combustivel" event="onclick" submitMode="none" 
-            action="/tipoCombustivel/TipoCombustivelList.xhtml"/>
-            <rich:panelMenuItem label="Grupo" event="onclick" submitMode="none" 
-	            action="/grupo/GrupoList.xhtml"/>
+            <rich:panelMenuItem label="Tipo de Combustivel" event="onclick" submitMode="none" 
+            	action="/tipoCombustivel/TipoCombustivelList.xhtml"/>
             <rich:panelMenuItem label="Tipo de Serviço" event="onclick" submitMode="none" 
 	            action="/tipoServico/TipoServicoList.xhtml"/>
-	            <rich:panelMenuItem label="Tipo de Combustivel" event="onclick" submitMode="none" 
-            action="/usuario/UsuarioList.xhtml"/>
             <rich:panelMenuItem label="Usuário" event="onclick" submitMode="none" 
-	            action="/grupo/GrupoList.xhtml"/>
-            <rich:panelMenuItem label="Cargo" event="onclick" submitMode="none" 
-	            action="/cargo/CargoList.xhtml"/>
-	            <rich:panelMenuItem label="Marca" event="onclick" submitMode="none" 
-	            action="/marca/MarcaList.xhtml"/>
-            <rich:panelMenuItem label="Cor" event="onclick" submitMode="none" 
-	            action="/cor/CorList.xhtml"/>
-	             <rich:panelMenuItem label="Especie" event="onclick" submitMode="none" 
-	            action="/especie/EspecieList.xhtml"/>
-	        </rich:panelMenuGroup>
+	            action="/usuario/UsuarioList.xhtml"/>
+        </rich:panelMenuGroup>
 	    </rich:panelMenu>
     </h:panelGrid>
     </h:form>
