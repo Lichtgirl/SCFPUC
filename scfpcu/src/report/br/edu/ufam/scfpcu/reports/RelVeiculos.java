@@ -11,7 +11,7 @@ import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
 
-@Name ("relVeiculos")
+@Name ("RelVeiculos")
 @Scope(ScopeType.SESSION)
 public class RelVeiculos extends ReportAction {
 	
@@ -53,8 +53,8 @@ public class RelVeiculos extends ReportAction {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 				
-		map.put("DTINICIO", Integer.parseInt(this.dtinicio));
-		map.put("DTFIM", Integer.parseInt(this.dtfim));
+		map.put("DTINICIO", dtinicio);
+		map.put("DTFIM", dtfim);
 		
 		
 		return map;
