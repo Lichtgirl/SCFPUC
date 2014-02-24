@@ -21,10 +21,11 @@ public class RelVeiculos extends ReportAction {
 	
 	@SuppressWarnings("unchecked")
 	public String imprimir(String dtinicio, String dtfim) {
+				
 		if (!canCreateReport()){			
 			return null;
 		}
-		System.out.println("Entrei aqui");
+		
 		String result = null;
 		result = super.createPdfReport(dtinicio, dtfim);
 		if (result == null) {
