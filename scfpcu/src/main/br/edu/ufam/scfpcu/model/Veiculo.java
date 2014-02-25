@@ -253,9 +253,9 @@ public class Veiculo implements java.io.Serializable {
 		this.numPatrimonio = numPatrimonio;
 	}
 
-	@Column(name = "Chassi", nullable = false, length = 10)
+	@Column(name = "Chassi", nullable = false, length = 17)
 	@NotNull
-	@Length(max = 10)
+	@Length(max = 17)
 	public String getChassi() {
 		return this.chassi;
 	}

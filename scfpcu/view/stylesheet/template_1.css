@@ -2010,7 +2010,7 @@ p {
 
 #section-box {
 	float: right;
-	width: 250px;
+	width: 210px;
 	margin-left: 10px;
 	margin-right: 10px;
 	background-color: #fff;
@@ -3275,6 +3275,8 @@ div#element-box div.section-box div.m {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
+	max-width: 910px;
+	min-width: 910px;
 }
 
 .submenu-box, #submenu-box div.m {

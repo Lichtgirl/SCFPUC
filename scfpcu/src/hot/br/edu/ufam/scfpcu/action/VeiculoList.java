@@ -11,11 +11,9 @@ public class VeiculoList extends EntityQuery<Veiculo> {
 	private static final String EJBQL = "select veiculo from Veiculo veiculo";
 
 	private static final String[] RESTRICTIONS = {
-			"lower(veiculo.adquiridoDe) like lower(concat(#{veiculoList.veiculo.adquiridoDe},'%'))",
 			"lower(veiculo.chassi) like lower(concat(#{veiculoList.veiculo.chassi},'%'))",
-			"lower(veiculo.modalidadeAquisicao) like lower(concat(#{veiculoList.veiculo.modalidadeAquisicao},'%'))",
 			"lower(veiculo.numPatrimonio) like lower(concat(#{veiculoList.veiculo.numPatrimonio},'%'))",
-			"lower(veiculo.observacao) like lower(concat(#{veiculoList.veiculo.observacao},'%'))",
+			"lower(veiculo.codRenavam) like lower(concat(#{veiculoList.veiculo.codRenavam},'%'))",
 			"lower(veiculo.placaAnterior) like lower(concat(#{veiculoList.veiculo.placaAnterior},'%'))",
 			"lower(veiculo.placaAtual) like lower(concat(#{veiculoList.veiculo.placaAtual},'%'))",};
 

@@ -10,7 +10,7 @@ public class GastosList extends EntityQuery<Gastos> {
 
 	private static final String EJBQL = "select gastos from Gastos gastos";
 
-	private static final String[] RESTRICTIONS = {"lower(gastos.lotado) like lower(concat(#{gastosList.gastos.lotado},'%'))",};
+	private static final String[] RESTRICTIONS = {"lower(gastos.veiculo.placaAtual) like lower(concat(#{gastosList.gastos.veiculo.placaAtual},'%'))",};
 
 	private Gastos gastos = new Gastos();
 

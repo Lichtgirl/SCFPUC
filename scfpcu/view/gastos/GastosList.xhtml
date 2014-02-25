@@ -10,52 +10,46 @@
 
 <ui:define name="body">
 
-    <h:form id="gastosSearch" styleClass="edit">
-
-        <rich:simpleTogglePanel label="Gastos Search Filter" switchType="ajax">
-
-            <s:decorate template="../layout/display.xhtml">
-                <ui:define name="label">Lotado</ui:define>
-                <h:inputText id="lotado" value="#{gastosList.gastos.lotado}"/>
-            </s:decorate>
-
-            <s:decorate template="../layout/display.xhtml">
-                <ui:define name="label">Match</ui:define>
-                <h:selectOneRadio id="logic" value="#{gastosList.restrictionLogicOperator}" styleClass="radio">
-                    <f:selectItem itemLabel="All" itemValue="and"/>
-                    <f:selectItem itemLabel="Any" itemValue="or"/>
-                </h:selectOneRadio>
-            </s:decorate>
-
-        </rich:simpleTogglePanel>
-
-        <div class="actionButtons">
-            <h:commandButton id="search" value="Search" action="/GastosList.xhtml"/>
-            <s:button id="reset" value="Reset" includePageParams="false"/>
-        </div>
-
+		<rich:panel>
+		<h:form id="gastosSearch" styleClass="edit" >
+			<div style="display:table; min-width: 860px; width: 100%;">
+	            <s:decorate template="../layout/display.xhtml" style="float:left;">
+	                <ui:define name="label">Veículo</ui:define>
+	                <h:inputText id="lotado" value="#{gastosList.gastos.veiculo.placaAtual}"/>
+	            </s:decorate>
+	
+	        <div class="actionButtons">
+	            <h:commandButton id="search" value="Buscar" action="/gastos/GastosList.xhtml"/>
+	            <s:button id="reset" value="Limpar" includePageParams="false"/>
+        	</div>
+		</div>
     </h:form>
-
-    <rich:panel>
-        <f:facet name="header">Gastos Search Results (#{empty gastosList.resultList ? 0 : (gastosList.paginated ? gastosList.resultCount : gastosList.resultList.size)})</f:facet>
+	<div class="cleared"></div>
     <div class="results" id="gastosList">
-
-    <h:outputText value="The gastos search returned no results."
-               rendered="#{empty gastosList.resultList}"/>
-
+	<br />
     <rich:dataTable id="gastosList"
                 var="_gastos"
-              value="#{gastosList.resultList}"
-           rendered="#{not empty gastosList.resultList}">
+              value="#{gastosList.resultList}">
+              
         <h:column>
             <f:facet name="header">
                 <ui:include src="../layout/sort.xhtml">
                     <ui:param name="entityList" value="#{gastosList}"/>
-                    <ui:param name="propertyLabel" value="Id gasto"/>
-                    <ui:param name="propertyPath" value="gastos.idGasto"/>
+                    <ui:param name="propertyLabel" value="Veiculo"/>
+                    <ui:param name="propertyPath" value="gastos.veiculo.idVeiculo"/>
                 </ui:include>
             </f:facet>
-            <h:outputText value="#{_gastos.idGasto}"/>
+            <h:outputText value="#{_gastos.veiculo.placaAtual}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{gastosList}"/>
+                    <ui:param name="propertyLabel" value="Tipo gasto"/>
+                    <ui:param name="propertyPath" value="gastos.tipoGasto"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_gastos.tipoGasto}"/>
         </h:column>
         <h:column>
             <f:facet name="header">
@@ -109,16 +103,7 @@
             </f:facet>
             <h:outputText value="#{_gastos.tipoCombustivel.idCombustivel}"/>
         </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{gastosList}"/>
-                    <ui:param name="propertyLabel" value="Tipo gasto"/>
-                    <ui:param name="propertyPath" value="gastos.tipoGasto"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_gastos.tipoGasto}"/>
-        </h:column>
+        
         <h:column>
             <f:facet name="header">
                 <ui:include src="../layout/sort.xhtml">
@@ -139,16 +124,7 @@
             </f:facet>
             <h:outputText value="#{_gastos.valor}"/>
         </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{gastosList}"/>
-                    <ui:param name="propertyLabel" value="Veiculo id veiculo"/>
-                    <ui:param name="propertyPath" value="gastos.veiculo.idVeiculo"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_gastos.veiculo.idVeiculo}"/>
-        </h:column>
+        
         <rich:column styleClass="action">
             <f:facet name="header">Action</f:facet>
             <s:link view="/#{empty from ? 'Gastos' : from}.xhtml"

@@ -9,55 +9,52 @@
     template="../layout/template.xhtml">
 
 <ui:define name="body">
+	<div class="m" style="vertical-align: middle;">
+		<div class="cpanel" >
+			<div class="ferramentas">
+				<div class="icon-wrapper">
+		           <div class="icon">
+		           	 <s:link view="/veiculo/VeiculoEdit.xhtml">
+				        <h:graphicImage value="" />
+				        <h:outputText value="Novo" />
+			    	</s:link>
+		           </div>
+		       </div>
+	       </div>
+       </div>
+	</div>
+	<rich:spacer height="20"/>
+	<div class="m" style="vertical-align: middle; padding: 10px;">
+	    <h:form id="veiculoSearch" styleClass="edit">
+			<div style="display:table; min-width: 860px; width: 100%;">
+				<s:decorate template="../layout/display.xhtml">
+	                <ui:define name="label">Placa atual</ui:define>
+	                <h:inputText id="placaAtual" value="#{veiculoList.veiculo.placaAtual}" size="7"/>
+	            </s:decorate>
+	            
+	             <s:decorate template="../layout/display.xhtml">
+	                <ui:define name="label">Renavam</ui:define>
+	                <h:inputText id="chassi" value="#{veiculoList.veiculo.codRenavam}" size="9"/>
+	            </s:decorate>
+	            
+	            <s:decorate template="../layout/display.xhtml">
+	                <ui:define name="label">Chassi</ui:define>
+	                <h:inputText id="chassi" value="#{veiculoList.veiculo.chassi}" size="17"/>
+	            </s:decorate>
+	
+	            <s:decorate template="../layout/display.xhtml">
+	                <ui:define name="label">Patrimônio</ui:define>
+	                <h:inputText id="numPatrimonio" value="#{veiculoList.veiculo.numPatrimonio}"/>
+	            </s:decorate>
+	
+				<div class="actionButtons">
+	            <h:commandButton id="search" value="Buscar" action="/veiculo/VeiculoList.xhtml"/>
+	            <s:button id="reset" value="Limpar" includePageParams="false"/>
+	        </div>
+	        </div>
+	    </h:form>
 
-    <h:form id="veiculoSearch" styleClass="edit">
-
-        <rich:simpleTogglePanel label="Parâmetros de Pesquisa" switchType="ajax">
-
-            <s:decorate template="../layout/display.xhtml">
-                <ui:define name="label">Adquirido de</ui:define>
-                <h:inputText id="adquiridoDe" value="#{veiculoList.veiculo.adquiridoDe}"/>
-            </s:decorate>
-
-            <s:decorate template="../layout/display.xhtml">
-                <ui:define name="label">Chassi</ui:define>
-                <h:inputText id="chassi" value="#{veiculoList.veiculo.chassi}"/>
-            </s:decorate>
-
-            <s:decorate template="../layout/display.xhtml">
-                <ui:define name="label">Num patrimonio</ui:define>
-                <h:inputText id="numPatrimonio" value="#{veiculoList.veiculo.numPatrimonio}"/>
-            </s:decorate>
-
-            <s:decorate template="../layout/display.xhtml">
-                <ui:define name="label">Placa anterior</ui:define>
-                <h:inputText id="placaAnterior" value="#{veiculoList.veiculo.placaAnterior}"/>
-            </s:decorate>
-
-            <s:decorate template="../layout/display.xhtml">
-                <ui:define name="label">Placa atual</ui:define>
-                <h:inputText id="placaAtual" value="#{veiculoList.veiculo.placaAtual}"/>
-            </s:decorate>
-
-            <s:decorate template="../layout/display.xhtml">
-                <ui:define name="label">Combinar</ui:define>
-                <h:selectOneRadio id="logic" value="#{veiculoList.restrictionLogicOperator}" styleClass="radio">
-                    <f:selectItem itemLabel="Todos" itemValue="and"/>
-                    <f:selectItem itemLabel="Qualquer" itemValue="or"/>
-                </h:selectOneRadio>
-            </s:decorate>
-
-        </rich:simpleTogglePanel>
-
-        <div class="actionButtons">
-            <h:commandButton id="search" value="Buscar" action="/VeiculoList.xhtml"/>
-            <s:button id="reset" value="Limpar" includePageParams="false"/>
-        </div>
-
-    </h:form>
-
-    <rich:panel>
-        <f:facet name="header">Resultado da Busca (#{empty veiculoList.resultList ? 0 : (veiculoList.paginated ? veiculoList.resultCount : veiculoList.resultList.size)})</f:facet>
+    
     <div class="results" id="veiculoList">
 
     <h:outputText value="Nenhum veículo encontrado"
@@ -176,7 +173,7 @@
     </rich:dataTable>
 
     </div>
-    </rich:panel>
+    </div>
 
     <div class="tableControl">
 
@@ -212,16 +209,6 @@
         </s:link>
 
     </div>
-
-    <s:div styleClass="actionButtons" rendered="#{empty from}">
-        <s:button view="/veiculo/VeiculoEdit.xhtml"
-                    id="create"
-           propagation="none"
-                 value="Criar Veiculo">
-            <f:param name="veiculoIdVeiculo"/>
-        </s:button>
-    </s:div>
-
 </ui:define>
 
 </ui:composition>
