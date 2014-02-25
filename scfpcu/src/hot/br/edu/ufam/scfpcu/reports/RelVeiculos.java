@@ -11,16 +11,21 @@ import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
 
-@Name ("RelVeiculos")
-@Scope(ScopeType.SESSION)
+@Name("relVeiculos")
 public class RelVeiculos extends ReportAction {
 	
-	private String dtinicio;
-	private String dtfim;
+	private Date dtinicio;
+	private Date dtfim;
+	
+	public RelVeiculos(){
+		
+	}
 	
 	
 	@SuppressWarnings("unchecked")
 	public String imprimir(String dtinicio, String dtfim) {
+		
+		System.out.println("Relatorioooooooooo");
 				
 		if (!canCreateReport()){			
 			return null;
@@ -60,20 +65,21 @@ public class RelVeiculos extends ReportAction {
 		return map;
 	}
 
-	public String getDtinicio() {
+	public Date getDtinicio() {
 		return dtinicio;
 	}
 
-	public void setDtinicio(String dtinicio) {
+	public void setDtinicio(Date dtinicio) {
 		this.dtinicio = dtinicio;
 	}
 
-	public String getDtfim() {
+	public Date getDtfim() {
 		return dtfim;
 	}
 
-	public void setDtfim(String dtfim) {
+	public void setDtfim(Date dtfim) {
 		this.dtfim = dtfim;
 	}
+
 
 }	

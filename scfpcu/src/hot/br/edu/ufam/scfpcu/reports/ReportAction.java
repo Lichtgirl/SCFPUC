@@ -23,8 +23,8 @@ import org.jboss.seam.annotations.In;
 import org.jboss.seam.core.Manager;
 import org.jboss.seam.faces.FacesMessages;
 import org.jboss.seam.pdf.DocumentData;
-import org.jboss.seam.pdf.DocumentStore;
 import org.jboss.seam.pdf.DocumentData.DocType;
+import org.jboss.seam.pdf.DocumentStore;
 
 public abstract class ReportAction {
 	

@@ -18,7 +18,8 @@ h1 {
 
 .cpanel{
 width: 100%;
-min-width: 860px;
+min-width: 900px;
+display: table;
 }
 
 .icon-wrapper{
@@ -51,6 +52,7 @@ select {
 
 .tableControl, .actionButtons {
 	width: 100%;
+	text-align: right;
 }
 
 .tableControl a {
@@ -113,14 +115,15 @@ select {
 .editContainer{
 	display: flex;
 	width: 100%;
-	min-width: 960px;
+	min-width: 910px;
+	max-width: 910px;
 }
 .name {
 	vertical-align: top;
 	font-weight: bold;
 	width: 115px;
-	/* float: left; */
-	padding: 5px;
+	/* float: left; 
+	padding: 5px;*/
 	margin-top: 3px;
 	clear: left;
 }
@@ -329,4 +332,28 @@ background-image: url(../img/topMenu.png);
 .dr-pmenu-top-group {
 color: #000;
 background-color: ##FFED29;
+}
+
+.rich-panel-body {
+min-width: 900px;
+display: table-caption;
+}
+
+.rich-table-subheadercell {
+background-image: url(../img/topPanel.png);
+}
+
+.prop{
+float: left;
+position: relative;
+margin-right: 10px;
+}
+
+.ferramentas{
+min-width: 900px;
+width: 100%;
+vertical-align: middle;
+margin-bottom: 10px;
+margin-top: 10px;
+display: table;
 }

@@ -16,12 +16,12 @@
 		<s:decorate id="gastosde" template="../layout/edit.xhtml">
 		                <ui:define name="label">Data Inicio</ui:define>
 		                <rich:calendar id="gastosde" inputSize="10"
-		                          value="#{RelVeiculos.dtinicio}" datePattern="dd/MM/yyyy" />
+		                          value="#{relVeiculos.dtinicio}" datePattern="dd/MM/yyyy" />
 		            </s:decorate>
             <s:decorate id="gastosate" template="../layout/edit.xhtml">
 		                <ui:define name="label">Data Fim</ui:define>
 		                <rich:calendar id="gastosate" inputSize="10"
-		                          value="#{RelVeiculos.dtfim}" datePattern="dd/MM/yyyy" />
+		                          value="#{relVeiculos.dtfim}" datePattern="dd/MM/yyyy" />
 		            </s:decorate>
             
                           
@@ -33,7 +33,7 @@
      
      <div class="actionButtons">
      
-     	<s:button action="#{RelVeiculos.imprimir(gastosde, gastosate)}" id="imprimir" value="imprimir"> </s:button>   
+     	<s:button action="#{relVeiculos.imprimir(gastosde, gastosate)}" id="imprimir" value="imprimir"> </s:button>   
           
      </div>
     
