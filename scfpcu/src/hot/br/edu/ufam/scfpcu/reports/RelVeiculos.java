@@ -23,7 +23,8 @@ public class RelVeiculos extends ReportAction {
 	
 	
 	@SuppressWarnings("unchecked")
-	public String imprimir(String dtinicio, String dtfim) {
+	public String imprimir() {
+	
 		
 		System.out.println("Relatorioooooooooo");
 				
@@ -32,7 +33,7 @@ public class RelVeiculos extends ReportAction {
 		}
 		
 		String result = null;
-		result = super.createPdfReport(dtinicio, dtfim);
+		result = super.createPdfReport();
 		if (result == null) {
 			System.out.println("Erro");
 			
@@ -43,7 +44,7 @@ public class RelVeiculos extends ReportAction {
 	}
 	
 	protected String getReportPath() {
-		return "/report/veiculos.jasper";
+		return "/veiculos.jasper";
 	}
 
 	@Override
@@ -58,8 +59,8 @@ public class RelVeiculos extends ReportAction {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 				
-		map.put("DTINICIO", dtinicio);
-		map.put("DTFIM", dtfim);
+	//	map.put("DTINICIO", dtinicio);
+	//	map.put("DTFIM", dtfim);
 		
 		
 		return map;

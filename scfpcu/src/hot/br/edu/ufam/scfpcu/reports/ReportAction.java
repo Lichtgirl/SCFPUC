@@ -28,7 +28,7 @@ import org.jboss.seam.pdf.DocumentStore;
 
 public abstract class ReportAction {
 	
-	@In(value = "org.jboss.seam.pdf.documentStore", create = true)  
+//	@In(value = "org.jboss.seam.pdf.documentStore", create = true)  
 	DocumentStore documentStore;
 	
 	private String error;
@@ -38,7 +38,7 @@ public abstract class ReportAction {
 	
 	
 	@SuppressWarnings("deprecation")
-	public String createPdfReport(String dtinicio, String dtfim){
+	public String createPdfReport(){
 		    
 		String reportUrl = getReportPath(); 
 
@@ -50,8 +50,8 @@ public abstract class ReportAction {
 			
 				
 			// obter os parâmetros específicos do relatório  
-		//	params.putAll(getParams());  
-			params.put(dtinicio, dtfim);
+			params.putAll(getParams());  
+			//params.put(dtinicio, dtfim);
 
 			// obter o caminho real (file system) para o relatório  
 			FacesContext facesContext = FacesContext.getCurrentInstance();  
@@ -61,7 +61,7 @@ public abstract class ReportAction {
 
 			
 			// imprimir o relatório para um stream em PDF  
-			JasperPrint jasperPrint = JasperFillManager.fillReport(reportUrlReal, params);  
+			JasperPrint jasperPrint = JasperFillManager.fillReport(reportUrlReal, params);  //erro nessaa linha  
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			JasperExportManager.exportReportToPdfStream(jasperPrint, output);
 						
@@ -80,7 +80,7 @@ public abstract class ReportAction {
 			return fileName;
 			       
 		} catch (Exception e) {
-			this.error = "Não foi possível gerar o relatório, entre em contato com o Administrador";
+			this.error = "Não foi possível gerar o relatório";
 			e.printStackTrace();
 			return null;  
 		}  	
