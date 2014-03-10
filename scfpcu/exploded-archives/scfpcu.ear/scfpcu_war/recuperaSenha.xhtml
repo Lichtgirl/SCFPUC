@@ -1,0 +1,38 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template_2.xhtml">
+    
+
+<ui:define name="body">
+
+    <h:form id="loginForm">
+
+        	<fieldset style="width: 380px;">
+        		<legend>Informe o e-mail de cadastro</legend>
+                <h:panelGrid columns="2" rowClasses="prop" columnClasses="name,value">
+                    <h:outputLabel for="username">E-mail</h:outputLabel>
+                    <h:inputText id="username"
+                              value="#{recuperarSenha.mail}" required="true" size="50"/>
+                </h:panelGrid>
+                <h:messages id="msgErro" style="color: red; width:320px; font-size: 0.9em; font-weight: normal;"/>
+                <div class="actionButtons">
+		            <h:commandButton id="submit" value="Buscar" action="#{recuperarSenha.enviarEmail()}" >
+		            	<a:support event="oncomplete" ajaxSingle="true" reRender="botaoVoltar"/>
+		            </h:commandButton>            
+		            <s:button id="botaoVoltar" value="Voltar" view="/login.xhtml"/>
+		        </div>
+			</fieldset>
+
+        
+
+    </h:form>
+
+ </ui:define>
+</ui:composition>

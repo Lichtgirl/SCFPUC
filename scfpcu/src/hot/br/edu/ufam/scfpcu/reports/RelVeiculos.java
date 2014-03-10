@@ -44,7 +44,7 @@ public class RelVeiculos extends ReportAction {
 	}
 	
 	protected String getReportPath() {
-		return "/veiculos.jasper";
+		return "/veiculo/veiculos.jasper";
 	}
 
 	@Override
@@ -59,8 +59,8 @@ public class RelVeiculos extends ReportAction {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 				
-	//	map.put("DTINICIO", dtinicio);
-	//	map.put("DTFIM", dtfim);
+		map.put("DTINICIO", dtinicio);
+		map.put("DTFIM", dtfim);
 		
 		
 		return map;

@@ -1,0 +1,146 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+    <ui:define name="body">
+    	<div class="cpanel" >
+    		<div class="pagetitle icon-48-frontpage"><h2>Página Inicial</h2></div>
+    		<br />
+    		<div class="icon-wrapper">
+                 <div class="icon">
+                 	 <s:link view="/gastos/GastosList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Gastos" />
+			       	</s:link>
+                 </div>
+             </div>
+			<div class="icon-wrapper">
+              <div class="icon">
+              	  <s:link view="/veiculo/VeiculoList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Veículos" />
+			       	</s:link>
+              </div>
+            </div>
+            <div  class="icon-wrapper">
+              <div class="icon">
+              	  <s:link view="/motorista/MotoristaList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Motoristas" />
+			       	</s:link>
+              </div>
+            </div>
+            
+		</div>
+    	<div  class="cleared"></div>
+    	<br />
+		<hr />
+		<br />
+		<div  class="cleared"></div>
+
+		<div class="cpanel" >
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/cargo/CargoList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Cargo" />
+			       	</s:link>
+              </div>
+            </div>
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/cor/CorList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Cor" />
+			       	</s:link>
+              </div>
+            </div>
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/entidade/EntidadeList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Entidade" />
+			       	</s:link>
+              </div>
+            </div>
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/especie/EspecieList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Espécie" />
+			       	</s:link>
+              </div>
+            </div>
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/grupo/GrupoList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Grupo" />
+			       	</s:link>
+              </div>
+            </div>
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/marca/MarcaList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Marca" />
+			       	</s:link>
+              </div>
+            </div>
+		</div>
+		
+		<div  class="cleared"></div>
+		<br />
+		
+		<div class="cpanel" >
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/modelo/ModeloList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Modelo" />
+			       	</s:link>
+              </div>
+            </div>
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/motVeic/MotVeicList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Motorista-Veiculo" />
+			       	</s:link>
+              </div>
+            </div>
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/tipoCombustivel/TipoCombustivelList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Tipo de Combustivel" />
+			       	</s:link>
+              </div>
+            </div>
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/tipoServico/TipoServicoList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Tipo de Serviço" />
+			       	</s:link>
+              </div>
+            </div>
+            <div  class="icon-wrapper">
+              <div class="iconsmall">
+              	  <s:link view="/usuario/UsuarioList.xhtml">
+			           <h:graphicImage value="" />
+			           <h:outputText value="Usuário" />
+			       	</s:link>
+              </div>
+            </div>
+		</div>        
+		        
+
+    </ui:define>
+</ui:composition>

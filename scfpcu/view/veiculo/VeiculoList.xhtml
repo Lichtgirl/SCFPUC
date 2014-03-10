@@ -7,8 +7,61 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:rich="http://richfaces.org/rich"
     template="../layout/template.xhtml">
-
 <ui:define name="body">
+<script language="javascript" type="text/javascript">
+function radioHab(variavel) {
+    
+    var table = document.getElementById('veiculoForm');            
+    var Radio=null;
+
+    Radio= table.RadioGroup1;
+    if(Radio.checked){
+        switch (variavel){
+            case 'edit':
+                document.location.href="/veiculo/Veiculo.seam?veiculoIdVeiculo="+Radio.value;                          
+                return;
+            case 'remove':    
+                decisao = confirm("Deseja realmente remover a solicitação?");
+                if (decisao){
+                    document.location.href="/atividades_ec/solicitacoes/"+Radio.value + "/remove";                                                              
+                } else {
+                    alert ("Nenhuma Solicitação foi removida");
+                }                            
+                return;
+            case 'show':
+                document.location.href="/veiculo/Veiculo.seam?veiculoIdVeiculo="+Radio.value";                          
+                return;
+            }
+        } else {
+            for(var i=0; i&ltRadio.length; i++) 
+            {
+                if(Radio[i].checked) 
+                {                    
+                    switch (variavel){
+                        case 'edit':
+                            document.location.href="/atividades_ec/solicitacoes/"+Radio[i].value + "/edit";                          
+                            return;
+                        case 'remove':    
+                            decisao = confirm("Deseja realmente remover a solicitação?");
+                            if (decisao){
+                                document.location.href="/atividades_ec/solicitacoes/"+Radio[i].value + "/remove";                                                              
+                            } else {
+                                alert ("Nenhuma Solicitação foi removida");
+                            }                            
+                            return;
+                        case 'show':
+                            document.location.href="/atividades_ec/solicitacoes/"+Radio[i].value + "/show";                          
+                            return;
+                        }                    
+                    }                
+                }
+            
+                alert('Você precisa selecionar uma das solicitações');
+            }
+}
+
+</script>
+
 	<div class="m" style="vertical-align: middle;">
 		<div class="cpanel" >
 			<div class="ferramentas">
@@ -20,6 +73,14 @@
 			    	</s:link>
 		           </div>
 		       </div>
+		       
+		       <div class="icon-wrapper">
+		           <div class="icon">
+				        <a href="javascript:radioHab('show')" >
+                            <span width="32" height="32" border="0" class="icon-32-preview"></span>Visualizar
+                        </a>
+		           </div>
+		       </div>
 	       </div>
        </div>
 	</div>
@@ -27,30 +88,31 @@
 	<div class="m" style="vertical-align: middle; padding: 10px;">
 	    <h:form id="veiculoSearch" styleClass="edit">
 			<div style="display:table; min-width: 860px; width: 100%;">
-				<s:decorate template="../layout/display.xhtml">
-	                <ui:define name="label">Placa atual</ui:define>
-	                <h:inputText id="placaAtual" value="#{veiculoList.veiculo.placaAtual}" size="7"/>
-	            </s:decorate>
-	            
-	             <s:decorate template="../layout/display.xhtml">
-	                <ui:define name="label">Renavam</ui:define>
-	                <h:inputText id="chassi" value="#{veiculoList.veiculo.codRenavam}" size="9"/>
-	            </s:decorate>
-	            
-	            <s:decorate template="../layout/display.xhtml">
-	                <ui:define name="label">Chassi</ui:define>
-	                <h:inputText id="chassi" value="#{veiculoList.veiculo.chassi}" size="17"/>
-	            </s:decorate>
-	
-	            <s:decorate template="../layout/display.xhtml">
-	                <ui:define name="label">Patrimônio</ui:define>
-	                <h:inputText id="numPatrimonio" value="#{veiculoList.veiculo.numPatrimonio}"/>
-	            </s:decorate>
-	
-				<div class="actionButtons">
-	            <h:commandButton id="search" value="Buscar" action="/veiculo/VeiculoList.xhtml"/>
-	            <s:button id="reset" value="Limpar" includePageParams="false"/>
-	        </div>
+				
+				<div style="width: 160px; float: left;">
+					<s:decorate template="../layout/display.xhtml">
+		                <ui:define name="label">Placa atual</ui:define>
+		                <h:inputText id="placaAtual" value="#{veiculoList.veiculo.placaAtual}" size="7"/>
+		            </s:decorate>
+	           </div>
+	           <div style="width: 200px; float: left;"> 
+		            <s:decorate template="../layout/display.xhtml">
+		                <ui:define name="label">Chassi</ui:define>
+		                <h:inputText id="chassi" value="#{veiculoList.veiculo.chassi}" size="17"/>
+		            </s:decorate>
+				</div>
+				<div style="width: 240px; float: left;">
+		            <s:decorate template="../layout/display.xhtml">
+		                <ui:define name="label">Patrimônio</ui:define>
+		                <h:inputText id="numPatrimonio" value="#{veiculoList.veiculo.numPatrimonio}"/>
+		            </s:decorate>
+				</div>
+				<div style="width: 200px; float: right;">
+					<div class="actionButtons">
+			            <h:commandButton id="search" value="Buscar" action="/veiculo/VeiculoList.xhtml"/>
+			            <s:button id="reset" value="Limpar" includePageParams="false"/>
+			        </div>
+		       </div>
 	        </div>
 	    </h:form>
 
@@ -59,11 +121,23 @@
 
     <h:outputText value="Nenhum veículo encontrado"
                rendered="#{empty veiculoList.resultList}"/>
-
+	<h:form id="veiculoForm">
     <rich:dataTable id="veiculoList"
                 var="_veiculo"
               value="#{veiculoList.resultList}"
            rendered="#{not empty veiculoList.resultList}">
+           
+           <h:column>
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{veiculoList}"/>
+                    <ui:param name="propertyLabel" value="Selecionar"/>
+                </ui:include>
+            </f:facet>
+            <input type="radio" name="RadioGroup1" value="#{_veiculo.idVeiculo}"></input>
+        </h:column>
+        
+        
 		<h:column>
             <f:facet name="header">
                 <ui:include src="../layout/sort.xhtml">
@@ -95,20 +169,6 @@
             </f:facet>
             <h:outputText value="#{_veiculo.codRenavam}"/>
         </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="../layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{veiculoList}"/>
-                    <ui:param name="propertyLabel" value="Data de aquisicao"/>
-                    <ui:param name="propertyPath" value="veiculo.dataDeAquisicao"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_veiculo.dataDeAquisicao}">
-                <s:convertDateTime type="date" dateStyle="short"/>
-            </h:outputText>
-        </h:column>
-        
-        
         
         <h:column>
             <f:facet name="header">
@@ -151,6 +211,19 @@
             </f:facet>
             <h:outputText value="#{_veiculo.adquiridoDe}"/>
         </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{veiculoList}"/>
+                    <ui:param name="propertyLabel" value="Data de aquisicao"/>
+                    <ui:param name="propertyPath" value="veiculo.dataDeAquisicao"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_veiculo.dataDeAquisicao}">
+                <s:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
+            </h:outputText>
+        </h:column> 
+        
         <rich:column styleClass="action">
             <f:facet name="header">Action</f:facet>
             <s:link view="/#{empty from ? '/veiculo/Veiculo' : from}.xhtml"
@@ -171,6 +244,7 @@
             </s:link>
         </rich:column>
     </rich:dataTable>
+    </h:form>
 
     </div>
     </div>
