@@ -10,14 +10,12 @@ import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JRExporter;
-import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.query.JRJpaQueryExecuterFactory;
 
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.core.Manager;
@@ -26,17 +24,31 @@ import org.jboss.seam.pdf.DocumentData;
 import org.jboss.seam.pdf.DocumentData.DocType;
 import org.jboss.seam.pdf.DocumentStore;
 
+import br.edu.ufam.scfpcu.reports.ConnectionJDBC;
+ 
+
 public abstract class ReportAction {
+	
+	@In
+	EntityManager entityManager;
+	@In
+	FacesMessages facesMessages;
+	
 	
 //	@In(value = "org.jboss.seam.pdf.documentStore", create = true)  
 	DocumentStore documentStore;
 	
 	private String error;
+	
+//	public JRBeanCollectionDataSource getBeanCollectionDataSource(){
+//		return null;
+//	}
+	
 	protected abstract String getReportPath();
 	protected abstract boolean canCreateReport();
 	protected abstract Map<String, Object> getParams();
 	
-	
+		
 	@SuppressWarnings("deprecation")
 	public String createPdfReport(){
 		    
@@ -47,8 +59,9 @@ public abstract class ReportAction {
 		try {  
 			
 			Map<String, Object> params = new HashMap<String, Object>();  
-			
-				
+						
+			params.put(JRJpaQueryExecuterFactory.PARAMETER_JPA_ENTITY_MANAGER, entityManager);
+						
 			// obter os parâmetros específicos do relatório  
 			params.putAll(getParams());  
 			//params.put(dtinicio, dtfim);
@@ -58,10 +71,15 @@ public abstract class ReportAction {
 			HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();  
 			String reportUrlReal = request.getRealPath(reportUrl);  
 			
-
+			ConnectionJDBC conn = ConnectionJDBC.getInstancia();
+			
+			if(!conn.isConnected()){
+				this.error = "Não foi possível criar conexão com o servidor";
+				return null;
+			}
 			
 			// imprimir o relatório para um stream em PDF  
-			JasperPrint jasperPrint = JasperFillManager.fillReport(reportUrlReal, params);  //erro nessaa linha  
+			JasperPrint jasperPrint = JasperFillManager.fillReport(reportUrlReal, params, conn.getConection());  //erro nessaa linha  
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			JasperExportManager.exportReportToPdfStream(jasperPrint, output);
 						
@@ -86,7 +104,27 @@ public abstract class ReportAction {
 		}  	
 	}
 	
+	public String getError() {
+		return error;
+	}
+
 	public void setError(String error) {
 		this.error = error;
+	}
+	
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+
+	public FacesMessages getFacesMessages() {
+		return facesMessages;
+	}
+
+	public void setFacesMessages(FacesMessages facesMessages) {
+		this.facesMessages = facesMessages;
 	}
 }
