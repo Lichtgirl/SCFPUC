@@ -1,18 +1,17 @@
 package br.edu.ufam.scfpcu.reports;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.faces.application.FacesMessage;
-
-import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Name;
-import org.jboss.seam.annotations.Scope;
 
 @Name("relVeiculos")
 public class RelVeiculos extends ReportAction {
+	
 	
 	private Date dtinicio;
 	private Date dtfim;
@@ -20,20 +19,24 @@ public class RelVeiculos extends ReportAction {
 	public RelVeiculos(){
 		
 	}
-	
-	
+		
 	@SuppressWarnings("unchecked")
 	public String imprimir() {
 	
 		
-		System.out.println("Relatorioooooooooo");
+		System.out.println("Entrei no imprimir");
+		
+		
+		
 				
-		if (!canCreateReport()){			
+		if (!canCreateReport()){
+			  System.out.println("entrei no !can create");
 			return null;
 		}
 		
 		String result = null;
 		result = super.createPdfReport();
+		  System.out.println("sai do super.createpdfcom reult:::::"+result);
 		if (result == null) {
 			System.out.println("Erro");
 			
@@ -55,12 +58,12 @@ public class RelVeiculos extends ReportAction {
 	
 	@Override
 	protected Map<String, Object> getParams() {
-		 
+		System.out.println("entrei no map"); 
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 				
-		map.put("DTINICIO", dtinicio);
-		map.put("DTFIM", dtfim);
+		//map.put("DTINICIO", dtinicio);
+		//map.put("DTFIM", dtfim);
 		
 		
 		return map;

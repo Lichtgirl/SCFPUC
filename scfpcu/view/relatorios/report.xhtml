@@ -16,12 +16,13 @@
 				<ui:define name="label">Data Inicio</ui:define>
 				<rich:calendar id="datainicio" inputSize="10"
 					value="#{relVeiculos.dtinicio}"
-					datePattern="dd/MM/yyyy" />
+					datePattern="dd/MM/yyyy" 
+					enableManualInput="true" />
 			</s:decorate>
 			<s:decorate id="datafim" template="../layout/edit.xhtml">
 		                <ui:define name="label">Data Fim</ui:define>
 		                <rich:calendar id="datafim" inputSize="10"
-		                          value="#{relVeiculos.dtfim}" datePattern="dd/MM/yyyy" />
+		                          value="#{relVeiculos.dtfim}" datePattern="dd/MM/yyyy" enableManualInput="true"/>
 		            </s:decorate>
 
 

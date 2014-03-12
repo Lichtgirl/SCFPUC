@@ -15,6 +15,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.bootstrap.DOMImplementationRegistry;
+import org.w3c.dom.ls.DOMImplementationLS;
+import org.w3c.dom.ls.LSParser;
 import org.xml.sax.SAXException;
 
 public class ConnectionJDBC {
@@ -29,19 +32,31 @@ public class ConnectionJDBC {
     
     protected Connection conection=null;
     
-    private void setAtributesForXml(){
+    @SuppressWarnings("deprecation")
+	private void setAtributesForXml(){
     	
     	FacesContext facesContext = FacesContext.getCurrentInstance();  
 		HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();  
-		String xmlUrlReal = request.getRealPath("/resources/scfpcu-dev-ds.xml");
-    	
+		String xmlUrlReal = request.getRealPath("../../scfpcu-ds.xml");
+		
+    	System.out.println("olha ai adheli ");
     	File file = new File(xmlUrlReal);
-
+    	
+    
+		
+    	
+    	System.out.println("xmlUrlReal:::::"+xmlUrlReal);
     	try {
+    		
+    		System.out.println("entrei no try connection");
+    		
+    		
+    		
     		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document document = builder.parse(file);
-			
+    		DocumentBuilder builder = factory.newDocumentBuilder();
+    		Document document = builder.parse(file);    	
+    		
+    		
 			Element element = document.getDocumentElement();
 			NodeList connection_url = element.getElementsByTagName("connection-url");
 			NodeList driver_class = element.getElementsByTagName("driver-class");
@@ -53,22 +68,34 @@ public class ConnectionJDBC {
 			Element userName = (Element)user_name.item(0);
 			Element psw = (Element)password.item(0);
 			
+			
+			
+			
+			
 			this.url = connectionUrl.getFirstChild().getNodeValue();
 			this.driver = driverClass.getFirstChild().getNodeValue();
 			this.user = userName.getFirstChild().getNodeValue();
-			this.psw = psw.getFirstChild().getNodeValue();
+			this.psw = "";
 			
+			System.out.println("URL   "+url);
+			System.out.println("Username     "+user);
+			System.out.println("Psswd ;;;;;;;"+psw);
+			
+			System.out.println("to aqui depois do pswd");
 		} catch (ParserConfigurationException e) {
-			
+			System.out.println("entrei no catch conexao");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SAXException e) {
+			System.out.println("entrei no catch sax");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
+			System.out.println("entrei no catch IO");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	  System.out.println("sai do parser XML");
     }
     
     /**
@@ -77,6 +104,8 @@ public class ConnectionJDBC {
     protected ConnectionJDBC() {
         try {
             
+        	System.out.println("entrei no conect jdbc");
+        	System.out.println(url);
             this.setAtributesForXml();
             Class.forName(driver);
             conection = DriverManager.getConnection(url,user,psw);
@@ -88,9 +117,11 @@ public class ConnectionJDBC {
         	e.printStackTrace();
         	this.setConnected(false);
         }
+        System.out.println("sai do Connection JDBC");
     }
     
     public static ConnectionJDBC getInstancia(){
+    	System.out.println("Entrei no getinstance");
         if (instancia == null){
             instancia = new ConnectionJDBC();
         }

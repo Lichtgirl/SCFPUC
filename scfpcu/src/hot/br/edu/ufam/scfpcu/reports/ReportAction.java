@@ -51,16 +51,16 @@ public abstract class ReportAction {
 		
 	@SuppressWarnings("deprecation")
 	public String createPdfReport(){
-		    
+		System.out.println("entrei no createpdf");
 		String reportUrl = getReportPath(); 
 
 		
 		
 		try {  
-			
+			System.out.println("entrei no try");
 			Map<String, Object> params = new HashMap<String, Object>();  
 						
-			params.put(JRJpaQueryExecuterFactory.PARAMETER_JPA_ENTITY_MANAGER, entityManager);
+			//params.put(JRJpaQueryExecuterFactory.PARAMETER_JPA_ENTITY_MANAGER, entityManager);
 						
 			// obter os parâmetros específicos do relatório  
 			params.putAll(getParams());  
@@ -71,6 +71,8 @@ public abstract class ReportAction {
 			HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();  
 			String reportUrlReal = request.getRealPath(reportUrl);  
 			
+			System.out.println("vamos a conexao");
+			
 			ConnectionJDBC conn = ConnectionJDBC.getInstancia();
 			
 			if(!conn.isConnected()){
@@ -78,22 +80,33 @@ public abstract class ReportAction {
 				return null;
 			}
 			
+			
+			  System.out.println("Entrando no imprimir");
 			// imprimir o relatório para um stream em PDF  
-			JasperPrint jasperPrint = JasperFillManager.fillReport(reportUrlReal, params, conn.getConection());  //erro nessaa linha  
+			  System.out.println("Report url real    "+reportUrlReal);
+			  System.out.println("params    "+params);
+			  System.out.println("conexao    "+conn.getConection());
+			 
+			JasperPrint jasperPrint = JasperFillManager.fillReport(reportUrlReal, params, conn.getConection());  //erro nessaa linha
+			 System.out.println("passei do Jasperprint");
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			JasperExportManager.exportReportToPdfStream(jasperPrint, output);
 						
 			// armazenar o relatório do DocumentStore do SEAM  
+			System.out.println("Tentarei o documento linha 89");
 			String reportId = documentStore.newId(); 
 			DocumentData data = new DocumentData("Report #" + reportId , DocType.PDF, output.toByteArray());
 			documentStore.saveData(reportId, data);
 		
 			// retornar para o caminho padrão do SEAM para exibição de relatórios  
+			System.out.println("Vou pro filename");
 			
 			String fileName = "/seam-doc?docId=" + reportId;
 			
 			HttpServletResponse response = (HttpServletResponse)facesContext.getExternalContext().getResponse();
 			response.setHeader("Content-Disposition", "attachment; filename="+fileName);
+			
+			System.out.println("vai pro return");
 			
 			return fileName;
 			       
