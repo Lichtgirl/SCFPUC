@@ -3,8 +3,14 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="Dt_inicio" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Dt_fim" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
-		<![CDATA[select * from veiculo, tipo_combustivel, modelo, marca where  veiculo.id_combustivel = tipo_combustivel.id_combustivel AND veiculo.id_modelo = modelo.id_modelo AND modelo.id_marca = marca.id_marca;]]>
+		<![CDATA[select * from veiculo, tipo_combustivel, modelo, marca where veiculo.Data_cadastro > $P{Dt_inicio} AND veiculo.Data_cadastro < $P{Dt_fim} AND veiculo.id_combustivel = tipo_combustivel.id_combustivel AND veiculo.id_modelo = modelo.id_modelo AND modelo.id_marca = marca.id_marca;]]>
 	</queryString>
 	<field name="id_veiculo" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>

@@ -59,7 +59,16 @@ public abstract class ReportAction {
 		try {  
 			System.out.println("entrei no try");
 			Map<String, Object> params = new HashMap<String, Object>();  
-						
+				
+			System.out.println("vamos a conexao");
+			
+			ConnectionJDBC conn = ConnectionJDBC.getInstancia();
+			
+			if(!conn.isConnected()){
+				this.error = "Não foi possível criar conexão com o servidor";
+				return null;
+			}
+			
 			//params.put(JRJpaQueryExecuterFactory.PARAMETER_JPA_ENTITY_MANAGER, entityManager);
 						
 			// obter os parâmetros específicos do relatório  
@@ -71,14 +80,7 @@ public abstract class ReportAction {
 			HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();  
 			String reportUrlReal = request.getRealPath(reportUrl);  
 			
-			System.out.println("vamos a conexao");
 			
-			ConnectionJDBC conn = ConnectionJDBC.getInstancia();
-			
-			if(!conn.isConnected()){
-				this.error = "Não foi possível criar conexão com o servidor";
-				return null;
-			}
 			
 			
 			  System.out.println("Entrando no imprimir");
@@ -87,6 +89,8 @@ public abstract class ReportAction {
 			  System.out.println("params    "+params);
 			  System.out.println("conexao    "+conn.getConection());
 			 
+			  System.out.println("Cheguei no Jasperprint");
+			  
 			JasperPrint jasperPrint = JasperFillManager.fillReport(reportUrlReal, params, conn.getConection());  //erro nessaa linha
 			 System.out.println("passei do Jasperprint");
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
