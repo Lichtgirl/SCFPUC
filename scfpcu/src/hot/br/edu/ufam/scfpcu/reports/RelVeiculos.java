@@ -1,45 +1,34 @@
 package br.edu.ufam.scfpcu.reports;
 
 
+import java.io.File;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.faces.application.FacesMessage;
+
+import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Name;
+import org.jboss.seam.annotations.Scope;
 
 @Name("relVeiculos")
+@Scope(ScopeType.SESSION)
 public class RelVeiculos extends ReportAction {
 	
 	
 	private Date dtinicio;
 	private Date dtfim;
-	private Calendar c1;
-	private Calendar c2;
+
 	
-	public RelVeiculos(){
-		
-		c1 = Calendar.getInstance();
-		c1.set(Calendar.HOUR_OF_DAY, 0);
-		c1.set(Calendar.MINUTE, 0);
-		c1.set(Calendar.SECOND, 0);
-		
-		c2 = Calendar.getInstance();
-		c2.set(Calendar.HOUR_OF_DAY, 23);
-		c2.set(Calendar.MINUTE, 59);
-		c2.set(Calendar.SECOND, 59);
-		
-		this.dtinicio = c1.getTime();
-		this.dtfim = c2.getTime();
-		
-	}
-		
 	@SuppressWarnings("unchecked")
-	public String imprimir(Date datinicio) {
+	public String imprimir() {
 	
 		
-		System.out.println("Entrei no imprimir");
+	
 		
 						
 		if (!canCreateReport()){
@@ -48,20 +37,21 @@ public class RelVeiculos extends ReportAction {
 		}
 		
 		String result = null;
-		result = super.createPdfReport();		
-		System.out.println("sai do super.createpdfcom reult:::::"+result);
+		result = super.createPdfReport();				
 		if (result == null) {
-			System.out.println("Erro");
-			
+			super.getFacesMessages().addToControl("ordem", FacesMessage.SEVERITY_ERROR, super.getError());
 		}else{
 			System.out.println("Sucesso");
 		}
 		
+		//Transferir para quando sair da pagina
+		File file = new File("C:/Users/Public/Documents/arquivo.pdf");
+		file.deleteOnExit();
 		return result;
 	}
 	
 	protected String getReportPath() {
-		return "relatorios/veiculos.jasper";
+		return "/relatorios/veiculos.jasper";
 	}
 
 	@Override
@@ -71,23 +61,26 @@ public class RelVeiculos extends ReportAction {
 	}
 	
 	@Override
-	protected Map<String, Object> getParams() {
-		System.out.println("entrei no map"); 
+	protected Map<String, Object> getParams() throws ParseException {
 		
-		String filtro;
-		String di = "2013-12-01"; 
-		
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		
 				
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		System.out.println("DTINICIO"+ di);
-//		System.out.println("DTFIM"+ (this.dtfim).toString());
+		System.out.println("DTINICIO;;;;"+ this.dtinicio);
+		String d1 = format.format(this.dtinicio);
+		String d2 = format.format(this.dtfim);
+		
+		this.dtinicio = (Date)format.parse(d1);
+		this.dtfim = (Date)format.parse(d2);
 		
 		
-		map.put("DTINICIO", di);
-		map.put("DTFIM", format.format(this.dtfim));
+		
+		
+		map.put("Dt_inicio", this.dtinicio );
+		map.put("Dt_fim", this.dtfim );
 		
 		
 		

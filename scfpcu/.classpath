@@ -46,10 +46,12 @@
 	<classpathentry kind="lib" path="lib/commons-collections-2.1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-javaflow-20060411.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-api-1.0.2.jar"/>
-	<classpathentry kind="lib" path="lib/ireport.jar"/>
-	<classpathentry kind="lib" path="lib/jasperreports-1.2.5.jar"/>
-	<classpathentry kind="lib" path="lib/jasperreports-3.0.0.jar"/>
 	<classpathentry kind="lib" path="lib/jboss-seam-gen.jar"/>
 	<classpathentry kind="lib" path="lib/jboss-seam-pdf.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.6-bin.jar"/>
+	<classpathentry kind="lib" path="lib/iText-2.1.7.jar"/>
+	<classpathentry kind="lib" path="lib/commons-digester-1.7.jar"/>
+	<classpathentry kind="lib" path="lib/itext.jar"/>
+	<classpathentry kind="lib" path="lib/jasperreports-5.5.1.jar"/>
 	<classpathentry kind="output" path="test-build"/>
 </classpath>

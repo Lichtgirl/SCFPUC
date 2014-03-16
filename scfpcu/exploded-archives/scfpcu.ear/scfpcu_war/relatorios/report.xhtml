@@ -11,6 +11,7 @@
                 
                        
 <ui:define name="body">
+	<h:form id="form">
      <rich:panel>
       	<f:facet name="header">Veiculos</f:facet>
       	
@@ -18,7 +19,7 @@
 			<ui:define name="label">Data Inicio</ui:define>
 			<rich:calendar value="#{relVeiculos.dtinicio}"
 					required="true"
-					datePattern="yyyy/MM/dd" 
+					datePattern="dd/MM/yyyy" 
 					enableManualInput="true" />
 			</s:decorate>
 			
@@ -26,7 +27,7 @@
 		    <ui:define name="label">Data Fim</ui:define>
 		    <rich:calendar value="#{relVeiculos.dtfim}"
 		    		required="true" 
-		    		datePattern="yyyy/MM/dd" 
+		    		datePattern="dd/MM/yyyy" 
 		    		enableManualInput="true"/>
 		    </s:decorate>
 
@@ -38,11 +39,16 @@
      
      <div class="actionButtons">
      
-     	#{relVeiculos.dtinicio}
-     	#{relVeiculos.dtfim}
-     	<s:button action="#{relVeiculos.imprimir(datainicio)}" id="imprimir" value="imprimir"> </s:button>   
+     	
+     	<h:commandButton value="imprimir" action="#{relVeiculos.imprimir()}"></h:commandButton>   
                   
      </div>
+     
+     
+     </h:form>
+     
+     
+     
     
                 
     
