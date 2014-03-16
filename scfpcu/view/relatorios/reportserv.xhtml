@@ -1,0 +1,57 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="../layout/template.xhtml"
+                xmlns:a4j="http://richfaces.org/a4j">
+                
+                       
+<ui:define name="body">
+	<h:form id="form">
+     <rich:panel>
+      	<f:facet name="header">Servicos</f:facet>
+      	
+			<s:decorate id="datanicio" template="../layout/edit.xhtml">
+			<ui:define name="label">Data Inicio</ui:define>
+			<rich:calendar value="#{relServicos.dtinicio}"
+					required="true"
+					datePattern="dd/MM/yyyy" 
+					enableManualInput="true" />
+			</s:decorate>
+			
+			<s:decorate id="datafim" template="../layout/edit.xhtml">
+		    <ui:define name="label">Data Fim</ui:define>
+		    <rich:calendar value="#{relServicos.dtfim}"
+		    		required="true" 
+		    		datePattern="dd/MM/yyyy" 
+		    		enableManualInput="true"/>
+		    </s:decorate>
+
+
+
+			<div style="clear:both"/>
+        
+     </rich:panel>
+     
+     <div class="actionButtons">
+     
+     	
+     	<h:commandButton value="imprimir" action="#{relServicos.imprimir()}"></h:commandButton>   
+                  
+     </div>
+     
+     
+     </h:form>
+     
+     
+     
+    
+                
+    
+</ui:define>
+
+</ui:composition>

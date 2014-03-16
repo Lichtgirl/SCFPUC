@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="veiculos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0da045f7-53a5-4b04-9312-4c8488b94f21">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Dt_inicio" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Dt_fim" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from veiculo, tipo_combustivel, modelo, marca where veiculo.Data_cadastro >= $P{Dt_inicio} AND veiculo.Data_cadastro <= $P{Dt_fim} AND veiculo.id_combustivel = tipo_combustivel.id_combustivel AND veiculo.id_modelo = modelo.id_modelo AND modelo.id_marca = marca.id_marca;]]>
+	</queryString>
+	<field name="id_veiculo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Ano_fabricacao" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Ano_modelo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Potencia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Num_patrimonio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Chassi" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Cod_renavam" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Adquirido_de" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Data_de_aquisicao" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Modalidade_aquisicao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Valor_da_aquisicao" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Observacao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Placa_anterior" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Placa_atual" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Data_cadastro" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_cor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_grupo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_entidade" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_servidor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_combustivel" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_cidade_panterior" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_cidade_patual" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_modelo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_especie" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="n_processo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ano_processo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valor_venda" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="arrematante" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cpf_cnpj" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="modalidade_venda" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipo_combustivel" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="modelo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_marca" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="marca" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="103070f5-6077-4d7a-b987-580e43108d30" x="126" y="0" width="309" height="79"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[PODER EXECUTIVO
+MINISTÉRIO DA EDUCAÇÃO
+UNIVERSIDADE FEDERAL DO AMAZONAS
+
+Prefeitura do Campus Universitário]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement uuid="3bb2bd1d-792e-434f-887a-a8875084cd9e" x="14" y="4" width="75" height="75"/>
+				<imageExpression><![CDATA["C:\\Users\\Kary\\Pictures\\Banco de Imagens\\brasao_ncional.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement uuid="ed88c6f2-2bfe-459c-a39b-15c89a43b1c0" x="467" y="4" width="68" height="75"/>
+				<imageExpression><![CDATA["C:\\Users\\Kary\\Pictures\\Banco de Imagens\\ufam.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="c81ee45b-2dc9-45f4-b44e-2422306975a7" x="126" y="12" width="309" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Veículos]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="300177ef-52c0-4864-8e37-7f53944dbe4e" x="474" y="13" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="51" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="d8047b4f-c610-4f45-b427-45611cc5532c" x="1" y="20" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[PLACA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6c0b1446-576f-4b2b-ba5c-2689a5cb08fc" x="224" y="20" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[MODELO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4b9cc1e6-5f1a-4777-8c01-b558e2081245" x="337" y="20" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[DATA CADASTRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="10af4c6d-10d3-40f4-9db1-21c3add6d15b" x="454" y="20" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[COMBUSTÍVEL]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="f6ebc6b4-e7bf-475b-862b-de5b9b6862e1" x="0" y="0" width="554" height="4"/>
+			</line>
+			<staticText>
+				<reportElement uuid="0f3fd9f3-8637-4b39-8a08-e69aa3ac934b" x="111" y="20" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[MARCA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement uuid="2822b9a9-486c-40c4-89bc-86ae792e7a29" x="1" y="3" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Placa_atual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="01cc6d29-c162-4c79-b9f7-4805d3de7132" x="453" y="3" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tipo_combustivel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7c0e9b84-2853-4082-95e7-40af121481f1" x="224" y="3" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{modelo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f49b6818-e2af-4a78-acec-e2a0856532ab" x="337" y="3" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Data_cadastro}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4f2dc572-081d-492f-9a60-18a330d55414" x="111" y="3" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="f9cb81a0-4f98-4a53-8d05-c92372cbde06" mode="Transparent" x="1" y="18" width="552" height="1" forecolor="#E6E1E1"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

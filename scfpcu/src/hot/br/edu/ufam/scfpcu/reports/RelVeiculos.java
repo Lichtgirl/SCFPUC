@@ -32,7 +32,7 @@ public class RelVeiculos extends ReportAction {
 		
 						
 		if (!canCreateReport()){
-			  System.out.println("entrei no !can create");
+			  
 			return null;
 		}
 		
@@ -46,7 +46,7 @@ public class RelVeiculos extends ReportAction {
 		
 		//Transferir para quando sair da pagina
 		File file = new File("C:/Users/Public/Documents/arquivo.pdf");
-		file.deleteOnExit();
+		file.delete();
 		return result;
 	}
 	
@@ -69,7 +69,7 @@ public class RelVeiculos extends ReportAction {
 				
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		System.out.println("DTINICIO;;;;"+ this.dtinicio);
+		
 		String d1 = format.format(this.dtinicio);
 		String d2 = format.format(this.dtfim);
 		

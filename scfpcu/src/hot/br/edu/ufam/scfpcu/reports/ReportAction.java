@@ -58,10 +58,10 @@ public abstract class ReportAction {
 		
 		
 		try {  
-			System.out.println("entrei no try");
+			
 			Map<String, Object> params = new HashMap<String, Object>();  
 				
-			System.out.println("vamos a conexao");
+			
 			
 			conn = ConnectionJDBC.getInstancia();
 			
